@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		7606161927AD77F600CC73B5 /* SurfWeatherAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606161827AD77F600CC73B5 /* SurfWeatherAppApp.swift */; };
-		7606161B27AD77F600CC73B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606161A27AD77F600CC73B5 /* ContentView.swift */; };
 		7606161D27AD77F700CC73B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7606161C27AD77F700CC73B5 /* Assets.xcassets */; };
 		7606162027AD77F700CC73B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7606161F27AD77F700CC73B5 /* Preview Assets.xcassets */; };
+		769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769CECF827C27D2B00FFD409 /* MainScreenView.swift */; };
+		769CECFC27C27DE100FFD409 /* LocationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769CECFB27C27DE100FFD409 /* LocationHeaderView.swift */; };
+		769CECFF27C27EBB00FFD409 /* LocationHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769CECFE27C27EBB00FFD409 /* LocationHeaderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7606161527AD77F600CC73B5 /* SurfWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SurfWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7606161827AD77F600CC73B5 /* SurfWeatherAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfWeatherAppApp.swift; sourceTree = "<group>"; };
-		7606161A27AD77F600CC73B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7606161C27AD77F700CC73B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7606161F27AD77F700CC73B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		769CECF827C27D2B00FFD409 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		769CECFB27C27DE100FFD409 /* LocationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderView.swift; sourceTree = "<group>"; };
+		769CECFE27C27EBB00FFD409 /* LocationHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +39,8 @@
 		7606160C27AD77F600CC73B5 = {
 			isa = PBXGroup;
 			children = (
+				769CECFA27C27DC000FFD409 /* Views */,
+				769CECF527C27D0E00FFD409 /* Flows */,
 				7606161727AD77F600CC73B5 /* SurfWeatherApp */,
 				7606161627AD77F600CC73B5 /* Products */,
 			);
@@ -52,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				7606161827AD77F600CC73B5 /* SurfWeatherAppApp.swift */,
-				7606161A27AD77F600CC73B5 /* ContentView.swift */,
 				7606161C27AD77F700CC73B5 /* Assets.xcassets */,
 				7606161E27AD77F700CC73B5 /* Preview Content */,
 			);
@@ -65,6 +70,39 @@
 				7606161F27AD77F700CC73B5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		769CECF427C27D0100FFD409 /* MainFlow */ = {
+			isa = PBXGroup;
+			children = (
+				769CECF827C27D2B00FFD409 /* MainScreenView.swift */,
+			);
+			path = MainFlow;
+			sourceTree = "<group>";
+		};
+		769CECF527C27D0E00FFD409 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				769CECF427C27D0100FFD409 /* MainFlow */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		769CECFA27C27DC000FFD409 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				769CECFD27C27EA700FFD409 /* LocationHeader */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		769CECFD27C27EA700FFD409 /* LocationHeader */ = {
+			isa = PBXGroup;
+			children = (
+				769CECFB27C27DE100FFD409 /* LocationHeaderView.swift */,
+				769CECFE27C27EBB00FFD409 /* LocationHeaderViewModel.swift */,
+			);
+			path = LocationHeader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +175,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7606161B27AD77F600CC73B5 /* ContentView.swift in Sources */,
 				7606161927AD77F600CC73B5 /* SurfWeatherAppApp.swift in Sources */,
+				769CECFF27C27EBB00FFD409 /* LocationHeaderViewModel.swift in Sources */,
+				769CECFC27C27DE100FFD409 /* LocationHeaderView.swift in Sources */,
+				769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
