@@ -12,6 +12,7 @@ struct LocationHeaderView: View {
     // MARK: - Properties
 
     @StateObject var viewModel: LocationHeaderViewModel
+    @State var toggleState = true
 
     // MARK: - Views
 
@@ -29,9 +30,8 @@ struct LocationHeaderView: View {
             }
 
             Spacer()
-            Capsule()
-                .frame(width: 65, height: 32, alignment: .center)
-                .foregroundColor(.blue)
+            Toggle("", isOn: $toggleState)
+                .toggleStyle(ColorModeToggleStyle(isOn: toggleState))
         }
         .padding(EdgeInsets(top: 8, leading: 24, bottom: 8, trailing: 24))
     }
