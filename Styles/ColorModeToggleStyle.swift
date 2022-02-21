@@ -31,7 +31,6 @@ struct ColorModeToggleStyle: ToggleStyle {
 
     func makeBody(configuration: Self.Configuration) -> some View {
         let image: Image = configuration.isOn ? Image("toggle-light") : Image("toggle-dark")
-        position = configuration.isOn ? Constants.lightPosition : Constants.darkPosition
 
         return HStack {
             ZStack {
@@ -49,6 +48,9 @@ struct ColorModeToggleStyle: ToggleStyle {
             }
             .foregroundColor(.clear)
             .frame(width: 56, height: 32, alignment: .center)
+            .onAppear {
+                position = configuration.isOn ? Constants.lightPosition : Constants.darkPosition
+            }
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     position = !configuration.isOn ? Constants.lightPosition : Constants.darkPosition

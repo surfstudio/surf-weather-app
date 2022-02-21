@@ -12,7 +12,7 @@ struct LocationHeaderView: View {
     // MARK: - Properties
 
     @StateObject var viewModel: LocationHeaderViewModel
-    @State var toggleState = true
+    @State var isLightMode = UserDefaultsService.shared.isLightMode
 
     // MARK: - Views
 
@@ -30,10 +30,13 @@ struct LocationHeaderView: View {
             }
 
             Spacer()
-            Toggle("", isOn: $toggleState)
-                .toggleStyle(ColorModeToggleStyle(isOn: toggleState))
+            Toggle("", isOn: $isLightMode)
+                .toggleStyle(ColorModeToggleStyle(isOn: isLightMode))
         }
         .padding(EdgeInsets(top: 8, leading: 24, bottom: 8, trailing: 24))
+        .onChange(of: isLightMode, perform: { isLightMode in
+            UserDefaultsService.shared.isLightMode = isLightMode
+        })
     }
 
     var button: some View {
