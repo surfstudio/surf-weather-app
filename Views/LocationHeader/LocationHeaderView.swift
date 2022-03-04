@@ -52,10 +52,10 @@ struct LocationHeaderView: View {
 
             Circle()
                 .frame(width: 40, height: 40, alignment: .center)
-                .foregroundColor(.white)
+                .foregroundColor(.lightBackground | .darkBackground)
                 .overlay(
                     Circle()
-                        .stroke(Color.gray, lineWidth: 1)
+                        .stroke(.lightBackground2 | .darkBackground2, lineWidth: 1)
                 )
 
             VStack(alignment: .center, spacing: 4) {
@@ -75,7 +75,7 @@ struct LocationHeaderView: View {
 
     var smallCircle: some View {
         RoundedRectangle(cornerRadius: 2.5, style: .continuous)
-            .foregroundColor(.blue)
+            .foregroundColor(.lightBlue | .purple)
             .frame(width: 5, height: 5, alignment: .center)
     }
 
@@ -85,7 +85,7 @@ struct LocationHeaderView: View {
     func infoView(with cityName: String) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text("Вы здесь")
-                .foregroundColor(.gray)
+                .foregroundColor(.lightText2 | .darkText2)
                 .font(Font.system(size: 12))
             Text(cityName)
                 .font(Font.system(size: 16, weight: .semibold))

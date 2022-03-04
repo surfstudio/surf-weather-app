@@ -8,9 +8,19 @@
 import Foundation
 import SwiftUI
 
-final class UserDefaultsService {
+final class UserDefaultsService: ObservableObject {
+
+    // MARK: - Environments
 
     @Environment(\.colorScheme) var colorScheme
+
+    // MARK: - Properties
+
+    @Published var isLightMode: Bool = false {
+        didSet {
+            UserDefaults.standard.set(isLightMode, forKey: Keys.isLightMode.rawValue)
+        }
+    }
 
     // MARK: - Static Properties
 
@@ -22,25 +32,20 @@ final class UserDefaultsService {
         case isLightMode
     }
 
-    // MARK: - Properties
-
-    var isLightMode: Bool {
-        get {
-            if let isDarkMode = UserDefaults.standard.object(forKey: Keys.isLightMode.rawValue) as? Bool {
-                return isDarkMode
-            } else {
-                let isLightMode = colorScheme == .light
-                self.isLightMode = isLightMode
-                return isLightMode
-            }
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Keys.isLightMode.rawValue)
-        }
-    }
-
     // MARK: - Initialization
 
-    private init() {}
+    private init() {
+        setColorMode()
+    }
+
+    // MARK: - Private Methods
+
+    func setColorMode() {
+        if let isLightMode = UserDefaults.standard.object(forKey: Keys.isLightMode.rawValue) as? Bool {
+            self.isLightMode = isLightMode
+        } else {
+            self.isLightMode = colorScheme == .light
+        }
+    }
 
 }

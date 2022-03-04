@@ -20,7 +20,9 @@ extension Color {
     }
 
     static func | (_ lightColor: Color, _ darkColor: Color) -> Color {
-        UserDefaultsService.shared.isLightMode ? lightColor : darkColor
+        let lightUiColor = UIColor(lightColor)
+        let darkUiColor = UIColor(darkColor)
+        return Color(UIColor { $0.userInterfaceStyle == .light ? lightUiColor : darkUiColor })
     }
 }
 

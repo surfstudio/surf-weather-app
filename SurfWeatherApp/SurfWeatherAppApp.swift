@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct SurfWeatherAppApp: App {
+
+    @ObservedObject var userSettings = UserDefaultsService.shared
+
     var body: some Scene {
         WindowGroup {
             MainScreenView()
+                .preferredColorScheme(userSettings.isLightMode ? .light : .dark)
         }
     }
+
 }

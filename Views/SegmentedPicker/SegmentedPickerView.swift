@@ -79,15 +79,15 @@ struct SegmentedPickerView: View {
 fileprivate extension Color {
 
     static var backgroundColor: Color {
-        .lightBackground2 | .darkBackground2
+        .lightBackground2 | .darkBackground
     }
 
     static var itemColor: Color {
-        .lightBackground | .darkBackground
+        .lightBackground | .darkBackground2
     }
 
     static var activeTextColor: Color {
-        .lightText | .darkText
+        .lightText | .darkWhite
     }
 
     static var inactiveTextColor: Color {

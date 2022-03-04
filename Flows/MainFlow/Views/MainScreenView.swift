@@ -16,6 +16,7 @@ struct MainScreenView: View {
                 .foregroundColor(.gray)
             MainScreenForecastView()
         }
+        .background(Color.lightBackground | .darkBackground)
     }
 }
 

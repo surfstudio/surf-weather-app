@@ -31,6 +31,7 @@ struct MainScreenForecastView: View {
     var titleView: some View {
         Text("Прогноз погоды")
             .font(Font.system(size: 24, weight: .semibold))
+            .foregroundColor(.lightText | .darkWhite)
     }
 
     var contentView: some View {
@@ -39,7 +40,7 @@ struct MainScreenForecastView: View {
             listView
         }
         .padding(EdgeInsets(top: 20, leading: 16, bottom: 8, trailing: 16))
-        .background(.lightBackground | .darkBackground)
+        .background(Color.lightBackground | Color.darkBackground2)
         .cornerRadius(16)
     }
 
@@ -50,7 +51,7 @@ struct MainScreenForecastView: View {
     var listView: some View {
         VStack(alignment: .leading, spacing: .zero) {
             ForEach(0..<5) { _ in
-                MainScreenForecastListItemView()
+                MainScreenForecastListItemView(viewModel: .init(isSelected: false))
             }
         }
     }
@@ -59,6 +60,13 @@ struct MainScreenForecastView: View {
 
 struct MainScreenForecastView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenForecastView()
+        Group {
+            MainScreenForecastView()
+                .preferredColorScheme(.light)
+                .previewInterfaceOrientation(.portrait)
+            MainScreenForecastView()
+                .preferredColorScheme(.dark)
+                .previewInterfaceOrientation(.portrait)
+        }
     }
 }
