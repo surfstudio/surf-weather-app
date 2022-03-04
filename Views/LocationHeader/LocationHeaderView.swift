@@ -75,7 +75,7 @@ struct LocationHeaderView: View {
 
     var smallCircle: some View {
         RoundedRectangle(cornerRadius: 2.5, style: .continuous)
-            .foregroundColor(.lightBlue | .purple)
+            .foregroundColor(.lightBlue | .darkPurple)
             .frame(width: 5, height: 5, alignment: .center)
     }
 

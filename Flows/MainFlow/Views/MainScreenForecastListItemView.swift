@@ -16,7 +16,7 @@ struct MainScreenForecastListItemView: View {
     // MARK: - Private Properties
 
     private var dayColor: Color {
-        let allocateColor: Color = .lightBlue | .purple
+        let allocateColor: Color = .lightBlue | .darkPurple
         let noramalColor: Color = .lightText | .darkWhite
         return viewModel.isNeedDayAllocate ? allocateColor : noramalColor
     }
@@ -67,7 +67,7 @@ struct MainScreenForecastListItemView: View {
                 .foregroundColor(.lightText | .darkWhite)
             Spacer()
                 .frame(width: 20)
-            Image("weather-sun", bundle: nil)
+            Image("weathar-snow", bundle: nil)
                 .renderingMode(.template)
                 .tint(.lightText | .darkWhite)
             Spacer()

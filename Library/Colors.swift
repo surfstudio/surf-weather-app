@@ -80,7 +80,7 @@ extension Color {
         Color(0x03151F)
     }
 
-    static var purple: Color {
+    static var darkPurple: Color {
         Color(0x865BFB)
     }
 

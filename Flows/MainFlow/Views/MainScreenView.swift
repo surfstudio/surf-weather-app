@@ -15,6 +15,7 @@ struct MainScreenView: View {
                 .frame(height: 392, alignment: .top)
                 .foregroundColor(.gray)
             MainScreenForecastView(viewModel: .init())
+            MainScreenForecastJournalView()
         }
         .background(Color.lightBackground | .darkBackground)
     }
