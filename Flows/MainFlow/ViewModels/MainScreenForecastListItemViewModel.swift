@@ -12,11 +12,22 @@ final class MainScreenForecastListItemViewModel: ObservableObject {
     // MARK: - Properties
 
     @Published var isSelected: Bool
+    let isNeedSeparator: Bool
+    let isNeedDayAllocate: Bool
 
     // MARK: - Initialization
 
-    init(isSelected: Bool) {
+    init(isSelected: Bool, isNeedSeparator: Bool = true, isNeedDayAllocate: Bool = false) {
         self.isSelected = isSelected
+        self.isNeedSeparator = isNeedSeparator
+        self.isNeedDayAllocate = isNeedDayAllocate
+    }
+
+    // MARK: - Actions
+
+    func selectItemAction() {
+        print("Selected")
+        isSelected.toggle()
     }
 
 }

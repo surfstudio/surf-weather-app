@@ -13,18 +13,25 @@ struct MainScreenForecastListItemView: View {
 
     @ObservedObject var viewModel: MainScreenForecastListItemViewModel
 
+    // MARK: - Private Properties
+
+    private var dayColor: Color {
+        let allocateColor: Color = .lightBlue | .purple
+        let noramalColor: Color = .lightText | .darkWhite
+        return viewModel.isNeedDayAllocate ? allocateColor : noramalColor
+    }
+
     // MARK: - Views
 
     var body: some View {
         VStack {
             headView
             bottomView
-            Rectangle()
-                .frame(height: 1)
-                .foregroundColor(.clear)
-                .background(
-                    gradientView
-                )
+
+            if viewModel.isNeedSeparator {
+                separatorView
+            }
+
         }
         .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
     }
@@ -33,15 +40,21 @@ struct MainScreenForecastListItemView: View {
         HStack {
             Text("Сегодня")
                 .font(.system(size: 16))
-                .foregroundColor(.lightText | .darkWhite) +
+                .foregroundColor(dayColor) +
             Text(", 9 сен")
                 .font(.system(size: 16))
                 .foregroundColor(.lightText2 | .darkText)
 
             Spacer()
 
-            Button(action: {}) {
-                Image("deselected", bundle: nil)
+            Button(action: {
+                viewModel.selectItemAction()
+            }) {
+                if viewModel.isSelected {
+                    Image("selected", bundle: nil)
+                } else {
+                    Image("deselected", bundle: nil)
+                }
             }
         }
         .padding(EdgeInsets(top: 16, leading: 0, bottom: 6, trailing: 0))
@@ -73,19 +86,24 @@ struct MainScreenForecastListItemView: View {
         }
     }
 
-    var gradientView: some View {
-        LinearGradient(colors: [
-            .lightBackground | .darkBackground2,
-            .lightBackground2 | .darkBackground,
-            .lightBackground | .darkBackground2],
-                       startPoint: .leading,
-                       endPoint: .trailing)
+    var separatorView: some View {
+        Rectangle()
+            .frame(height: 1)
+            .foregroundColor(.clear)
+            .background(
+                LinearGradient(colors: [
+                    .lightBackground | .darkBackground2,
+                    .lightBackground2 | .darkBackground,
+                    .lightBackground | .darkBackground2],
+                               startPoint: .leading,
+                               endPoint: .trailing)
+            )
     }
 
 }
 
 struct MainScreenForecastListView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenForecastListItemView(viewModel: .init(isSelected: false))
+        MainScreenForecastListItemView(viewModel: .init(isSelected: false, isNeedSeparator: true, isNeedDayAllocate: false))
     }
 }

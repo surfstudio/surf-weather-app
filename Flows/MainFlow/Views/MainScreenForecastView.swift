@@ -11,7 +11,7 @@ struct MainScreenForecastView: View {
 
     // MARK: - States
 
-    @State var selctedSegment: Int = 1
+    @ObservedObject var viewModel: MainScreenForecastViewModel
 
     // MARK: - Views
 
@@ -39,19 +39,19 @@ struct MainScreenForecastView: View {
             pickerView
             listView
         }
-        .padding(EdgeInsets(top: 20, leading: 16, bottom: 8, trailing: 16))
+        .padding(EdgeInsets(top: 20, leading: 16, bottom: 28, trailing: 16))
         .background(Color.lightBackground | Color.darkBackground2)
         .cornerRadius(16)
     }
 
     var pickerView: some View {
-        SegmentedPickerView(selected: $selctedSegment, elements: ["Архив", "5 дней"])
+        SegmentedPickerView(selected: $viewModel.selectedList, elements: ["Архив", "5 дней"])
     }
 
     var listView: some View {
         VStack(alignment: .leading, spacing: .zero) {
-            ForEach(0..<5) { _ in
-                MainScreenForecastListItemView(viewModel: .init(isSelected: false))
+            ForEach(viewModel.items.indices, id: \.self) {
+                MainScreenForecastListItemView(viewModel: viewModel.items[$0])
             }
         }
     }
@@ -61,10 +61,10 @@ struct MainScreenForecastView: View {
 struct MainScreenForecastView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MainScreenForecastView()
+            MainScreenForecastView(viewModel: .init())
                 .preferredColorScheme(.light)
                 .previewInterfaceOrientation(.portrait)
-            MainScreenForecastView()
+            MainScreenForecastView(viewModel: .init())
                 .preferredColorScheme(.dark)
                 .previewInterfaceOrientation(.portrait)
         }
