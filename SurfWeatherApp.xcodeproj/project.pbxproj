@@ -15,6 +15,10 @@
 		769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769CECF827C27D2B00FFD409 /* MainScreenView.swift */; };
 		769CECFC27C27DE100FFD409 /* LocationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769CECFB27C27DE100FFD409 /* LocationHeaderView.swift */; };
 		769CECFF27C27EBB00FFD409 /* LocationHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769CECFE27C27EBB00FFD409 /* LocationHeaderViewModel.swift */; };
+		76ADAFC427C8F01000F85FA7 /* MainScreenForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */; };
+		76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */; };
+		76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467C27C92B0200D8BBA9 /* Colors.swift */; };
+		76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +31,10 @@
 		769CECF827C27D2B00FFD409 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		769CECFB27C27DE100FFD409 /* LocationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderView.swift; sourceTree = "<group>"; };
 		769CECFE27C27EBB00FFD409 /* LocationHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderViewModel.swift; sourceTree = "<group>"; };
+		76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastView.swift; sourceTree = "<group>"; };
+		76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
+		76C6467C27C92B0200D8BBA9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +51,7 @@
 		7606160C27AD77F600CC73B5 = {
 			isa = PBXGroup;
 			children = (
+				76C6467B27C92AE300D8BBA9 /* Library */,
 				76210BF027C29A7700F858AA /* Services */,
 				76210BED27C2997B00F858AA /* Styles */,
 				769CECFA27C27DC000FFD409 /* Views */,
@@ -98,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				769CECF827C27D2B00FFD409 /* MainScreenView.swift */,
+				76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */,
+				76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */,
 			);
 			path = MainFlow;
 			sourceTree = "<group>";
@@ -113,6 +124,7 @@
 		769CECFA27C27DC000FFD409 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				76C6467827C90AE900D8BBA9 /* SegmentedPicker */,
 				769CECFD27C27EA700FFD409 /* LocationHeader */,
 			);
 			path = Views;
@@ -125,6 +137,22 @@
 				769CECFE27C27EBB00FFD409 /* LocationHeaderViewModel.swift */,
 			);
 			path = LocationHeader;
+			sourceTree = "<group>";
+		};
+		76C6467827C90AE900D8BBA9 /* SegmentedPicker */ = {
+			isa = PBXGroup;
+			children = (
+				76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */,
+			);
+			path = SegmentedPicker;
+			sourceTree = "<group>";
+		};
+		76C6467B27C92AE300D8BBA9 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				76C6467C27C92B0200D8BBA9 /* Colors.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,10 +226,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				76210BF227C29AAD00F858AA /* UserDefaultsService.swift in Sources */,
+				76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */,
+				76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */,
 				76210BEF27C299A100F858AA /* ColorModeToggleStyle.swift in Sources */,
+				76ADAFC427C8F01000F85FA7 /* MainScreenForecastView.swift in Sources */,
 				7606161927AD77F600CC73B5 /* SurfWeatherAppApp.swift in Sources */,
 				769CECFF27C27EBB00FFD409 /* LocationHeaderViewModel.swift in Sources */,
 				769CECFC27C27DE100FFD409 /* LocationHeaderView.swift in Sources */,
+				76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */,
 				769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

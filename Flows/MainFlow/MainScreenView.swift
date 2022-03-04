@@ -9,7 +9,13 @@ import SwiftUI
 
 struct MainScreenView: View {
     var body: some View {
-        LocationHeaderView(viewModel: LocationHeaderViewModel())
+        ScrollView {
+            LocationHeaderView(viewModel: LocationHeaderViewModel())
+            Rectangle()
+                .frame(height: 392, alignment: .top)
+                .foregroundColor(.gray)
+            MainScreenForecastView()
+        }
     }
 }
 
