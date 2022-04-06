@@ -27,3 +27,18 @@ public enum DateFormat: String {
     }
 
 }
+
+extension Date {
+
+    var weekday: String {
+        let calendar = Calendar.current
+        let daily = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
+        let weekday = calendar.component(.weekday, from: self)
+        let currentDay = calendar.component(.weekday, from: Date())
+
+        let isToday = weekday == currentDay
+
+        return isToday ? "Сегодня" : daily[weekday - 1]
+    }
+
+}

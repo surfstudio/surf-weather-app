@@ -12,7 +12,7 @@ public enum TemperatureFormatter {
     // MARK: - Nested
 
     private enum Constants {
-        static let maximumFractionDigits = 2 // Колличество символов после запятой
+        static let maximumFractionDigits = 1 // Колличество символов после запятой
     }
 
     // MARK: - Method

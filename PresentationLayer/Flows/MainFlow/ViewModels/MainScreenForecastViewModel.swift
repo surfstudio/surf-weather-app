@@ -21,29 +21,21 @@ final class MainScreenForecastViewModel: ObservableObject {
 
     @Published var selectedList: Int = SelectedList.forecast.rawValue
     @Published var items: [MainScreenForecastListItemViewModel] = []
-    @Published var forecastItems = [
-        MainScreenForecastListItemViewModel(isSelected: true, isNeedDayAllocate: true),
-        MainScreenForecastListItemViewModel(isSelected: false),
-        MainScreenForecastListItemViewModel(isSelected: false),
-        MainScreenForecastListItemViewModel(isSelected: false),
-        MainScreenForecastListItemViewModel(isSelected: true, isNeedSeparator: false),
-    ]
+    @Published var forecastItems: [MainScreenForecastListItemViewModel] = []
 
-    @Published var archiveItems = [
-        MainScreenForecastListItemViewModel(isSelected: true, isNeedDayAllocate: false),
-        MainScreenForecastListItemViewModel(isSelected: true),
-        MainScreenForecastListItemViewModel(isSelected: true),
-        MainScreenForecastListItemViewModel(isSelected: true),
-        MainScreenForecastListItemViewModel(isSelected: true, isNeedSeparator: false),
-    ]
+    @Published var archiveItems: [MainScreenForecastListItemViewModel] = []
 
     private var cancellables: [AnyCancellable] = []
     private let weatherService: IWeatherNetworkService
+    private var mainScreenForecastModelAdapter: MainScreenForecastModelAdapter? {
+        willSet { handleAdapter(with: newValue?.makeScreenForecastModel() ?? []) }
+    }
 
     // MARK: - Initialization
 
     init() {
         weatherService = ServicesAssembly().weatherNetworkService
+        loadWeather(with: .init(lat: 54, lon: 55))
         $selectedList.sink { value in
             self.items = value == SelectedList.forecast.rawValue ? self.forecastItems : self.archiveItems
         }.store(in: &self.cancellables)
@@ -59,10 +51,19 @@ private extension MainScreenForecastViewModel {
         weatherService.getWeather(with: cord) { [weak self] result in
             switch result {
             case .success(let request):
-                break
+                self?.mainScreenForecastModelAdapter = .init(weatherDayEntities: request?.daily ?? [])
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+
+    func handleAdapter(with models: [MainScreenForecastListItemView.Model]) {
+        forecastItems = models.compactMap { model in
+                .init(isSelected: false, model: model)
+        }
+        archiveItems = models.compactMap { model in
+                .init(isSelected: false, model: model)
         }
     }
 
