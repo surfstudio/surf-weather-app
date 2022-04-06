@@ -22,9 +22,9 @@ final class MainScreenForecastViewModel: ObservableObject {
 
     @Published var selectedList: Int = SelectedList.forecast.rawValue
     @Published var items: [MainScreenForecastListItemViewModel] = []
-    @Published var forecastItems: [MainScreenForecastListItemViewModel] = []
 
-    @Published var archiveItems: [MainScreenForecastListItemViewModel] = []
+    private var forecastItems: [MainScreenForecastListItemViewModel] = []
+    private var archiveItems: [MainScreenForecastListItemViewModel] = []
 
     private var cancellables: [AnyCancellable] = []
     private let weatherService: IWeatherNetworkService
