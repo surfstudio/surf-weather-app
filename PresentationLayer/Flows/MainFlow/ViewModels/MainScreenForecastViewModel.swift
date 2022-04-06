@@ -39,7 +39,7 @@ final class MainScreenForecastViewModel: ObservableObject {
     // MARK: - Methods
 
     func loadData() {
-        loadWeather(with: .init(lat: 54, lon: 55))
+        loadWeather(with: .init(lat: 51, lon: 39))
     }
 
 }
