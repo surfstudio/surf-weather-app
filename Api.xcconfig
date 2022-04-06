@@ -8,8 +8,5 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-// https://openweathermap.org/current
-CURRENT_WEATHER_URL = api.openweathermap.org/data/2.5/weather?appid=90cee4375dcfa3aaa915a90b814615d0&units=metric&lang=ru
-
-// https://openweathermap.org/current
+// https://openweathermap.org
 FOUR_DAY_WEATHER_URL = api.openweathermap.org/data/2.5/onecall?appid=90cee4375dcfa3aaa915a90b814615d0&units=metric&lang=ru

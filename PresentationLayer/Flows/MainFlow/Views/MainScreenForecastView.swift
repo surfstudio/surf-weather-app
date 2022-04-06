@@ -26,6 +26,7 @@ struct MainScreenForecastView: View {
                             trailing: 16))
         .frame(maxWidth: .infinity, alignment: .leading)
         .shadow(color: Color(.black.withAlphaComponent(0.08)), radius: 12, x: 0, y: 0)
+        .onAppear { viewModel.loadData() }
     }
 
     var titleView: some View {

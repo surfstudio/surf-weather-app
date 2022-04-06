@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Combine
 
 final class MainScreenForecastViewModel: ObservableObject {
@@ -27,18 +28,18 @@ final class MainScreenForecastViewModel: ObservableObject {
 
     private var cancellables: [AnyCancellable] = []
     private let weatherService: IWeatherNetworkService
-    private var mainScreenForecastModelAdapter: MainScreenForecastModelAdapter? {
-        willSet { handleAdapter(with: newValue?.makeScreenForecastModel() ?? []) }
-    }
+    private var mainScreenForecastModelAdapter: MainScreenForecastModelAdapter?
 
     // MARK: - Initialization
 
     init() {
         weatherService = ServicesAssembly().weatherNetworkService
+    }
+
+    // MARK: - Methods
+
+    func loadData() {
         loadWeather(with: .init(lat: 54, lon: 55))
-        $selectedList.sink { value in
-            self.items = value == SelectedList.forecast.rawValue ? self.forecastItems : self.archiveItems
-        }.store(in: &self.cancellables)
     }
 
 }
@@ -51,20 +52,21 @@ private extension MainScreenForecastViewModel {
         weatherService.getWeather(with: cord) { [weak self] result in
             switch result {
             case .success(let request):
-                self?.mainScreenForecastModelAdapter = .init(weatherDayEntities: request?.daily ?? [])
+                self?.handleSuccess(with: request)
             case .failure(let error):
                 print(error)
             }
         }
     }
 
-    func handleAdapter(with models: [MainScreenForecastListItemView.Model]) {
-        forecastItems = models.compactMap { model in
-                .init(isSelected: false, model: model)
-        }
-        archiveItems = models.compactMap { model in
-                .init(isSelected: false, model: model)
-        }
+    func handleSuccess(with entity: WeatherRequestEntity?) {
+        mainScreenForecastModelAdapter = .init(weatherDayEntities: entity?.daily ?? [])
+        let models = mainScreenForecastModelAdapter?.makeScreenForecastModels() ?? []
+        forecastItems = models.compactMap { .init(isSelected: false, model: $0) }
+
+        $selectedList.sink { value in
+            self.items = value == SelectedList.forecast.rawValue ? self.forecastItems : self.archiveItems
+        }.store(in: &self.cancellables)
     }
 
 }

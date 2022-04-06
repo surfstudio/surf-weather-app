@@ -21,7 +21,7 @@ class MainScreenForecastModelAdapter {
 
     // MARK: - Methods
 
-    func makeScreenForecastModel() -> [MainScreenForecastListItemView.Model] {
+    func makeScreenForecastModels() -> [MainScreenForecastListItemView.Model] {
 
         weatherDayEntities.prefix(5).compactMap { entity -> MainScreenForecastListItemView.Model in
             let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
