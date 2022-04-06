@@ -9,22 +9,15 @@ import Foundation
 
 final class WeatherRequest: IRequest {
 
-    enum DaysCount: String {
-        case one = "CurrentWeatherUrl"
-        case four = "FourDayWeatherUrl"
-    }
-
     private let cordsEntity: CordsEntity
-    private let daysCount: DaysCount
 
-    init(cordsEntity: CordsEntity, daysCount: DaysCount) {
+    init(cordsEntity: CordsEntity) {
         self.cordsEntity = cordsEntity
-        self.daysCount = daysCount
     }
 
     private var urlString: String? {
         let param = "&lat=\(cordsEntity.lat)&lon=\(cordsEntity.lon)"
-        guard let url = Bundle.main.object(forInfoDictionaryKey: daysCount.rawValue) as? String else { return nil }
+        guard let url = Bundle.main.object(forInfoDictionaryKey: "WeatherRequestUrl") as? String else { return nil }
         let urlString = url + param
         return urlString
     }

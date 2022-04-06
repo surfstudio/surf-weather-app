@@ -20,17 +20,3 @@ final class WeatherParser: IParser {
         }
     }
 }
-
-final class WeatherDailyParser: IParser {
-
-    typealias Model = WeatherDailyRequestEntity
-
-    func parse(data: Data) -> Model? {
-        do {
-            return try JSONDecoder().decode(Model.self, from: data)
-        } catch {
-            print(NetworkError.notModel.localizedDescription)
-            return nil
-        }
-    }
-}

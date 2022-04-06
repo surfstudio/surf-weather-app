@@ -4,7 +4,7 @@
 <dict>
 	<key>CurrentWeatherUrl</key>
 	<string>https://$(CURRENT_WEATHER_URL)</string>
-	<key>FourDayWeatherUrl</key>
+	<key>WeatherRequestUrl</key>
 	<string>https://$(FOUR_DAY_WEATHER_URL)</string>
 </dict>
 </plist>

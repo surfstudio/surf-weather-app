@@ -38,13 +38,32 @@ final class MainScreenForecastViewModel: ObservableObject {
     ]
 
     private var cancellables: [AnyCancellable] = []
+    private let weatherService: IWeatherNetworkService
 
     // MARK: - Initialization
 
     init() {
+        weatherService = ServicesAssembly().weatherNetworkService
         $selectedList.sink { value in
             self.items = value == SelectedList.forecast.rawValue ? self.forecastItems : self.archiveItems
         }.store(in: &self.cancellables)
+    }
+
+}
+
+// MARK: - Private Methods
+
+private extension MainScreenForecastViewModel {
+
+    func loadWeather(with cord: CordsEntity) {
+        weatherService.getWeather(with: cord) { [weak self] result in
+            switch result {
+            case .success(let request):
+                break
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
 }
