@@ -11,9 +11,7 @@ struct MainScreenView: View {
     var body: some View {
         ScrollView {
             LocationHeaderView(viewModel: LocationHeaderViewModel())
-            Rectangle()
-                .frame(height: 392, alignment: .top)
-                .foregroundColor(.gray)
+            PagerView()
             MainScreenForecastView(viewModel: .init())
             MainScreenForecastJournalView()
         }

@@ -22,6 +22,9 @@
 		76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */; };
 		76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467C27C92B0200D8BBA9 /* Colors.swift */; };
 		76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */; };
+		A4D4A02827FEEDA5008F5BD4 /* PagingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4A02727FEEDA5008F5BD4 /* PagingScrollView.swift */; };
+		A4D4A02A27FEF210008F5BD4 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4A02927FEF210008F5BD4 /* PagerView.swift */; };
+		A4D4A02C27FEF6AB008F5BD4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4A02B27FEF6AB008F5BD4 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		76C6467C27C92B0200D8BBA9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListItemView.swift; sourceTree = "<group>"; };
+		A4D4A02727FEEDA5008F5BD4 /* PagingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingScrollView.swift; sourceTree = "<group>"; };
+		A4D4A02927FEF210008F5BD4 /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
+		A4D4A02B27FEF6AB008F5BD4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				769CECF827C27D2B00FFD409 /* MainScreenView.swift */,
+				A4D4A02927FEF210008F5BD4 /* PagerView.swift */,
+				A4D4A02B27FEF6AB008F5BD4 /* CardView.swift */,
 				76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */,
 				76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */,
 				769A6F1D27D275080007759C /* MainScreenForecastJournalView.swift */,
@@ -149,6 +157,7 @@
 		769CECFA27C27DC000FFD409 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4D4A02627FEED8D008F5BD4 /* PagingScrollView */,
 				76C6467827C90AE900D8BBA9 /* SegmentedPicker */,
 				769CECFD27C27EA700FFD409 /* LocationHeader */,
 			);
@@ -178,6 +187,14 @@
 				76C6467C27C92B0200D8BBA9 /* Colors.swift */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		A4D4A02627FEED8D008F5BD4 /* PagingScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				A4D4A02727FEEDA5008F5BD4 /* PagingScrollView.swift */,
+			);
+			path = PagingScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76210BF227C29AAD00F858AA /* UserDefaultsService.swift in Sources */,
+				A4D4A02827FEEDA5008F5BD4 /* PagingScrollView.swift in Sources */,
 				769A6F1627D23BBA0007759C /* MainScreenForecastListItemViewModel.swift in Sources */,
 				76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */,
 				76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */,
@@ -262,6 +280,8 @@
 				769A6F1C27D2633C0007759C /* MainScreenForecastViewModel.swift in Sources */,
 				769CECFC27C27DE100FFD409 /* LocationHeaderView.swift in Sources */,
 				76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */,
+				A4D4A02A27FEF210008F5BD4 /* PagerView.swift in Sources */,
+				A4D4A02C27FEF6AB008F5BD4 /* CardView.swift in Sources */,
 				769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
