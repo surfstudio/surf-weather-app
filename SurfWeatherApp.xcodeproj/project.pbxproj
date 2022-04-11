@@ -57,11 +57,12 @@
 		7606160C27AD77F600CC73B5 = {
 			isa = PBXGroup;
 			children = (
-				76C6467B27C92AE300D8BBA9 /* Library */,
-				76210BF027C29A7700F858AA /* Services */,
-				76210BED27C2997B00F858AA /* Styles */,
-				769CECFA27C27DC000FFD409 /* Views */,
 				769CECF527C27D0E00FFD409 /* Flows */,
+				A4D49FCD27FC937D008F5BD4 /* Service */,
+				A4D49FD027FC93B2008F5BD4 /* Core */,
+				76C6467B27C92AE300D8BBA9 /* Library */,
+				A4D49FD127FC93D1008F5BD4 /* Resources */,
+				A4D49FD327FC940E008F5BD4 /* Models */,
 				7606161727AD77F600CC73B5 /* SurfWeatherApp */,
 				7606161627AD77F600CC73B5 /* Products */,
 			);
@@ -79,8 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				7606161827AD77F600CC73B5 /* SurfWeatherAppApp.swift */,
-				7606161C27AD77F700CC73B5 /* Assets.xcassets */,
-				7606161E27AD77F700CC73B5 /* Preview Content */,
 			);
 			path = SurfWeatherApp;
 			sourceTree = "<group>";
@@ -101,12 +100,12 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
-		76210BF027C29A7700F858AA /* Services */ = {
+		76210BF027C29A7700F858AA /* Storage */ = {
 			isa = PBXGroup;
 			children = (
 				76210BF127C29AAD00F858AA /* UserDefaultsService.swift */,
 			);
-			path = Services;
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		769A6F1727D23BEF0007759C /* Views */ = {
@@ -175,9 +174,66 @@
 		76C6467B27C92AE300D8BBA9 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				76C6467C27C92B0200D8BBA9 /* Colors.swift */,
+				76210BED27C2997B00F858AA /* Styles */,
+				769CECFA27C27DC000FFD409 /* Views */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		A4D49FCA27FC9338008F5BD4 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				76C6467C27C92B0200D8BBA9 /* Colors.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		A4D49FCD27FC937D008F5BD4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				76210BF027C29A7700F858AA /* Storage */,
+				A4D49FCE27FC937D008F5BD4 /* Network */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		A4D49FCE27FC937D008F5BD4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A4D49FD027FC93B2008F5BD4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A4D49FD127FC93D1008F5BD4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A4D49FCA27FC9338008F5BD4 /* Colors */,
+				A4D49FD227FC93F5008F5BD4 /* Assets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A4D49FD227FC93F5008F5BD4 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				7606161C27AD77F700CC73B5 /* Assets.xcassets */,
+				7606161E27AD77F700CC73B5 /* Preview Content */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		A4D49FD327FC940E008F5BD4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,7 +448,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SurfWeatherApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Resources/Assets/Preview Content\"";
 				DEVELOPMENT_TEAM = U6V2AU849T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -421,7 +477,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SurfWeatherApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Resources/Assets/Preview Content\"";
 				DEVELOPMENT_TEAM = U6V2AU849T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
