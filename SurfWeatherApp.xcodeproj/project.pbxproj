@@ -99,9 +99,9 @@
 			isa = PBXGroup;
 			children = (
 				A4D49FEA27FC9E94008F5BD4 /* Config */,
-				A4D49FCB27FC9359008F5BD4 /* PresentationLayer */,
-				A4D49FCD27FC937D008F5BD4 /* ServiceLayer */,
-				A4D49FD027FC93B2008F5BD4 /* CoreLayer */,
+				769CECF527C27D0E00FFD409 /* Flows */,
+				A4D49FCD27FC937D008F5BD4 /* Service */,
+				A4D49FD027FC93B2008F5BD4 /* Core */,
 				76C6467B27C92AE300D8BBA9 /* Library */,
 				A4D49FD127FC93D1008F5BD4 /* Resources */,
 				A4D49FD327FC940E008F5BD4 /* Models */,
@@ -234,22 +234,14 @@
 			path = Colors;
 			sourceTree = "<group>";
 		};
-		A4D49FCB27FC9359008F5BD4 /* PresentationLayer */ = {
-			isa = PBXGroup;
-			children = (
-				769CECF527C27D0E00FFD409 /* Flows */,
-			);
-			path = PresentationLayer;
-			sourceTree = "<group>";
-		};
-		A4D49FCD27FC937D008F5BD4 /* ServiceLayer */ = {
+		A4D49FCD27FC937D008F5BD4 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				A4D49FE527FC9630008F5BD4 /* ServiceAssembly.swift */,
 				76210BF027C29A7700F858AA /* Storage */,
 				A4D49FCE27FC937D008F5BD4 /* Network */,
 			);
-			path = ServiceLayer;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		A4D49FCE27FC937D008F5BD4 /* Network */ = {
@@ -260,13 +252,13 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		A4D49FD027FC93B2008F5BD4 /* CoreLayer */ = {
+		A4D49FD027FC93B2008F5BD4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				A4D49FDB27FC95FD008F5BD4 /* CoreAssembly.swift */,
 				A4D49FD427FC95FD008F5BD4 /* NetworkManager */,
 			);
-			path = CoreLayer;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		A4D49FD127FC93D1008F5BD4 /* Resources */ = {
