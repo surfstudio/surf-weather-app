@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class WeatherRequest: IRequest {
+final class WeatherRequest: RequestProvider {
 
     private let cordsEntity: CordsEntity
 

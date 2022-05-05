@@ -27,13 +27,13 @@ final class MainScreenForecastViewModel: ObservableObject {
     private var archiveItems: [MainScreenForecastListItemViewModel] = []
 
     private var cancellables: [AnyCancellable] = []
-    private let weatherService: IWeatherNetworkService
+    private let weatherService: WeatherNetworkService
     private var mainScreenForecastModelAdapter: MainScreenForecastModelAdapter?
 
     // MARK: - Initialization
 
-    init() {
-        weatherService = ServicesAssembly().weatherNetworkService
+    init(weatherService: WeatherNetworkService) {
+        self.weatherService = weatherService
     }
 
     // MARK: - Methods

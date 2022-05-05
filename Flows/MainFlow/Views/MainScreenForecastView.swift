@@ -62,10 +62,10 @@ struct MainScreenForecastView: View {
 struct MainScreenForecastView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MainScreenForecastView(viewModel: .init())
+            MainScreenForecastView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService))
                 .preferredColorScheme(.light)
                 .previewInterfaceOrientation(.portrait)
-            MainScreenForecastView(viewModel: .init())
+            MainScreenForecastView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService))
                 .preferredColorScheme(.dark)
                 .previewInterfaceOrientation(.portrait)
         }

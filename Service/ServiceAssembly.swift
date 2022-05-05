@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol IServicesAssembly {
-    var weatherNetworkService: IWeatherNetworkService { get }
+protocol ServicesAssembly {
+    var weatherNetworkService: WeatherNetworkService { get }
 }
 
-final class ServicesAssembly: IServicesAssembly {
+final class ServicesAssemblyFactory: ServicesAssembly {
 
-    private let coreAssembly: ICoreAssembly = CoreAssembly()
+    private let coreAssembly: CoreAssembly = CoreAssemblyFactory()
 
-    lazy var weatherNetworkService: IWeatherNetworkService = WeatherNetworkService(requestSender: coreAssembly.requestSender)
+    lazy var weatherNetworkService: WeatherNetworkService = NetworkService(networkManager: coreAssembly.networkManager)
 
 }

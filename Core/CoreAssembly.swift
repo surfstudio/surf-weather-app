@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol ICoreAssembly {
-    var requestSender: IRequestSender { get }
+protocol CoreAssembly {
+    var networkManager: RequestSenderable { get }
 }
 
-class CoreAssembly: ICoreAssembly {
-    lazy var requestSender: IRequestSender = RequestSender()
+final class CoreAssemblyFactory: CoreAssembly {
+    lazy var networkManager: RequestSenderable = NetworkManager()
 }
