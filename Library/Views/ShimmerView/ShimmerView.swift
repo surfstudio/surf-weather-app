@@ -53,8 +53,7 @@ struct ShimmerView : View {
     func content(shimmerOffset: CGFloat) -> some View {
         ZStack(alignment: .leading) {
             Rectangle()
-                .background(shimmerConfig.bgColor)
-                .foregroundColor(.clear)
+                .foregroundColor(Color.lightBackground2)
             
             Rectangle()
                 .foregroundColor(.clear)
@@ -62,7 +61,7 @@ struct ShimmerView : View {
                 .rotationEffect(Angle(degrees: shimmerConfig.shimmerAngle))
                 .offset(x: (shimmerConfig.isActive ? 1 : -1) * shimmerOffset, y: .zero)
                 .transition(.move(edge: .leading))
-                .animation(.linear(duration: shimmerConfig.shimmerDuration))
+                .animation(.linear(duration: shimmerConfig.shimmerDuration), value: Double.zero)
         }
         .padding(.vertical(-shimmerOffset))
     }
@@ -110,7 +109,7 @@ public class ShimmerConfig: ObservableObject {
 
     public init(bgColor: Color = Color(white: 0.8),
                 fgColor: Color = .white,
-                shimmerColor: Color = Color(white: 1.0, opacity: 0.5),
+                shimmerColor: Color = Color(white: 1.0, opacity: 0.2),
                 shimmerAngle: Double = 20,
                 shimmerDuration: TimeInterval = 1,
                 shimmerDelay: TimeInterval = 2) {
