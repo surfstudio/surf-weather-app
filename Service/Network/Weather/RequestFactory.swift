@@ -10,14 +10,9 @@ import Foundation
 struct RequestFactory {
 
     struct WeatherRequests {
-
-        static func loadWeatherDaily(with coords: CordsEntity) -> RequestConfig<WeatherParser> {
-            let request = WeatherRequest(cordsEntity: coords)
-            let parser = WeatherParser()
-
-            return RequestConfig<WeatherParser>(request: request, parser: parser)
+        static func loadWeatherDaily(with coords: CordsEntity) -> WeatherRequest {
+            return WeatherRequest(cordsEntity: coords)
         }
-
     }
 
 }

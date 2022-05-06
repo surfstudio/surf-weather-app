@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct MainScreenView: View {
+
+    let serviceAssembly = ServicesAssemblyFactory()
+
     var body: some View {
         ScrollView {
             LocationHeaderView(viewModel: LocationHeaderViewModel())
-            makeRactangle().padding(.all, 12)
-            MainScreenForecastView(viewModel: .init())
+            Rectangle()
+                .frame(height: 392, alignment: .top)
+                .foregroundColor(.gray)
+            MainScreenForecastView(viewModel: .init(weatherService: serviceAssembly.weatherNetworkService))
             MainScreenForecastJournalView()
         }
         .background(Color.lightBackground | .darkBackground)
