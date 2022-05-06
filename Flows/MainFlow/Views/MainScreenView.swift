@@ -14,9 +14,7 @@ struct MainScreenView: View {
     var body: some View {
         ScrollView {
             LocationHeaderView(viewModel: LocationHeaderViewModel())
-            Rectangle()
-                .frame(height: 392, alignment: .top)
-                .foregroundColor(.gray)
+            makeRactangle()
             MainScreenForecastView(viewModel: .init(weatherService: serviceAssembly.weatherNetworkService))
             MainScreenForecastJournalView()
         }
@@ -28,7 +26,7 @@ struct MainScreenView: View {
         let shimmeringConfig = getShimmerConfig(animation: true)
         return Rectangle()
             .frame(height: 392, alignment: .top)
-            .foregroundColor(.gray)
+            .foregroundColor(.lightBackground2)
             .shimmer(isActive: true)
             .environmentObject(shimmeringConfig)
     }

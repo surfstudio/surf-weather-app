@@ -41,6 +41,7 @@
 		A4D4A00727FD9A48008F5BD4 /* DailyWeatherEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4A00627FD9A48008F5BD4 /* DailyWeatherEntity.swift */; };
 		A4D4A00927FD9A6B008F5BD4 /* CurrentWeatherEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4A00827FD9A6B008F5BD4 /* CurrentWeatherEntity.swift */; };
 		A4E4E02428240DEF007EF844 /* RequestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4E02328240DEF007EF844 /* RequestProvider.swift */; };
+		A4E4E02A2824F8EF007EF844 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E4E0292824F8EF007EF844 /* ShimmerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		A4D4A00627FD9A48008F5BD4 /* DailyWeatherEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherEntity.swift; sourceTree = "<group>"; };
 		A4D4A00827FD9A6B008F5BD4 /* CurrentWeatherEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherEntity.swift; sourceTree = "<group>"; };
 		A4E4E02328240DEF007EF844 /* RequestProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProvider.swift; sourceTree = "<group>"; };
+		A4E4E0292824F8EF007EF844 /* ShimmerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,7 +230,7 @@
 		A43447A528055268009B93A8 /* ShimmerView */ = {
 			isa = PBXGroup;
 			children = (
-				A43447A62805527C009B93A8 /* ShimmerView.swift */,
+				A4E4E0292824F8EF007EF844 /* ShimmerView.swift */,
 			);
 			path = ShimmerView;
 			sourceTree = "<group>";
@@ -451,6 +453,7 @@
 				A4D4A00327FD7630008F5BD4 /* MainScreenForecastModelAdapter.swift in Sources */,
 				76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */,
 				A4D49FE227FC95FD008F5BD4 /* CoreAssembly.swift in Sources */,
+				A4E4E02A2824F8EF007EF844 /* ShimmerView.swift in Sources */,
 				769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */,
 				A4D49FFC27FCB49F008F5BD4 /* WeatherRequestEntity.swift in Sources */,
 				A4D49FE427FC9615008F5BD4 /* NetworkService.swift in Sources */,
