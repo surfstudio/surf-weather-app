@@ -22,6 +22,8 @@
 		76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */; };
 		76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467C27C92B0200D8BBA9 /* Colors.swift */; };
 		76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */; };
+		A467D0B9282B7ED100D92212 /* AddSitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467D0B8282B7ED100D92212 /* AddSitiesView.swift */; };
+		A467D0BB282B836B00D92212 /* CityCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467D0BA282B836B00D92212 /* CityCardView.swift */; };
 		A4D49FDC27FC95FD008F5BD4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D49FD527FC95FD008F5BD4 /* NetworkManager.swift */; };
 		A4D49FDD27FC95FD008F5BD4 /* RequestSenderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D49FD627FC95FD008F5BD4 /* RequestSenderable.swift */; };
 		A4D49FDE27FC95FD008F5BD4 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D49FD727FC95FD008F5BD4 /* WeatherRequest.swift */; };
@@ -61,6 +63,8 @@
 		76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		76C6467C27C92B0200D8BBA9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListItemView.swift; sourceTree = "<group>"; };
+		A467D0B8282B7ED100D92212 /* AddSitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSitiesView.swift; sourceTree = "<group>"; };
+		A467D0BA282B836B00D92212 /* CityCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCardView.swift; sourceTree = "<group>"; };
 		A4D49FD527FC95FD008F5BD4 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A4D49FD627FC95FD008F5BD4 /* RequestSenderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSenderable.swift; sourceTree = "<group>"; };
 		A4D49FD727FC95FD008F5BD4 /* WeatherRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherRequest.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				769CECF827C27D2B00FFD409 /* MainScreenView.swift */,
+				A467D0B8282B7ED100D92212 /* AddSitiesView.swift */,
+				A467D0BA282B836B00D92212 /* CityCardView.swift */,
 				76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */,
 				76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */,
 				769A6F1D27D275080007759C /* MainScreenForecastJournalView.swift */,
@@ -431,10 +437,12 @@
 				769A6F1627D23BBA0007759C /* MainScreenForecastListItemViewModel.swift in Sources */,
 				A4E4E02428240DEF007EF844 /* RequestProvider.swift in Sources */,
 				A4D49FEE27FC9F90008F5BD4 /* CordsEntity.swift in Sources */,
+				A467D0B9282B7ED100D92212 /* AddSitiesView.swift in Sources */,
 				A4D4A00927FD9A6B008F5BD4 /* CurrentWeatherEntity.swift in Sources */,
 				A4D49FDC27FC95FD008F5BD4 /* NetworkManager.swift in Sources */,
 				A4D4A00527FD9A33008F5BD4 /* TempEntity.swift in Sources */,
 				76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */,
+				A467D0BB282B836B00D92212 /* CityCardView.swift in Sources */,
 				76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */,
 				A4D49FE627FC9630008F5BD4 /* ServiceAssembly.swift in Sources */,
 				A4D49FDD27FC95FD008F5BD4 /* RequestSenderable.swift in Sources */,
