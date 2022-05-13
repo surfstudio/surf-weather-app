@@ -55,6 +55,7 @@ struct MainScreenForecastView: View {
                 MainScreenForecastListItemView(viewModel: viewModel.items[$0])
             }
         }
+        .frame(minHeight: 430)
     }
 
 }

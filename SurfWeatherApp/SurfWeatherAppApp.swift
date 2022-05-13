@@ -14,7 +14,7 @@ struct SurfWeatherAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainScreenView()
+            MainScreenView(viewModel: MainScreenViewModel(serviceAssembly: .init()))
                 .preferredColorScheme(userSettings.isLightMode ? .light : .dark)
         }
     }
