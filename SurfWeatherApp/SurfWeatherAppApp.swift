@@ -11,9 +11,12 @@ import SwiftUI
 struct SurfWeatherAppApp: App {
 
     @ObservedObject var userSettings = UserDefaultsService.shared
+    let serviceAssembly = ServicesAssemblyFactory()
 
     var body: some Scene {
         WindowGroup {
+//            SelectCityView(viewModel: .init(weatherService: serviceAssembly.weatherNetworkService))
+//                .preferredColorScheme(userSettings.isLightMode ? .light : .dark)
             MainScreenView()
                 .preferredColorScheme(userSettings.isLightMode ? .light : .dark)
         }

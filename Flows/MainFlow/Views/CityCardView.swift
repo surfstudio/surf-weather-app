@@ -9,15 +9,23 @@ import SwiftUI
 
 struct CityCardView: View {
 
-    struct Model {
+    // MARK: - Nested
+
+    struct Model: Hashable {
+        var id: Int
         var isSelected: Bool
         let temperature: String
         let time: String
         let city: String
+        let imageName: String
     }
+
+    // MARK: - Properties
 
     @State var model: Model
     @State var isLightMode = UserDefaultsService.shared.isLightMode
+
+    // MARK: - Views
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -31,8 +39,9 @@ struct CityCardView: View {
                 temteratureView
             }
             .padding()
-            Image("sun", bundle: nil).position(x: 145, y: 125)
+            Image(model.imageName, bundle: nil).position(x: 145, y: 125)
         }
+        .background(isLightMode ? Color.white : Color.darkBackground)
         .frame(width: 156, height: 152, alignment: .leading)
         .cornerRadius(24)
         .clipped()
@@ -71,6 +80,6 @@ struct CityCardView: View {
 
 struct CityCardView_Previews: PreviewProvider {
     static var previews: some View {
-        CityCardView(model: .init(isSelected: false, temperature: "20", time: "10:00", city: "Воронеж"))
+        CityCardView(model: .init(id: 1, isSelected: false, temperature: "20", time: "10:00", city: "Воронеж", imageName: "sun"))
     }
 }

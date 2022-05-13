@@ -9,20 +9,38 @@ import SwiftUI
 
 struct MainScreenView: View {
 
+    // MARK: - Properties
+
     let serviceAssembly = ServicesAssemblyFactory()
 
+    // MARK: - View
+
     var body: some View {
-        ScrollView {
-            LocationHeaderView(viewModel: LocationHeaderViewModel())
-            makeRactangle()
-            MainScreenForecastView(viewModel: .init(weatherService: serviceAssembly.weatherNetworkService))
-            MainScreenForecastJournalView()
+        NavigationView {
+            VStack {
+                LocationHeaderView(
+                    viewModel: LocationHeaderViewModel(),
+                    weatherNetworkService: serviceAssembly.weatherNetworkService
+                )
+                ScrollView(.vertical) {
+                    makeRactangle()
+                    MainScreenForecastView(viewModel: .init(weatherService: serviceAssembly.weatherNetworkService))
+                    MainScreenForecastJournalView()
+                }
+            }
+            .background(Color.lightBackground | .darkBackground)
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
-        .background(Color.lightBackground | .darkBackground)
     }
 
-    func makeRactangle() -> some View {
+}
 
+// MARK: - Private Methods
+
+private extension MainScreenView {
+
+    func makeRactangle() -> some View {
         let shimmeringConfig = getShimmerConfig(animation: true)
         return Rectangle()
             .frame(height: 392, alignment: .top)
@@ -36,6 +54,7 @@ struct MainScreenView: View {
         if animation { config.startAnimation() }
         return config
     }
+
 }
 
 struct MainScreenView_Previews: PreviewProvider {

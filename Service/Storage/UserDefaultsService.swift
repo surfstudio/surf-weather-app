@@ -22,6 +22,15 @@ final class UserDefaultsService: ObservableObject {
         }
     }
 
+    var selectedCity: String {
+        get {
+            UserDefaults.standard.string(forKey: Keys.selectedCity.rawValue) ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.selectedCity.rawValue)
+        }
+    }
+
     // MARK: - Static Properties
 
     static let shared = UserDefaultsService()
@@ -30,6 +39,7 @@ final class UserDefaultsService: ObservableObject {
 
     private enum Keys: String {
         case isLightMode
+        case selectedCity
     }
 
     // MARK: - Initialization
