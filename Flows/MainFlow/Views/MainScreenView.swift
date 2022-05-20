@@ -11,9 +11,10 @@ struct MainScreenView: View {
 
     // MARK: - Properties
 
+    let viewModel: MainScreenViewModel
     let serviceAssembly = ServicesAssemblyFactory()
 
-    // MARK: - View
+    // MARK: - Views
 
     var body: some View {
         NavigationView {
@@ -22,9 +23,10 @@ struct MainScreenView: View {
                     viewModel: LocationHeaderViewModel(),
                     weatherNetworkService: serviceAssembly.weatherNetworkService
                 )
-                ScrollView(.vertical) {
+                ScrollView {
+                    LocationHeaderView(viewModel: LocationHeaderViewModel())
                     makeRactangle()
-                    MainScreenForecastView(viewModel: .init(weatherService: serviceAssembly.weatherNetworkService))
+                    MainScreenForecastView(viewModel: viewModel.forecastViewModel)
                     MainScreenForecastJournalView()
                 }
             }
@@ -59,6 +61,6 @@ private extension MainScreenView {
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenView()
+        MainScreenView(viewModel: .init(serviceAssembly: .init()))
     }
 }

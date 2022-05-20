@@ -53,7 +53,7 @@ struct ShimmerView : View {
     func content(shimmerOffset: CGFloat) -> some View {
         ZStack(alignment: .leading) {
             Rectangle()
-                .foregroundColor(Color.lightBackground2)
+                .foregroundColor(.clear)
             
             Rectangle()
                 .foregroundColor(.clear)
@@ -109,8 +109,8 @@ public class ShimmerConfig: ObservableObject {
 
     public init(bgColor: Color = Color(white: 0.8),
                 fgColor: Color = .white,
-                shimmerColor: Color = Color(white: 1.0, opacity: 0.2),
-                shimmerAngle: Double = 20,
+                shimmerColor: Color = Color(white: 0.8, opacity: 0.2),
+                shimmerAngle: Double = 1,
                 shimmerDuration: TimeInterval = 1,
                 shimmerDelay: TimeInterval = 2) {
         self.bgColor = bgColor

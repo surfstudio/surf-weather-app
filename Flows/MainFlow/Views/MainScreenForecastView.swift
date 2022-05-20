@@ -50,10 +50,23 @@ struct MainScreenForecastView: View {
     }
 
     var listView: some View {
+        return viewModel.items.isEmpty
+        ? AnyView(shimmeringListView)
+        : AnyView(weatherlistView)
+    }
+
+    var weatherlistView: some View {
         VStack(alignment: .leading, spacing: .zero) {
             ForEach(viewModel.items.indices, id: \.self) {
                 MainScreenForecastListItemView(viewModel: viewModel.items[$0])
             }
+        }
+        .frame(minHeight: 430)
+    }
+
+    var shimmeringListView: some View {
+        ForEach(0...4, id: \.self) { index in
+            MainScreenForecastListShimmerView(isSelected: index == .zero)
         }
     }
 

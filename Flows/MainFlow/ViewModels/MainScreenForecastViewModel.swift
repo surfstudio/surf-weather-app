@@ -23,6 +23,8 @@ final class MainScreenForecastViewModel: ObservableObject {
     @Published var selectedList: Int = SelectedList.forecast.rawValue
     @Published var items: [MainScreenForecastListItemViewModel] = []
 
+    // MARK: - Private Properties
+
     private var forecastItems: [MainScreenForecastListItemViewModel] = []
     private var archiveItems: [MainScreenForecastListItemViewModel] = []
 

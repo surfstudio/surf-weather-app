@@ -17,7 +17,7 @@ struct SurfWeatherAppApp: App {
         WindowGroup {
 //            SelectCityView(viewModel: .init(weatherService: serviceAssembly.weatherNetworkService))
 //                .preferredColorScheme(userSettings.isLightMode ? .light : .dark)
-            MainScreenView()
+            MainScreenView(viewModel: MainScreenViewModel(serviceAssembly: .init()))
                 .preferredColorScheme(userSettings.isLightMode ? .light : .dark)
         }
     }
