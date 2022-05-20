@@ -182,8 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				769CECF827C27D2B00FFD409 /* MainScreenView.swift */,
-				A4AED41928377D1E00FA6C2E /* SelectCityView.swift */,
-				A4AED41B28377D6200FA6C2E /* CityCardView.swift */,
 				76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */,
 				A4AED41728377CF500FA6C2E /* MainScreenForecastListShimmerView.swift */,
 				76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */,
@@ -197,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				762BDF00282EB2BA0083A29F /* MainScreenViewModel.swift */,
-				A4AED41D28377D9B00FA6C2E /* SelectCityViewModel.swift */,
 				769A6F1B27D2633C0007759C /* MainScreenForecastViewModel.swift */,
 				769A6F1527D23BBA0007759C /* MainScreenForecastListItemViewModel.swift */,
 				A4D4A00227FD7630008F5BD4 /* MainScreenForecastModelAdapter.swift */,
@@ -217,6 +214,7 @@
 		769CECF527C27D0E00FFD409 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				A4AED42A2837AA6D00FA6C2E /* SelectedCityFlow */,
 				769CECF427C27D0100FFD409 /* MainFlow */,
 			);
 			path = Flows;
@@ -294,6 +292,32 @@
 				A4AED42028377DC800FA6C2E /* SelectCityHeaderViewModel.swift */,
 			);
 			path = SelectCityHeader;
+			sourceTree = "<group>";
+		};
+		A4AED42A2837AA6D00FA6C2E /* SelectedCityFlow */ = {
+			isa = PBXGroup;
+			children = (
+				A4AED42C2837AA8500FA6C2E /* Views */,
+				A4AED42B2837AA7D00FA6C2E /* ViewModels */,
+			);
+			path = SelectedCityFlow;
+			sourceTree = "<group>";
+		};
+		A4AED42B2837AA7D00FA6C2E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A4AED41D28377D9B00FA6C2E /* SelectCityViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A4AED42C2837AA8500FA6C2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A4AED41928377D1E00FA6C2E /* SelectCityView.swift */,
+				A4AED41B28377D6200FA6C2E /* CityCardView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A4D49FCA27FC9338008F5BD4 /* Colors */ = {
