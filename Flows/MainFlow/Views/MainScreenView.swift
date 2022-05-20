@@ -24,7 +24,6 @@ struct MainScreenView: View {
                     weatherNetworkService: serviceAssembly.weatherNetworkService
                 )
                 ScrollView {
-                    LocationHeaderView(viewModel: LocationHeaderViewModel())
                     makeRactangle()
                     MainScreenForecastView(viewModel: viewModel.forecastViewModel)
                     MainScreenForecastJournalView()
