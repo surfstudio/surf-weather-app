@@ -18,14 +18,16 @@ final class SelectCityViewModel: ObservableObject {
     // MARK: - Private Properties
 
     private var weatherService: WeatherNetworkService
+    private var locationService: LocationNetworkService
     private var loadedWeathers: [CityCardView.Model] = [ ]
     private var searchWeathers: [CityCardView.Model] = [ ]
     private var selectedCity = UserDefaultsService.shared.selectedCity
 
     // MARK: - Initialization
 
-    init(weatherService: WeatherNetworkService) {
+    init(weatherService: WeatherNetworkService, locationService: LocationNetworkService) {
         self.weatherService = weatherService
+        self.locationService = locationService
     }
 
     // MARK: - Methods
@@ -54,6 +56,18 @@ private extension SelectCityViewModel {
         }
         if text.isEmpty { searchWeathers.removeAll() }
         withAnimation { weathers = text.isEmpty ? loadedWeathers : searchWeathers }
+    }
+
+    func loadCities(with cityName: String) {
+        locationService.getLocation(with: cityName) { result in
+            switch result {
+            case .success(let responce):
+                guard let responce = responce else {  return }
+                let addressComponents = GeocoderEntity(response: responce).getAddressesComponents()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     func loadWeather(with cord: CordsEntity, city: String, id: Int, completion: @escaping () -> Void) {

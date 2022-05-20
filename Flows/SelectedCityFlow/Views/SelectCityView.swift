@@ -94,7 +94,9 @@ struct SelectCityView: View {
 struct AddSitiesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        SelectCityView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService), mainHeaderViewModel: .init())
+        SelectCityView(viewModel: .init(
+            weatherService: ServicesAssemblyFactory().weatherNetworkService,
+            locationService: ServicesAssemblyFactory().locationNetworkService), mainHeaderViewModel: .init())
     }
 
 }

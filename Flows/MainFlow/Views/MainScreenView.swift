@@ -21,7 +21,8 @@ struct MainScreenView: View {
             VStack {
                 LocationHeaderView(
                     viewModel: LocationHeaderViewModel(),
-                    weatherNetworkService: serviceAssembly.weatherNetworkService
+                    weatherNetworkService: serviceAssembly.weatherNetworkService,
+                    locationNetworkService: serviceAssembly.locationNetworkService
                 )
                 ScrollView {
                     makeRactangle()
