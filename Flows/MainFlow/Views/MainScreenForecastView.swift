@@ -61,6 +61,7 @@ struct MainScreenForecastView: View {
                 MainScreenForecastListItemView(viewModel: viewModel.items[$0])
             }
         }
+        .frame(minHeight: 430)
     }
 
     var shimmeringListView: some View {

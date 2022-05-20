@@ -9,13 +9,18 @@ import SwiftUI
 
 struct MainScreenView: View {
 
+    // MARK: - Properties
+
+    let viewModel: MainScreenViewModel
     let serviceAssembly = ServicesAssemblyFactory()
+
+    // MARK: - Views
 
     var body: some View {
         ScrollView {
             LocationHeaderView(viewModel: LocationHeaderViewModel())
             makeRactangle()
-            MainScreenForecastView(viewModel: .init(weatherService: serviceAssembly.weatherNetworkService))
+            MainScreenForecastView(viewModel: viewModel.forecastViewModel)
             MainScreenForecastJournalView()
         }
         .background(Color.lightBackground | .darkBackground)
@@ -40,6 +45,6 @@ struct MainScreenView: View {
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenView()
+        MainScreenView(viewModel: .init(serviceAssembly: .init()))
     }
 }
