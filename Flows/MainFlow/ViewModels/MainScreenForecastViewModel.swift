@@ -41,7 +41,8 @@ final class MainScreenForecastViewModel: ObservableObject {
     // MARK: - Methods
 
     func loadData() {
-        loadWeather(with: .init(lat: 51, lon: 39))
+        let savedCords = UserDefaultsService.shared.selectedCity?.cords ?? .init(lat: 51, lon: 39)
+        loadWeather(with: savedCords)
     }
 
 }

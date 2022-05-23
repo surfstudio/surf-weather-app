@@ -24,6 +24,8 @@ struct CityCardView: View {
 
     @State var model: Model
     @State var isLightMode = UserDefaultsService.shared.isLightMode
+    @Binding var isChangeMode: Bool
+    let viewModel: CityCardViewModel
 
     // MARK: - Views
 
@@ -40,6 +42,9 @@ struct CityCardView: View {
             }
             .padding()
             Image(model.imageName, bundle: nil).position(x: 145, y: 125)
+            if isChangeMode {
+                changeModeView
+            }
         }
         .background(isLightMode ? Color.white : Color.darkBackground)
         .frame(width: 156, height: 152, alignment: .leading)
@@ -76,10 +81,34 @@ struct CityCardView: View {
         }
     }
 
+    var deleteButtonView: some View {
+        Button {
+            viewModel.deleteCity(with: model.city)
+        } label: {
+            Image("delete", bundle: nil)
+        }
+    }
+
+    var changeModeView: some View {
+        ZStack {
+            Rectangle().foregroundColor(.black.opacity(0.5))
+            deleteButtonView.position(x: 136, y: 20)
+        }
+    }
+
 }
 
 struct CityCardView_Previews: PreviewProvider {
     static var previews: some View {
-        CityCardView(model: .init(id: 1, isSelected: false, temperature: "20", time: "10:00", city: "Воронеж", imageName: "sun"))
+        CityCardView(
+            model: .init(id: 1,
+                         isSelected: false,
+                         temperature: "20",
+                         time: "10:00",
+                         city: "Воронеж",
+                         imageName: "sun"),
+            isChangeMode: .constant(false),
+            viewModel: .init()
+        )
     }
 }

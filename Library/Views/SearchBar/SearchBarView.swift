@@ -20,6 +20,7 @@ struct SearchBarView: View {
             Image("search", bundle: nil)
             TextField("Поиск", text: $searchText)
                 .foregroundColor(Color.black | Color.white)
+            deleteView
         }
         .font(.headline)
         .padding()
@@ -28,6 +29,15 @@ struct SearchBarView: View {
                 .fill(Color.lightBackground2 | Color.darkBackground)
                 .frame(height: 40)
         )
+    }
+
+    var deleteView: some View {
+        Button {
+            searchText.removeAll()
+        } label: {
+            Image("clearButton", bundle: nil)
+        }
+
     }
 
 }

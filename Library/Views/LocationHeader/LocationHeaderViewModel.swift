@@ -19,7 +19,7 @@ final class LocationHeaderViewModel: ObservableObject {
 
     // MARK: - States
 
-    @Published var state: State = .content(UserDefaultsService.shared.selectedCity)
+    @Published var state: State = .content(UserDefaultsService.shared.selectedCity?.cityName ?? "")
 
 }
 

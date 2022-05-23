@@ -9,5 +9,6 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 // https://openweathermap.org
-FOUR_DAY_WEATHER_URL = api.openweathermap.org/data/2.5/onecall?appid=90cee4375dcfa3aaa915a90b814615d0&units=metric&lang=ru
+FOUR_DAY_WEATHER_URL = api.openweathermap.org/data/2.5/onecall?appid=d9e55ca8388772a5f655d921c6a70e4a&units=metric&lang=ru
+
 LOCATION_URL = geocode-maps.yandex.ru/1.x?apikey=67017cb3-e5bb-45f6-81ca-f383d2f8d3c6&format=json&
