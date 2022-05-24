@@ -48,6 +48,15 @@ struct SelectCityView: View {
         .onTapGesture { UIApplication.shared.endEditing() }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .popup(isPresented: $viewModel.showingPopup, autohideIn: 2) {
+            ZStack(alignment: .center) {
+                Color.lightBackground | Color.darkBackground
+                Text("Добавлен новый город \nВыберете его, чтобы сделать главным.")
+                    .foregroundColor(.black | .white)
+                    .font(.system(size: 12))
+                    .multilineTextAlignment(.center)
+            }.frame(height: 112)
+        }
     }
 
     var searchButton: some View {

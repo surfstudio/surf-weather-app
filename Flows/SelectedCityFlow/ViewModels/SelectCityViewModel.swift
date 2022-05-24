@@ -13,6 +13,7 @@ final class SelectCityViewModel: ObservableObject {
     // MARK: - Properties
 
     @Published var weathers: [CityCardView.Model] = [ ]
+    @Published var showingPopup: Bool = false
     var searchListViewModel: LocationListViewModel
     var cityCardViewModel: CityCardViewModel
 
@@ -32,6 +33,7 @@ final class SelectCityViewModel: ObservableObject {
 
         searchListViewModel.onAddNewCity = { [weak self] in
             self?.loadData()
+            self?.showingPopup.toggle()
         }
         cityCardViewModel.onDeleteCity = { [weak self] in
             self?.loadData()

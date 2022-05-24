@@ -11,6 +11,7 @@ struct SearchListView: View {
 
     @ObservedObject var viewModel: LocationListViewModel
     @Binding var presentingModal: Bool
+    @FocusState var focusedField: Bool
 
     var body: some View {
         VStack {
@@ -19,11 +20,17 @@ struct SearchListView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            // Без задержки почему то текстовое поле не получает статус первого респондента
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.focusedField = true
+            }
+        }
     }
 
     var searchView: some View {
         HStack {
-            SearchBarView(searchText: $viewModel.searchText)
+            SearchBarView(searchText: $viewModel.searchText, focusedField: $focusedField)
             Button {
                 presentingModal.toggle()
             } label: {
