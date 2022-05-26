@@ -18,55 +18,33 @@ struct PagerView: View {
 
     // MARK: - Private Properties
 
-    @State private var activePageIndex: Int = 0
-    private var items: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .gray, .brown]
+    @State var activePageIndex: Int = 0
+
+    static let hourly: [CardView.Hourly] = [
+        .init(time: "12:00", temperature: "20"),
+        .init(time: "12:00", temperature: "20"),
+        .init(time: "12:00", temperature: "20"),
+        .init(time: "12:00", temperature: "20"),
+        .init(time: "12:00", temperature: "20"),
+    ]
+    let items: [CardView.Model] = [
+        .init(dayly: "Понедельник", temperature: "23", sky: "Солнечно", hourly: Self.hourly),
+        .init(dayly: "Вторник", temperature: "10", sky: "Пасмурно", hourly: Self.hourly),
+        .init(dayly: "Среда", temperature: "21", sky: "Солнечно", hourly: Self.hourly),
+        .init(dayly: "Четверг", temperature: "15", sky: "Дождливо", hourly: Self.hourly),
+        .init(dayly: "Пятница", temperature: "19", sky: "Солнечно", hourly: Self.hourly),
+        .init(dayly: "Суббота", temperature: "25", sky: "Солнечно", hourly: Self.hourly),
+        .init(dayly: "Воскресенье", temperature: "23", sky: "Солнечно", hourly: Self.hourly),
+    ]
 
     // MARK: - Body
 
     var body: some View {
-        GeometryReader { geometry in
-            makePagingScrollView(geometry: geometry) {
-                ForEach(0 ..< items.count) { index in
-                    GeometryReader { geometry2 in
-                        CardView()
-                            .foregroundColor(items[index])
-                            .transformEffect(makeTransform(with: geometry2))
-                            .onTapGesture {
-                                print ("tap on index: \(index) current:\(self.$activePageIndex)")
-                            }
-                    }
-                }
-            }
-        }.frame(height:360)
-    }
-}
-
-// MARK: - Private Methods
-
-private extension PagerView {
-
-    func makePagingScrollView<A: View>(geometry: GeometryProxy, content: () -> A) -> some View {
-        PagingScrollView(
-            activePageIndex: $activePageIndex,
-            itemCount: items.count,
-            containerWidth: geometry.size.width,
-            itemWidth: Constants.itemWidth,
-            itemPadding: Constants.itemPadding,
-            content: content
-        )
-    }
-
-    func makeTransform(with geometry: GeometryProxy) -> CGAffineTransform {
-        let height = geometry.size.height / 2
-        let paddings = UIScreen.main.bounds.width - Constants.itemWidth
-        let contentWidth = (Constants.itemWidth + Constants.itemPadding) * CGFloat(items.count) + paddings - Constants.itemPadding
-
-        let centerItem = geometry.frame(in: .global).midX - UIScreen.main.bounds.width / 2
-        let scale = max(1 - abs(centerItem) / contentWidth, 0.7)
-
-        return CGAffineTransform(translationX: 0, y: height)
-            .scaledBy(x: 1, y: scale)
-            .translatedBy(x: 0, y: -height)
+        ScalePageView(items) { item in
+            CardView(model: item)
+        }
+        .pagePadding(left: .absolute(30), right: .absolute(30))
+        .frame(height: 360)
     }
 
 }
