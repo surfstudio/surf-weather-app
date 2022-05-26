@@ -31,6 +31,7 @@ struct MainScreenView: View {
                 }
             }
             .background(Color.lightBackground | .darkBackground)
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
         }
@@ -44,9 +45,7 @@ private extension MainScreenView {
 
     func makeRactangle() -> some View {
         let shimmeringConfig = getShimmerConfig(animation: true)
-        return Rectangle()
-            .frame(height: 392, alignment: .top)
-            .foregroundColor(.lightBackground2)
+        return MainCorouselView(viewModel: .init())
             .shimmer(isActive: true)
             .environmentObject(shimmeringConfig)
     }
