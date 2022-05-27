@@ -13,12 +13,15 @@ final class MainScreenViewModel {
 
     let locationViewModel: LocationHeaderViewModel
     let forecastViewModel: MainScreenForecastViewModel
+    let carouselViewModel: MainCorouselViewModel
 
     // MARK: - Initialization
 
-    init(serviceAssembly:  ServicesAssemblyFactory) {
+    init(serviceAssembly:  ServicesAssembly) {
         self.locationViewModel = LocationHeaderViewModel()
-        self.forecastViewModel = MainScreenForecastViewModel(weatherService: serviceAssembly.weatherNetworkService)
+        self.forecastViewModel = MainScreenForecastViewModel(weatherService: serviceAssembly.weatherNetworkService,
+                                                             storageService: serviceAssembly.weatherStorageService)
+        self.carouselViewModel = .init()
     }
 
 }

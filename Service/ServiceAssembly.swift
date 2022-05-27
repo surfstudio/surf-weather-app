@@ -10,6 +10,7 @@ import Foundation
 protocol ServicesAssembly {
     var weatherNetworkService: WeatherNetworkService { get }
     var locationNetworkService: LocationNetworkService { get }
+    var weatherStorageService: WeatherStorageService { get }
 }
 
 final class ServicesAssemblyFactory: ServicesAssembly {
@@ -19,4 +20,5 @@ final class ServicesAssemblyFactory: ServicesAssembly {
     lazy var weatherNetworkService: WeatherNetworkService = NetworkService(networkManager: coreAssembly.networkManager)
     lazy var locationNetworkService: LocationNetworkService = NetworkService(networkManager: coreAssembly.networkManager)
 
+    lazy var weatherStorageService: WeatherStorageService = DataBaseStorage()
 }

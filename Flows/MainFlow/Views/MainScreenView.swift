@@ -25,7 +25,8 @@ struct MainScreenView: View {
                     locationNetworkService: serviceAssembly.locationNetworkService
                 )
                 ScrollView {
-                    makeRactangle()
+//                    MainCorouselView(viewModel: viewModel.carouselViewModel)
+                    CardView(model: viewModel.carouselViewModel.items.first!).padding()
                     MainScreenForecastView(viewModel: viewModel.forecastViewModel)
                     MainScreenForecastJournalView()
                 }
@@ -39,27 +40,8 @@ struct MainScreenView: View {
 
 }
 
-// MARK: - Private Methods
-
-private extension MainScreenView {
-
-    func makeRactangle() -> some View {
-        let shimmeringConfig = getShimmerConfig(animation: true)
-        return MainCorouselView(viewModel: .init())
-            .shimmer(isActive: true)
-            .environmentObject(shimmeringConfig)
-    }
-
-    func getShimmerConfig(animation: Bool) -> ShimmerConfig {
-        let config = ShimmerConfig(bgColor: Color.clear, fgColor: Color.clear)
-        if animation { config.startAnimation() }
-        return config
-    }
-
-}
-
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenView(viewModel: .init(serviceAssembly: .init()))
+        MainScreenView(viewModel: .init(serviceAssembly: ServicesAssemblyFactory()))
     }
 }

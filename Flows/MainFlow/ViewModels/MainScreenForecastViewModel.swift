@@ -30,19 +30,21 @@ final class MainScreenForecastViewModel: ObservableObject {
 
     private var cancellables: [AnyCancellable] = []
     private let weatherService: WeatherNetworkService
-    private var mainScreenForecastModelAdapter: MainScreenForecastModelAdapter?
+    private let storageService: WeatherStorageService
 
     // MARK: - Initialization
 
-    init(weatherService: WeatherNetworkService) {
+    init(weatherService: WeatherNetworkService, storageService: WeatherStorageService) {
         self.weatherService = weatherService
+        self.storageService = storageService
     }
 
     // MARK: - Methods
 
     func loadData() {
-        let savedCords = UserDefaultsService.shared.selectedCity?.cords ?? .init(lat: 51, lon: 39)
-        loadWeather(with: savedCords)
+        guard let selectedCity = UserDefaultsService.shared.selectedCity else { return }
+        loadWeather(with: selectedCity)
+        loadArchiveWeather(with: selectedCity)
     }
 
 }
@@ -51,25 +53,76 @@ final class MainScreenForecastViewModel: ObservableObject {
 
 private extension MainScreenForecastViewModel {
 
-    func loadWeather(with cord: CordsEntity) {
-        weatherService.getWeather(with: cord) { [weak self] result in
+    func loadArchiveWeather(with selectedCity: CityWeather) {
+        storageService.getCities { [weak self] result in
             switch result {
-            case .success(let request):
-                self?.handleSuccess(with: request)
+            case .success(let entities):
+                self?.handleSuccess(with: entities, selectedCity: selectedCity)
             case .failure(let error):
                 print(error)
             }
         }
     }
 
-    func handleSuccess(with entity: WeatherRequestEntity?) {
-        mainScreenForecastModelAdapter = .init(weatherDayEntities: entity?.daily ?? [])
-        let models = mainScreenForecastModelAdapter?.makeScreenForecastModels() ?? []
-        forecastItems = models.compactMap { .init(isSelected: false, model: $0) }
+    func loadWeather(with selectedCity: CityWeather) {
+        weatherService.getWeather(with: selectedCity.cords) { [weak self] result in
+            switch result {
+            case .success(let request):
+                self?.handleSuccess(with: request, selectedCity: selectedCity)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 
+    func handleSuccess(with entity: WeatherRequestEntity?, selectedCity: CityWeather) {
+        let adapter = MainScreenForecastModelAdapter(weatherDayEntities: entity?.daily ?? [], cityWeather: selectedCity)
+
+        forecastItems = adapter.makeScreenForecastModels().compactMap { model in
+                .init(isSelected: archiveItems.contains(where: { $0.model.date == model.date }),
+                      model: model,
+                      storageService: storageService)
+        }
+
+        // Работа чекбокса
+        forecastItems.forEach { handleSelectItems(for: $0) }
+
+        sincLists()
+    }
+
+    func handleSuccess(with entities: [CityWeatherEntity]?, selectedCity: CityWeather) {
+        guard let city = entities?.first(where: { $0.cityName == selectedCity.cityName }) else {
+            archiveItems.removeAll()
+            return
+        }
+        let adapter = MainScreenForecastModelAdapter(weatherStorageEntities: city.weatherArray, cityWeather: selectedCity)
+        let models = adapter.makeScreenForecastModelsByStorage().sorted {
+            DateFormat.compareDates($0.date, $1.date, format: .dayLongMonth)
+        }
+        archiveItems = models.compactMap { .init(isSelected: true, model: $0, storageService: storageService) }
+
+        // Работа чекбокса
+        archiveItems.forEach { handleSelectItems(for: $0) }
+
+        sincLists()
+    }
+
+    func sincLists() {
         $selectedList.sink { value in
             self.items = value == SelectedList.forecast.rawValue ? self.forecastItems : self.archiveItems
         }.store(in: &self.cancellables)
+    }
+
+    func handleSelectItems(for item: MainScreenForecastListItemViewModel) {
+        item.onSelect = { [weak self] isSelected in
+            if isSelected {
+                self?.archiveItems.append(item)
+            } else {
+                guard let index = self?.archiveItems.firstIndex(where: { $0.model.date == item.model.date }) else { return }
+                self?.archiveItems.remove(at: index)
+            }
+            self?.sincLists()
+        }
     }
 
 }

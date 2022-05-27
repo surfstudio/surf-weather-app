@@ -60,6 +60,7 @@ struct MainScreenForecastView: View {
             ForEach(viewModel.items.indices, id: \.self) {
                 MainScreenForecastListItemView(viewModel: viewModel.items[$0])
             }
+            Spacer()
         }
         .frame(minHeight: 430)
     }
@@ -75,10 +76,12 @@ struct MainScreenForecastView: View {
 struct MainScreenForecastView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MainScreenForecastView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService))
+            MainScreenForecastView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService,
+                                                    storageService: ServicesAssemblyFactory().weatherStorageService))
                 .preferredColorScheme(.light)
                 .previewInterfaceOrientation(.portrait)
-            MainScreenForecastView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService))
+            MainScreenForecastView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService,
+                                                    storageService: ServicesAssemblyFactory().weatherStorageService))
                 .preferredColorScheme(.dark)
                 .previewInterfaceOrientation(.portrait)
         }
