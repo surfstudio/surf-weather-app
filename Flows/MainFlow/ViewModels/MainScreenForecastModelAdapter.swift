@@ -12,7 +12,7 @@ class MainScreenForecastModelAdapter {
     // MARK: - Private Properties
 
     private var weatherDayEntities: [DailyWeatherEntity] = []
-    private var weatherStorageEntities: [StorageWeatherEntity] = []
+    private var weatherStorageEntities: [WeeklyWeatherEntityDB] = []
     private var cityName: String
     private var cord: CordsEntity
 
@@ -24,7 +24,7 @@ class MainScreenForecastModelAdapter {
         self.cord = cityWeather.cords
     }
 
-    init(weatherStorageEntities: [StorageWeatherEntity], cityWeather: CityWeather) {
+    init(weatherStorageEntities: [WeeklyWeatherEntityDB], cityWeather: CityWeather) {
         self.weatherStorageEntities = weatherStorageEntities
         self.cityName = cityWeather.cityName
         self.cord = cityWeather.cords
@@ -76,8 +76,8 @@ class MainScreenForecastModelAdapter {
         return models
     }
 
-    static func makeStorageWeatherEntity(with model: MainScreenForecastListItemView.Model) -> StorageWeatherEntity {
-        return StorageWeatherEntity(
+    static func makeStorageWeatherEntity(with model: MainScreenForecastListItemView.Model) -> WeeklyWeatherEntityDB {
+        return WeeklyWeatherEntityDB(
             weekday: model.weekday,
             wind: model.wind,
             specification: model.description,
@@ -92,7 +92,9 @@ class MainScreenForecastModelAdapter {
             cityName: model.cityName,
             lat: model.lat,
             lon: model.lon,
-            weather: []
+            current: nil,
+            weekly: [],
+            hourly: []
         )
     }
 

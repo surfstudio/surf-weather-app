@@ -52,7 +52,7 @@ final class MainScreenForecastListItemViewModel: ObservableObject {
         }
     }
 
-    func saveWeather(by city: CityWeatherEntity, savedWeather: StorageWeatherEntity) {
+    func saveWeather(by city: CityWeatherEntity, savedWeather: WeeklyWeatherEntityDB) {
         storageService.saveWeather(by: city, weather: savedWeather) { [weak self] result in
             switch result {
             case .success:
@@ -94,7 +94,14 @@ final class MainScreenForecastListItemViewModel: ObservableObject {
         if let city = cities?.first(where: { $0.cityName == model.cityName }) {
             saveWeather(by: city, savedWeather: savedWeather)
         } else {
-            let newCity = CityWeatherEntity(cityName: model.cityName, lat: model.lat, lon: model.lon, weather: [savedWeather])
+            let newCity = CityWeatherEntity(
+                cityName: model.cityName,
+                lat: model.lat,
+                lon: model.lon,
+                current: nil,
+                weekly: [savedWeather],
+                hourly: []
+            )
             saveCity(with: newCity)
         }
     }

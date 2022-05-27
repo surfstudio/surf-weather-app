@@ -13,14 +13,14 @@ protocol WeatherStorageService {
     func saveCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void)
     func deleteCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void)
 
-    func getWeathers(with cityName: String, completion: @escaping (Result<[StorageWeatherEntity]?, Error>) -> Void)
+    func getWeathers(with cityName: String, completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void)
     func deleteWeather(with cityName: String, date: String, completion: @escaping (Result<Void, Error>) -> Void)
-    func saveWeather(by city: CityWeatherEntity, weather: StorageWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void)
+    func saveWeather(by city: CityWeatherEntity, weather: WeeklyWeatherEntityDB, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 final class DataBaseStorage: WeatherStorageService {
 
-    let storageManager = CoreDataRepository<StorageWeatherEntity>()
+    let storageManager = CoreDataRepository<WeeklyWeatherEntityDB>()
     let cityStorageManager = CoreDataRepository<CityWeatherEntity>()
 
     private var cancelable: AnyCancellable?
@@ -43,7 +43,7 @@ final class DataBaseStorage: WeatherStorageService {
             } receiveValue: { completion(.success(())) }
     }
 
-    func getWeathers(with cityName: String, completion: @escaping (Result<[StorageWeatherEntity]?, Error>) -> Void) {
+    func getWeathers(with cityName: String, completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void) {
         getCities { result in
             switch result {
             case .success(let cities):
@@ -55,8 +55,8 @@ final class DataBaseStorage: WeatherStorageService {
         }
     }
 
-    func saveWeather(by city: CityWeatherEntity, weather: StorageWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void) {
-        city.addToWeather(weather)
+    func saveWeather(by city: CityWeatherEntity, weather: WeeklyWeatherEntityDB, completion: @escaping (Result<Void, Error>) -> Void) {
+        city.addToWeeklyWeather(weather)
         cancelable = cityStorageManager.update(city)
             .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
             } receiveValue: { _ in completion(.success(())) }

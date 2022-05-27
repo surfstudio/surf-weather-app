@@ -4,21 +4,50 @@
         <attribute name="cityName" optional="YES" attributeType="String"/>
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="weather" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StorageWeatherEntity" inverseName="city" inverseEntity="StorageWeatherEntity"/>
+        <relationship name="currentWeather" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CurrentWeatherEntityDB" inverseName="city" inverseEntity="CurrentWeatherEntityDB"/>
+        <relationship name="hourlyWeather" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HourlyWeatherEntityDB" inverseName="city" inverseEntity="HourlyWeatherEntityDB"/>
+        <relationship name="weeklyWeather" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="WeeklyWeatherEntityDB" inverseName="city" inverseEntity="WeeklyWeatherEntityDB"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="cityName"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="StorageWeatherEntity" representedClassName="StorageWeatherEntity" syncable="YES" codeGenerationType="class">
+    <entity name="CurrentWeatherEntityDB" representedClassName="CurrentWeatherEntityDB" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="specification" optional="YES" attributeType="String"/>
         <attribute name="temperature" optional="YES" attributeType="String"/>
         <attribute name="weatherImage" optional="YES" attributeType="String"/>
         <attribute name="weekday" optional="YES" attributeType="String"/>
         <attribute name="wind" optional="YES" attributeType="String"/>
-        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityWeatherEntity" inverseName="weather" inverseEntity="CityWeatherEntity"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityWeatherEntity" inverseName="currentWeather" inverseEntity="CityWeatherEntity"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="date"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="HourlyWeatherEntityDB" representedClassName="HourlyWeatherEntityDB" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="specification" optional="YES" attributeType="String"/>
+        <attribute name="temperature" optional="YES" attributeType="String"/>
+        <attribute name="weatherImage" optional="YES" attributeType="String"/>
+        <attribute name="wind" optional="YES" attributeType="String"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityWeatherEntity" inverseName="hourlyWeather" inverseEntity="CityWeatherEntity"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="date"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="WeeklyWeatherEntityDB" representedClassName="WeeklyWeatherEntityDB" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="specification" optional="YES" attributeType="String"/>
+        <attribute name="temperature" optional="YES" attributeType="String"/>
+        <attribute name="weatherImage" optional="YES" attributeType="String"/>
+        <attribute name="weekday" optional="YES" attributeType="String"/>
+        <attribute name="wind" optional="YES" attributeType="String"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityWeatherEntity" inverseName="weeklyWeather" inverseEntity="CityWeatherEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="date"/>
@@ -26,7 +55,9 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="CityWeatherEntity" positionX="9036" positionY="5544" width="128" height="89"/>
-        <element name="StorageWeatherEntity" positionX="9033.51953125" positionY="5488.21484375" width="128" height="134"/>
+        <element name="CityWeatherEntity" positionX="9036" positionY="5544" width="128" height="133"/>
+        <element name="CurrentWeatherEntityDB" positionX="9129.21484375" positionY="5781.71484375" width="128" height="148"/>
+        <element name="HourlyWeatherEntityDB" positionX="8868.65234375" positionY="5692.01171875" width="128" height="133"/>
+        <element name="WeeklyWeatherEntityDB" positionX="9280.3203125" positionY="5575.8359375" width="128" height="134"/>
     </elements>
 </model>
