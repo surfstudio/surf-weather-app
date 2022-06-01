@@ -15,16 +15,10 @@ final class CarouselViewModel {
         .init(time: "14:00", temperature: "14", isSelected: false),
         .init(time: "15:00", temperature: "8", isSelected: false),
         .init(time: "16:00", temperature: "15", isSelected: false),
-        .init(time: "12:00", temperature: "20", isSelected: false),
-        .init(time: "13:00", temperature: "25", isSelected: true),
-        .init(time: "14:00", temperature: "14", isSelected: false),
-        .init(time: "15:00", temperature: "8", isSelected: false),
-        .init(time: "16:00", temperature: "15", isSelected: false),
-        .init(time: "12:00", temperature: "20", isSelected: false),
-        .init(time: "13:00", temperature: "25", isSelected: true),
-        .init(time: "14:00", temperature: "14", isSelected: false),
-        .init(time: "15:00", temperature: "8", isSelected: false),
-        .init(time: "16:00", temperature: "15", isSelected: false),
+        .init(time: "17:00", temperature: "8", isSelected: false),
+        .init(time: "18:00", temperature: "15", isSelected: false),
+        .init(time: "19:00", temperature: "8", isSelected: false),
+        .init(time: "20:00", temperature: "15", isSelected: false)
     ]
     let cardViewModels: [CardViewModel] = [
         .init(model: .init(id: 0, dayly: "Понедельник", temperature: "23", sky: "Солнечно", hourly: CarouselViewModel.hourly)),

@@ -34,6 +34,10 @@ extension Color {
         Color(0x865BFB, alpha: 0.64)
     }
 
+    static var opacityWhite: Color {
+        .white.opacity(0.64)
+    }
+
     // MARK: - Light
 
     static var lightBackground: Color {
