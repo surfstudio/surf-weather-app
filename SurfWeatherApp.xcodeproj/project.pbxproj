@@ -43,6 +43,8 @@
 		A4B6987228468577002CA415 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6987128468577002CA415 /* CardViewModel.swift */; };
 		A4B69876284685AE002CA415 /* HourlyCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B69875284685AE002CA415 /* HourlyCardViewModel.swift */; };
 		A4B6987A28474032002CA415 /* ScrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6987928474032002CA415 /* ScrollIndicatorView.swift */; };
+		A4B6987D2847693D002CA415 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6987C2847693C002CA415 /* CustomScrollView.swift */; };
+		A4B698802847697A002CA415 /* CustomScrollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6987F2847697A002CA415 /* CustomScrollCoordinator.swift */; };
 		A4D4A02C27FEF6AB008F5BD4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4A02B27FEF6AB008F5BD4 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +86,8 @@
 		A4B6987128468577002CA415 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		A4B69875284685AE002CA415 /* HourlyCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCardViewModel.swift; sourceTree = "<group>"; };
 		A4B6987928474032002CA415 /* ScrollIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollIndicatorView.swift; sourceTree = "<group>"; };
+		A4B6987C2847693C002CA415 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		A4B6987F2847697A002CA415 /* CustomScrollCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollCoordinator.swift; sourceTree = "<group>"; };
 		A4D4A02B27FEF6AB008F5BD4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -195,6 +199,7 @@
 		769CECFA27C27DC000FFD409 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4B6987B2847691D002CA415 /* CustomScrollView */,
 				A4B6987828474011002CA415 /* ScrollIndicator */,
 				A41A88D6283F6411003DAFB0 /* ScalePageView */,
 				76C6467827C90AE900D8BBA9 /* SegmentedPicker */,
@@ -310,6 +315,23 @@
 			path = ScrollIndicator;
 			sourceTree = "<group>";
 		};
+		A4B6987B2847691D002CA415 /* CustomScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				A4B6987C2847693C002CA415 /* CustomScrollView.swift */,
+				A4B6987E2847696A002CA415 /* Support */,
+			);
+			path = CustomScrollView;
+			sourceTree = "<group>";
+		};
+		A4B6987E2847696A002CA415 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A4B6987F2847697A002CA415 /* CustomScrollCoordinator.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -394,6 +416,8 @@
 				76210BEF27C299A100F858AA /* ColorModeToggleStyle.swift in Sources */,
 				A4B6986828451206002CA415 /* CarouselView.swift in Sources */,
 				76ADAFC427C8F01000F85FA7 /* MainScreenForecastView.swift in Sources */,
+				A4B6987D2847693D002CA415 /* CustomScrollView.swift in Sources */,
+				A4B698802847697A002CA415 /* CustomScrollCoordinator.swift in Sources */,
 				A41A890F283F6412003DAFB0 /* CollectionViewPagingLayout.ZPositionHandler.swift in Sources */,
 				7606161927AD77F600CC73B5 /* SurfWeatherAppApp.swift in Sources */,
 				A41A890C283F6412003DAFB0 /* Multipliable.swift in Sources */,

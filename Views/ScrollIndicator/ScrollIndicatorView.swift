@@ -9,20 +9,21 @@ import SwiftUI
 
 struct ScrollIndicatorView: View {
 
-    var itemCount = 7
-    @Binding var page: Int
+    @Binding var progres: CGFloat
+    var visibleItemCount: CGFloat
 
     var body: some View {
-        HStack(spacing: 0) {
-            ForEach(0..<itemCount) { index in
-                let isSelected = page == index
-                Rectangle()
-                    .foregroundColor(isSelected ? .white : .white.opacity(0.4))
-                    .cornerRadius(isSelected ? 4 : 0)
-            }
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .foregroundColor(.white.opacity(0.4))
+                .frame(width: 64, height: 4)
+                .cornerRadius(4)
+            Rectangle()
+                .foregroundColor(.white)
+                .frame(width: 20, height: 4)
+                .cornerRadius(4)
+                .padding(.leading, progres * visibleItemCount)
         }
-        .frame(width: 64, height: 4)
-        .cornerRadius(4)
     }
 }
 

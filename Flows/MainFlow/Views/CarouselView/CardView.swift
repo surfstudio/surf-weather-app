@@ -20,6 +20,8 @@ struct CardView: View {
     @ObservedObject var viewModel: CardViewModel
     @Binding var page: CGFloat
     let itemSize: CGSize
+    @State var hourProgres: CGFloat = 0
+    @State var isNeedUpdateHour = false
 
     var body: some View {
         ZStack {
@@ -27,7 +29,7 @@ struct CardView: View {
                 .resizable(capInsets: .init(top: 20, leading: 0, bottom: 20, trailing: 0), resizingMode: .stretch)
             VStack {
                 HStack(alignment: .top) {
-                    makeTempBigView().padding()
+                    makeTempBigView().padding(.top, 20).padding(.leading, 24)
                     Spacer()
                     Image("sun_big", bundle: nil)
                 }
@@ -35,6 +37,7 @@ struct CardView: View {
                 Image("separator", bundle: nil)
                 Spacer()
                 hourlyWeatherListView
+                Spacer()
             }
         }
         .frame(width: itemSize.width, height: itemSize.height, alignment: .center)
@@ -52,17 +55,26 @@ struct CardView: View {
     }
 
     var hourlyWeatherListView: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            
-            HStack(spacing: 0) {
-                let items = viewModel.model.hourly
-                let array = Array(zip(items.indices, items))
-                ForEach(array, id: \.0) { index, model in
-                    HourlyCardView(model: model)
-                        .onTapGesture { self.viewModel.selectHourlyWeather(with: model) }
-                }
+        let itemSize = CGSize(width: 68, height: 112)
+        let padding = 20.0
+        let itemCount = viewModel.model.hourly.count
+        let visibleItemCounts = (self.itemSize.width - padding * 2) / itemSize.width
+
+        let subview = HStack(spacing: .zero) {
+            ForEach(viewModel.model.hourly, id: \.self) { model in
+                HourlyCardView(model: model, size: itemSize)
+                    .onTapGesture {
+                        self.viewModel.selectHourlyWeather(with: model)
+                        self.isNeedUpdateHour = true
+                    }
             }
-        }.padding()
+        }
+        return VStack(spacing: 20) {
+            CustomScrollView(size: itemSize, itemCount: itemCount, view: subview, page: $hourProgres, isNeedUpdate: $isNeedUpdateHour)
+                .padding(.leading, padding).padding(.trailing, padding)
+                .frame(height: itemSize.height)
+            ScrollIndicatorView(progres: $hourProgres, visibleItemCount: visibleItemCounts)
+        }
     }
 
     func makeTempBigView() -> some View {
@@ -77,7 +89,7 @@ struct CardView: View {
                 Text("&deg;")
                     .foregroundColor(.white.opacity(0.64))
                     .font(Font(.init(.system, size: 72)))
-                    .padding(EdgeInsets(top: -3, leading: 0, bottom: 0, trailing: 0))
+                    .padding(.top, -3)
             }
             Text(viewModel.model.sky)
                 .foregroundColor(.white)
