@@ -1,0 +1,14 @@
+//
+//  Api.xcconfig
+//  SurfWeatherApp
+//
+//  Created by porohov on 05.04.2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// https://openweathermap.org
+FOUR_DAY_WEATHER_URL = api.openweathermap.org/data/2.5/onecall?appid=fbd24acae5bb7d61f6f304e894001f63&units=metric&lang=ru
+
+LOCATION_URL = geocode-maps.yandex.ru/1.x?apikey=67017cb3-e5bb-45f6-81ca-f383d2f8d3c6&format=json&

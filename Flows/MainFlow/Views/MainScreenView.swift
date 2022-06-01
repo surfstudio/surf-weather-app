@@ -11,7 +11,7 @@ struct MainScreenView: View {
     var body: some View {
         ScrollView {
             LocationHeaderView(viewModel: LocationHeaderViewModel())
-            PagerView()
+            CarouselView(viewModel: .init()).frame(height: 360)
             MainScreenForecastView(viewModel: .init())
             MainScreenForecastJournalView()
         }
