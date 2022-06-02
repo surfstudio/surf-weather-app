@@ -22,20 +22,6 @@
 		76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */; };
 		76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467C27C92B0200D8BBA9 /* Colors.swift */; };
 		76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */; };
-		A41A8906283F6412003DAFB0 /* ScaleTransformViewOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88E1283F6411003DAFB0 /* ScaleTransformViewOptions.swift */; };
-		A41A8907283F6412003DAFB0 /* ScaleTransformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88E2283F6411003DAFB0 /* ScaleTransformView.swift */; };
-		A41A890C283F6412003DAFB0 /* Multipliable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88E8283F6411003DAFB0 /* Multipliable.swift */; };
-		A41A890E283F6412003DAFB0 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88EA283F6411003DAFB0 /* UIView+Extension.swift */; };
-		A41A890F283F6412003DAFB0 /* CollectionViewPagingLayout.ZPositionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88EB283F6411003DAFB0 /* CollectionViewPagingLayout.ZPositionHandler.swift */; };
-		A41A8910283F6412003DAFB0 /* CollectionViewPagingLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88EC283F6411003DAFB0 /* CollectionViewPagingLayout.swift */; };
-		A41A8915283F6412003DAFB0 /* TransformableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88F2283F6411003DAFB0 /* TransformableView.swift */; };
-		A41A8916283F6412003DAFB0 /* PagingCollectionViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88F4283F6411003DAFB0 /* PagingCollectionViewControllerBuilder.swift */; };
-		A41A8918283F6412003DAFB0 /* ScalePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88F6283F6411003DAFB0 /* ScalePageView.swift */; };
-		A41A8919283F6412003DAFB0 /* PagePadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88F7283F6411003DAFB0 /* PagePadding.swift */; };
-		A41A891A283F6412003DAFB0 /* TransformPageViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88F8283F6411003DAFB0 /* TransformPageViewProtocol.swift */; };
-		A41A891B283F6412003DAFB0 /* PagingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88F9283F6411003DAFB0 /* PagingCollectionViewCell.swift */; };
-		A41A891D283F6412003DAFB0 /* PagingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88FB283F6411003DAFB0 /* PagingCollectionViewController.swift */; };
-		A41A891E283F6412003DAFB0 /* PagingCollectionViewModifierData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A88FC283F6411003DAFB0 /* PagingCollectionViewModifierData.swift */; };
 		A4B6986828451206002CA415 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6986728451206002CA415 /* CarouselView.swift */; };
 		A4B6986A28452309002CA415 /* ScrollDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6986928452309002CA415 /* ScrollDelegate.swift */; };
 		A4B6986D28467CB6002CA415 /* CarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6986C28467CB6002CA415 /* CarouselViewModel.swift */; };
@@ -66,20 +52,6 @@
 		76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		76C6467C27C92B0200D8BBA9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListItemView.swift; sourceTree = "<group>"; };
-		A41A88E1283F6411003DAFB0 /* ScaleTransformViewOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleTransformViewOptions.swift; sourceTree = "<group>"; };
-		A41A88E2283F6411003DAFB0 /* ScaleTransformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleTransformView.swift; sourceTree = "<group>"; };
-		A41A88E8283F6411003DAFB0 /* Multipliable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipliable.swift; sourceTree = "<group>"; };
-		A41A88EA283F6411003DAFB0 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		A41A88EB283F6411003DAFB0 /* CollectionViewPagingLayout.ZPositionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewPagingLayout.ZPositionHandler.swift; sourceTree = "<group>"; };
-		A41A88EC283F6411003DAFB0 /* CollectionViewPagingLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewPagingLayout.swift; sourceTree = "<group>"; };
-		A41A88F2283F6411003DAFB0 /* TransformableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformableView.swift; sourceTree = "<group>"; };
-		A41A88F4283F6411003DAFB0 /* PagingCollectionViewControllerBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewControllerBuilder.swift; sourceTree = "<group>"; };
-		A41A88F6283F6411003DAFB0 /* ScalePageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalePageView.swift; sourceTree = "<group>"; };
-		A41A88F7283F6411003DAFB0 /* PagePadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagePadding.swift; sourceTree = "<group>"; };
-		A41A88F8283F6411003DAFB0 /* TransformPageViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformPageViewProtocol.swift; sourceTree = "<group>"; };
-		A41A88F9283F6411003DAFB0 /* PagingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewCell.swift; sourceTree = "<group>"; };
-		A41A88FB283F6411003DAFB0 /* PagingCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewController.swift; sourceTree = "<group>"; };
-		A41A88FC283F6411003DAFB0 /* PagingCollectionViewModifierData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewModifierData.swift; sourceTree = "<group>"; };
 		A4B6986728451206002CA415 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		A4B6986928452309002CA415 /* ScrollDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDelegate.swift; sourceTree = "<group>"; };
 		A4B6986C28467CB6002CA415 /* CarouselViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewModel.swift; sourceTree = "<group>"; };
@@ -204,7 +176,6 @@
 			children = (
 				A4B6987B2847691D002CA415 /* CustomScrollView */,
 				A4B6987828474011002CA415 /* ScrollIndicator */,
-				A41A88D6283F6411003DAFB0 /* ScalePageView */,
 				76C6467827C90AE900D8BBA9 /* SegmentedPicker */,
 				769CECFD27C27EA700FFD409 /* LocationHeader */,
 			);
@@ -234,51 +205,6 @@
 				76C6467C27C92B0200D8BBA9 /* Colors.swift */,
 			);
 			path = Library;
-			sourceTree = "<group>";
-		};
-		A41A88D6283F6411003DAFB0 /* ScalePageView */ = {
-			isa = PBXGroup;
-			children = (
-				A41A88E0283F6411003DAFB0 /* Scale */,
-				A41A88E6283F6411003DAFB0 /* Support */,
-				A41A88EB283F6411003DAFB0 /* CollectionViewPagingLayout.ZPositionHandler.swift */,
-				A41A88EC283F6411003DAFB0 /* CollectionViewPagingLayout.swift */,
-				A41A88F2283F6411003DAFB0 /* TransformableView.swift */,
-				A41A88F3283F6411003DAFB0 /* SwiftUI */,
-			);
-			path = ScalePageView;
-			sourceTree = "<group>";
-		};
-		A41A88E0283F6411003DAFB0 /* Scale */ = {
-			isa = PBXGroup;
-			children = (
-				A41A88E1283F6411003DAFB0 /* ScaleTransformViewOptions.swift */,
-				A41A88E2283F6411003DAFB0 /* ScaleTransformView.swift */,
-			);
-			path = Scale;
-			sourceTree = "<group>";
-		};
-		A41A88E6283F6411003DAFB0 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				A41A88E8283F6411003DAFB0 /* Multipliable.swift */,
-				A41A88EA283F6411003DAFB0 /* UIView+Extension.swift */,
-			);
-			path = Support;
-			sourceTree = "<group>";
-		};
-		A41A88F3283F6411003DAFB0 /* SwiftUI */ = {
-			isa = PBXGroup;
-			children = (
-				A41A88F4283F6411003DAFB0 /* PagingCollectionViewControllerBuilder.swift */,
-				A41A88F6283F6411003DAFB0 /* ScalePageView.swift */,
-				A41A88F7283F6411003DAFB0 /* PagePadding.swift */,
-				A41A88F8283F6411003DAFB0 /* TransformPageViewProtocol.swift */,
-				A41A88F9283F6411003DAFB0 /* PagingCollectionViewCell.swift */,
-				A41A88FB283F6411003DAFB0 /* PagingCollectionViewController.swift */,
-				A41A88FC283F6411003DAFB0 /* PagingCollectionViewModifierData.swift */,
-			);
-			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		A4B6986B28467068002CA415 /* CarouselView */ = {
@@ -405,44 +331,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A41A8916283F6412003DAFB0 /* PagingCollectionViewControllerBuilder.swift in Sources */,
-				A41A8910283F6412003DAFB0 /* CollectionViewPagingLayout.swift in Sources */,
 				A4B69882284804E1002CA415 /* Assets.swift in Sources */,
 				76210BF227C29AAD00F858AA /* UserDefaultsService.swift in Sources */,
-				A41A8918283F6412003DAFB0 /* ScalePageView.swift in Sources */,
 				A4B6987228468577002CA415 /* CardViewModel.swift in Sources */,
 				769A6F1627D23BBA0007759C /* MainScreenForecastListItemViewModel.swift in Sources */,
 				A4B6987A28474032002CA415 /* ScrollIndicatorView.swift in Sources */,
 				76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */,
-				A41A8919283F6412003DAFB0 /* PagePadding.swift in Sources */,
 				76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */,
-				A41A891E283F6412003DAFB0 /* PagingCollectionViewModifierData.swift in Sources */,
 				76210BEF27C299A100F858AA /* ColorModeToggleStyle.swift in Sources */,
 				A4B6986828451206002CA415 /* CarouselView.swift in Sources */,
 				76ADAFC427C8F01000F85FA7 /* MainScreenForecastView.swift in Sources */,
 				A4B6987D2847693D002CA415 /* CustomScrollView.swift in Sources */,
 				A4B698802847697A002CA415 /* CustomScrollCoordinator.swift in Sources */,
-				A41A890F283F6412003DAFB0 /* CollectionViewPagingLayout.ZPositionHandler.swift in Sources */,
 				7606161927AD77F600CC73B5 /* SurfWeatherAppApp.swift in Sources */,
-				A41A890C283F6412003DAFB0 /* Multipliable.swift in Sources */,
 				769CECFF27C27EBB00FFD409 /* LocationHeaderViewModel.swift in Sources */,
 				769A6F1E27D275080007759C /* MainScreenForecastJournalView.swift in Sources */,
-				A41A891A283F6412003DAFB0 /* TransformPageViewProtocol.swift in Sources */,
 				769A6F1C27D2633C0007759C /* MainScreenForecastViewModel.swift in Sources */,
-				A41A8907283F6412003DAFB0 /* ScaleTransformView.swift in Sources */,
-				A41A891D283F6412003DAFB0 /* PagingCollectionViewController.swift in Sources */,
 				769CECFC27C27DE100FFD409 /* LocationHeaderView.swift in Sources */,
 				76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */,
 				A4B6986F28468001002CA415 /* HourlyCardView.swift in Sources */,
 				A4D4A02C27FEF6AB008F5BD4 /* CardView.swift in Sources */,
 				769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */,
-				A41A8906283F6412003DAFB0 /* ScaleTransformViewOptions.swift in Sources */,
 				A4B6986A28452309002CA415 /* ScrollDelegate.swift in Sources */,
 				A4B6986D28467CB6002CA415 /* CarouselViewModel.swift in Sources */,
-				A41A891B283F6412003DAFB0 /* PagingCollectionViewCell.swift in Sources */,
 				A4B69876284685AE002CA415 /* HourlyCardViewModel.swift in Sources */,
-				A41A8915283F6412003DAFB0 /* TransformableView.swift in Sources */,
-				A41A890E283F6412003DAFB0 /* UIView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
