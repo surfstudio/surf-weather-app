@@ -47,7 +47,7 @@ struct CarouselView: UIViewRepresentable {
 
 // MARK: - Private
 
- extension CarouselView {
+ private extension CarouselView {
 
      func configureScrollView(context: Context, scrollView: UIScrollView) {
         let leftAndRightInsets = UIScreen.main.bounds.width - Constants.longItemSize.width

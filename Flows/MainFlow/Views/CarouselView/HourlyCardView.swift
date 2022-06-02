@@ -10,6 +10,8 @@ import SwiftUI
 
 struct HourlyCardView: View {
 
+    // MARK: - Nested
+
     struct Model: Hashable {
         let time: String
         let temperature: String
@@ -17,8 +19,12 @@ struct HourlyCardView: View {
         var isSelected: Bool
     }
 
+    // MARK: - Properties
+
     let model: Model
     let size: CGSize
+
+    // MARK: - Views
 
     var body: some View {
         VStack(spacing: 8) {

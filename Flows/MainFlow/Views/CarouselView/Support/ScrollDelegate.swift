@@ -9,9 +9,13 @@ import UIKit
 
 final class ScrollDelegate: NSObject, UIScrollViewDelegate {
 
+    // MARK: - Properties
+
     let parent: CarouselView
     let itemWidth: CGFloat
     let itemSpacing: CGFloat
+
+    // MARK: - Initialization
 
     init(parent: CarouselView, itemWidth: CGFloat, itemSpacing: CGFloat) {
         self.parent = parent
@@ -19,13 +23,13 @@ final class ScrollDelegate: NSObject, UIScrollViewDelegate {
         self.itemSpacing = itemSpacing
     }
 
+    // MARK: - UIScrollViewDelegate
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let width = itemWidth + itemSpacing
         let page = scrollView.contentOffset.x / width
 
-//        DispatchQueue.main.async {
-            self.parent.page = page
-//        }
+        self.parent.page = page
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
