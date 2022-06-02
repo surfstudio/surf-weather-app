@@ -6,14 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
 
-final class MainScreenViewModel {
+final class MainScreenViewModel: ObservableObject {
 
     // MARK: - Properties
 
     let locationViewModel: LocationHeaderViewModel
     let forecastViewModel: MainScreenForecastViewModel
-    let carouselViewModel: MainCorouselViewModel
+    @ObservedObject var carouselViewModel: CarouselViewModel
 
     // MARK: - Initialization
 

@@ -84,7 +84,7 @@ private extension SelectCityViewModel {
 
         let dateFormatted = DateFormat.calendarFormatter(format: .dayLongMonth).string(from: date)
         let temp = TemperatureFormatter.format(with: entity.temp, unit: .celsius).replacingOccurrences(of: "°C", with: "")
-        let imageName = WeatherImageName(rawValue: entity.weather.first?.icon ?? "01d")?.transformImageName() ?? "sun"
+        let imageName = Assets(rawValue: entity.weather.first?.icon ?? "01d")?.imageName ?? "sun"
 
         let isSelected = UserDefaultsService.shared.selectedCity?.cityName == city
         return CityCardView.Model(id: id, isSelected: isSelected, temperature: temp, time: dateFormatted, city: city, imageName: imageName)

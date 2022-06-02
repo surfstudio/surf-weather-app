@@ -11,8 +11,12 @@ struct MainScreenView: View {
 
     // MARK: - Properties
 
-    let viewModel: MainScreenViewModel
+    @ObservedObject var viewModel: MainScreenViewModel
     let serviceAssembly = ServicesAssemblyFactory()
+
+    // MARK: - Private Properties
+
+    @State private var carouselMode: CardView.Mode = .long
 
     // MARK: - Views
 
@@ -25,8 +29,7 @@ struct MainScreenView: View {
                     locationNetworkService: serviceAssembly.locationNetworkService
                 )
                 ScrollView {
-//                    MainCorouselView(viewModel: viewModel.carouselViewModel)
-                    CardView(model: viewModel.carouselViewModel.items.first!).padding()
+                    GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 188 : 360)
                     MainScreenForecastView(viewModel: viewModel.forecastViewModel)
                     MainScreenForecastJournalView()
                 }
@@ -35,7 +38,28 @@ struct MainScreenView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
+            .animation(.easeInOut(duration: 0.5), value: carouselMode)
         }
+
+    }
+
+    func makeCarousel(with proxy: GeometryProxy) -> some View {
+        let topSpace = 80.0
+        let offset = proxy.frame(in: .global).minY - topSpace
+        DispatchQueue.main.async {
+            if carouselMode == .long && offset < .zero {
+                self.carouselMode = .short
+                self.viewModel.carouselViewModel.updateIsNeeded = true
+            } else if carouselMode == .short && offset > .zero {
+                self.carouselMode = .long
+                self.viewModel.carouselViewModel.updateIsNeeded = true
+            }
+        }
+        return CarouselView(
+            cardMode: $carouselMode,
+            updateIsNeeded: $viewModel.carouselViewModel.updateIsNeeded,
+            viewModel: viewModel.carouselViewModel
+        )
     }
 
 }

@@ -32,7 +32,7 @@ struct CityCardView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             if model.isSelected {
-                Image(isLightMode ? "cardBackgroundLight" : "cardBackgroundDark", bundle: nil)
+                Image(isLightMode ? "small_background_light" : "small_background_dark", bundle: nil)
             }
             VStack(alignment: .leading) {
                 topView
