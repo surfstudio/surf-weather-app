@@ -13,6 +13,7 @@ struct HourlyCardView: View {
     struct Model: Hashable {
         let time: String
         let temperature: String
+        let image: Assets.Weather
         var isSelected: Bool
     }
 
@@ -24,7 +25,7 @@ struct HourlyCardView: View {
             Text(model.time)
                 .font(Font(.init(.system, size: 14)))
                 .foregroundColor(model.isSelected ? .violetTextColor : .white.opacity(0.64))
-            Image("sun", bundle: nil).resizable()
+            Image(model.image.medium, bundle: nil).resizable()
                 .frame(width: 32, height: 32)
             Text("\(model.temperature)&deg;")
                 .font(Font(.init(.system, size: 20)))

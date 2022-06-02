@@ -6,27 +6,36 @@
 //
 
 import Foundation
+import SwiftUI
 
-final class CarouselViewModel {
+final class CarouselViewModel: ObservableObject {
 
-    static let hourly: [HourlyCardView.Model] = [
-        .init(time: "12:00", temperature: "20", isSelected: false),
-        .init(time: "13:00", temperature: "25", isSelected: true),
-        .init(time: "14:00", temperature: "14", isSelected: false),
-        .init(time: "15:00", temperature: "8", isSelected: false),
-        .init(time: "16:00", temperature: "15", isSelected: false),
-        .init(time: "17:00", temperature: "8", isSelected: false),
-        .init(time: "18:00", temperature: "15", isSelected: false),
-        .init(time: "19:00", temperature: "8", isSelected: false),
-        .init(time: "20:00", temperature: "15", isSelected: false)
-    ]
-    let cardViewModels: [CardViewModel] = [
-        .init(model: .init(id: 0, dayly: "Понедельник", temperature: "23", sky: "Солнечно", hourly: CarouselViewModel.hourly)),
-        .init(model: .init(id: 1, dayly: "Вторник", temperature: "10", sky: "Пасмурно", hourly: CarouselViewModel.hourly)),
-        .init(model: .init(id: 2, dayly: "Среда", temperature: "21", sky: "Солнечно", hourly: CarouselViewModel.hourly)),
-        .init(model: .init(id: 3, dayly: "Четверг", temperature: "15", sky: "Дождливо", hourly: CarouselViewModel.hourly)),
-        .init(model: .init(id: 4, dayly: "Пятница", temperature: "19", sky: "Солнечно", hourly: CarouselViewModel.hourly)),
-        .init(model: .init(id: 5, dayly: "Суббота", temperature: "25", sky: "Солнечно", hourly: CarouselViewModel.hourly)),
-        .init(model: .init(id: 6, dayly: "Воскресенье", temperature: "23", sky: "Солнечно", hourly: CarouselViewModel.hourly))
-    ]
+    @Published var updateIsNeeded = false
+    @Published var cardViewModels: [CardViewModel] = []
+
+    init() {
+        self.cardViewModels = [
+            .init(model: .init(dayly: "Понедельник, 1 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+            .init(model: .init(dayly: "Вторник, 2 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+            .init(model: .init(dayly: "Среда, 3 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+            .init(model: .init(dayly: "Четверг, 4 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+            .init(model: .init(dayly: "Пятница, 5 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+            .init(model: .init(dayly: "Суббота, 6 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+            .init(model: .init(dayly: "Воскресенье, 7 мая", temperature: "25", image: .sunCloudi, hourly: hourly))
+        ]
+        withAnimation { self.updateIsNeeded = true }
+    }
+
 }
+
+let hourly: [HourlyCardView.Model] = [
+    .init(time: "12:00", temperature: "20", image: .sun, isSelected: false),
+    .init(time: "13:00", temperature: "25", image: .sunCloudi, isSelected: true),
+    .init(time: "14:00", temperature: "14", image: .rain, isSelected: false),
+    .init(time: "15:00", temperature: "8", image: .storm, isSelected: false),
+    .init(time: "16:00", temperature: "15", image: .cloudi, isSelected: false),
+    .init(time: "17:00", temperature: "8", image: .cloudi, isSelected: false),
+    .init(time: "18:00", temperature: "15", image: .sunCloudi, isSelected: false),
+    .init(time: "19:00", temperature: "8", image: .sunCloudi, isSelected: false),
+    .init(time: "20:00", temperature: "15", image: .sun, isSelected: false)
+]

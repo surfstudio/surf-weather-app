@@ -14,13 +14,19 @@ protocol ParentScrollable {
 
 class CustomScrollCoordinator: NSObject, UIScrollViewDelegate {
 
+    // MARK: - Properties
+
     var parent: ParentScrollable
     let itemWidth: CGFloat
+
+    // MARK: - Initialization
 
     init(parent: ParentScrollable, itemWidth: CGFloat) {
         self.parent = parent
         self.itemWidth = itemWidth
     }
+
+    // MARK: - UIScrollViewDelegate
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = scrollView.contentOffset.x / itemWidth

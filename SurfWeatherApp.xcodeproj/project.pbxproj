@@ -45,6 +45,7 @@
 		A4B6987A28474032002CA415 /* ScrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6987928474032002CA415 /* ScrollIndicatorView.swift */; };
 		A4B6987D2847693D002CA415 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6987C2847693C002CA415 /* CustomScrollView.swift */; };
 		A4B698802847697A002CA415 /* CustomScrollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6987F2847697A002CA415 /* CustomScrollCoordinator.swift */; };
+		A4B69882284804E1002CA415 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B69881284804E1002CA415 /* Assets.swift */; };
 		A4D4A02C27FEF6AB008F5BD4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D4A02B27FEF6AB008F5BD4 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		A4B6987928474032002CA415 /* ScrollIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollIndicatorView.swift; sourceTree = "<group>"; };
 		A4B6987C2847693C002CA415 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		A4B6987F2847697A002CA415 /* CustomScrollCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollCoordinator.swift; sourceTree = "<group>"; };
+		A4B69881284804E1002CA415 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		A4D4A02B27FEF6AB008F5BD4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 			children = (
 				7606161827AD77F600CC73B5 /* SurfWeatherAppApp.swift */,
 				7606161C27AD77F700CC73B5 /* Assets.xcassets */,
+				A4B69881284804E1002CA415 /* Assets.swift */,
 				7606161E27AD77F700CC73B5 /* Preview Content */,
 			);
 			path = SurfWeatherApp;
@@ -404,6 +407,7 @@
 			files = (
 				A41A8916283F6412003DAFB0 /* PagingCollectionViewControllerBuilder.swift in Sources */,
 				A41A8910283F6412003DAFB0 /* CollectionViewPagingLayout.swift in Sources */,
+				A4B69882284804E1002CA415 /* Assets.swift in Sources */,
 				76210BF227C29AAD00F858AA /* UserDefaultsService.swift in Sources */,
 				A41A8918283F6412003DAFB0 /* ScalePageView.swift in Sources */,
 				A4B6987228468577002CA415 /* CardViewModel.swift in Sources */,

@@ -26,6 +26,7 @@ private extension CardViewModel {
     func updateModel(with selected: HourlyCardView.Model) {
         var newModel = model
         newModel.temperature = selected.temperature
+        newModel.image = selected.image
         for (index, hourModel) in newModel.hourly.enumerated() {
             newModel.hourly[index].isSelected = hourModel == selected
         }
