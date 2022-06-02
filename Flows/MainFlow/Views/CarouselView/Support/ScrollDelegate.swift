@@ -15,6 +15,10 @@ final class ScrollDelegate: NSObject, UIScrollViewDelegate {
     let itemWidth: CGFloat
     let itemSpacing: CGFloat
 
+    // MARK: - Private Properties
+
+    private var oldPage: CGFloat = 0
+
     // MARK: - Initialization
 
     init(parent: CarouselView, itemWidth: CGFloat, itemSpacing: CGFloat) {
@@ -36,10 +40,12 @@ final class ScrollDelegate: NSObject, UIScrollViewDelegate {
         let width = itemWidth + itemSpacing
         let page = trunc(scrollView.contentOffset.x / width)
 
-        if (parent.page - page) > 0.5 {
+        if (parent.page - oldPage) > .zero {
             targetContentOffset.pointee.x = width * (page + 1)
+            oldPage = page + 1
         } else {
             targetContentOffset.pointee.x = width * page
+            oldPage = page
         }
     }
 
