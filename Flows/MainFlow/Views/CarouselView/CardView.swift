@@ -29,6 +29,7 @@ struct CardView: View {
     @Binding var page: CGFloat
     let cardId: Int
     let itemSize: CGSize
+    let maxReductionPercent: CGFloat
 
     // MARK: - Private  Properties
 
@@ -123,11 +124,10 @@ private extension CardView {
 
     func makeScale() -> CGSize {
         let maxScale = 1.0
-        let maxReductionPercent = 0.3 // Максимальный процент уменьшения крайних вьюх где 0.3 - это уменьшить на 30 %
         let scaleProgress = abs(page - CGFloat(cardId)) * maxReductionPercent
         let scale = maxScale - scaleProgress
 
-        return .init(width: maxScale, height: scale)
+        return .init(width: scale, height: scale)
     }
 
 }
