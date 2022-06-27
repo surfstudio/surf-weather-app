@@ -21,15 +21,18 @@ final class SelectCityViewModel: ObservableObject {
 
     private var weatherService: WeatherNetworkService
     private var locationService: LocationNetworkService
-    private var savedCities = UserDefaultsService.shared.savedCities
+    private var weatherStorageServices: WeatherStorageService
 
     // MARK: - Initialization
 
-    init(weatherService: WeatherNetworkService, locationService: LocationNetworkService) {
+    init(weatherService: WeatherNetworkService, locationService: LocationNetworkService, weatherStorageServices: WeatherStorageService) {
         self.weatherService = weatherService
         self.locationService = locationService
-        self.searchListViewModel = .init(locationService: locationService, weatherService: weatherService)
-        self.cityCardViewModel = .init()
+        self.weatherStorageServices = weatherStorageServices
+        self.searchListViewModel = .init(locationService: locationService,
+                                         weatherService: weatherService,
+                                         weatherStorageServices: weatherStorageServices)
+        self.cityCardViewModel = .init(weatherStorageService: weatherStorageServices)
 
         searchListViewModel.onAddNewCity = { [weak self] in
             self?.loadData()
@@ -43,33 +46,28 @@ final class SelectCityViewModel: ObservableObject {
     // MARK: - Methods
 
     func loadData() {
-        guard let entities = UserDefaultsService.shared.savedCities else { return }
-        var cities: [CityCardView.Model] = []
-
-        for (index, entity) in entities.enumerated() {
-            guard let currentWeather = entity.cityWeather.current else { return }
-            let city = makeCityCardModel(with: currentWeather, city: entity.cityName, id: index)
-            cities.append(city)
+        weatherStorageServices.getCities { [weak self] result in
+            switch result {
+            case .success(let entities):
+                self?.handleSuccess(with: entities ?? [])
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
-
-        withAnimation { weathers = cities.sorted(by: { $0.isSelected && !$1.isSelected }) }
     }
 
     func selectCity(with model: CityCardView.Model) {
-        for (index, _) in weathers.enumerated() {
-            weathers[index].isSelected = false
-        }
+        weathers.enumerated().forEach { weathers[$0.offset].isSelected = false }
         guard let index = weathers.firstIndex(where: { $0.id == model.id }) else {
             return
         }
-        let city = savedCities?.first(where: { $0.cityName == model.city })
-        UserDefaultsService.shared.selectedCity = city
-        weathers[index].isSelected = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            withAnimation(.easeInOut(duration: 0.5)) {
-                let selectedModel = self.weathers.remove(at: index)
-                self.weathers.insert(selectedModel, at: 0)
+        weatherStorageServices.getCities { [weak self] in
+            guard case .success(let entities) = $0, let entity = entities?.first(where: { $0.cityName == model.city }) else {
+                return
             }
+            UserDefaultsService.shared.selectedCity = .init(cityName: model.city, area: "", cords: .init(lat: entity.lat, lon: entity.lon))
+            self?.weathers[index].isSelected = true
+            self?.selectCityWithAnimate(by: index)
         }
     }
 
@@ -79,15 +77,35 @@ final class SelectCityViewModel: ObservableObject {
 
 private extension SelectCityViewModel {
 
-    func makeCityCardModel(with entity: CurrentWeatherEntity, city: String, id: Int) -> CityCardView.Model {
-        let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
+    func handleSuccess(with entities: [CityWeatherEntity]) {
+        var cities: [CityCardView.Model] = []
 
-        let dateFormatted = DateFormat.calendarFormatter(format: .dayLongMonth).string(from: date)
-        let temp = TemperatureFormatter.format(with: entity.temp, unit: .celsius).replacingOccurrences(of: "°C", with: "")
-        let imageName = Assets(rawValue: entity.weather.first?.icon ?? "01d")?.imageName ?? "sun"
+        entities.enumerated().forEach {
+            guard let currentWeather = $0.element.currentWeather, let cityName = $0.element.cityName else { return }
+            let city = makeCityCardModel(with: currentWeather, city: cityName, id: $0.offset)
+            cities.append(city)
+        }
+
+        withAnimation { weathers = cities.sorted(by: { $0.isSelected && !$1.isSelected }) }
+    }
+
+    func makeCityCardModel(with entity: CurrentWeatherEntityDB, city: String, id: Int) -> CityCardView.Model {
+        let date = entity.date ?? ""
+        let temp = entity.temperature ?? ""
+        let imageName = Assets(rawValue: entity.weatherImage ?? "01d")?.imageName ?? "sun"
 
         let isSelected = UserDefaultsService.shared.selectedCity?.cityName == city
-        return CityCardView.Model(id: id, isSelected: isSelected, temperature: temp, time: dateFormatted, city: city, imageName: imageName)
+        return CityCardView.Model(id: id, isSelected: isSelected, temperature: temp, time: date, city: city, imageName: imageName)
+    }
+
+
+    func selectCityWithAnimate(by index: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            withAnimation(.easeInOut(duration: 0.5)) {
+                let selectedModel = self.weathers.remove(at: index)
+                self.weathers.insert(selectedModel, at: 0)
+            }
+        }
     }
 
 }

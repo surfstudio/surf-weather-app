@@ -18,16 +18,16 @@ class MainScreenForecastModelAdapter {
 
     // MARK: - Initialization
 
-    init(weatherDayEntities: [DailyWeatherEntity], cityWeather: CityWeather) {
+    init(weatherDayEntities: [DailyWeatherEntity], cityWeather: CityEntity) {
         self.weatherDayEntities = weatherDayEntities
         self.cityName = cityWeather.cityName
         self.cord = cityWeather.cords
     }
 
-    init(weatherStorageEntities: [WeeklyWeatherEntityDB], cityWeather: CityWeather) {
+    init(weatherStorageEntities: [WeeklyWeatherEntityDB], city: CityEntity) {
         self.weatherStorageEntities = weatherStorageEntities
-        self.cityName = cityWeather.cityName
-        self.cord = cityWeather.cords
+        self.cityName = city.cityName
+        self.cord = city.cords
     }
 
     // MARK: - Methods

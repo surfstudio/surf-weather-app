@@ -19,13 +19,15 @@ final class LocationListViewModel: ObservableObject {
 
     private var locationService: LocationNetworkService
     private var weatherService: WeatherNetworkService
+    private var weatherStorageServices: WeatherStorageService
     private var cities: [CityEntity] = [ ]
 
     // MARK: - Initialization
 
-    init(locationService: LocationNetworkService, weatherService: WeatherNetworkService) {
+    init(locationService: LocationNetworkService, weatherService: WeatherNetworkService, weatherStorageServices: WeatherStorageService) {
         self.locationService = locationService
         self.weatherService = weatherService
+        self.weatherStorageServices = weatherStorageServices
     }
 
     // MARK: - Methods
@@ -67,17 +69,6 @@ private extension LocationListViewModel {
         }
     }
 
-    func handleSuccess(with entity: WeatherRequestEntity?, cityName: String, cords: CordsEntity) {
-        var cities = UserDefaultsService.shared.savedCities ?? []
-        guard let entity = entity, !cities.contains(where: { $0.cityName == cityName }) else {
-            return
-        }
-
-        cities.append(.init(cityName: cityName, cords: cords, cityWeather: entity))
-        UserDefaultsService.shared.savedCities = cities
-        onAddNewCity?()
-    }
-
     func handleSuccess(with responce: GeocoderResponseEntry?) {
         guard let responce = responce else { return }
         let addressComponents = GeocoderEntity(response: responce).getAddressesComponents()
@@ -87,6 +78,33 @@ private extension LocationListViewModel {
             return .init(cityName: cityName, area: $0.area ?? "", cords: cords)
         }
         locations = cities.map { [$0.cityName, $0.area].filter { !$0.isEmpty }.joined(separator: ", ") }
+    }
+
+    func handleSuccess(with entity: WeatherRequestEntity?, cityName: String, cords: CordsEntity) {
+        guard let current = entity?.current else {
+            return
+        }
+
+        let weekly = entity?.daily.compactMap { WeeklyWeatherEntityDB(entity: $0) } ?? []
+        let hourly = entity?.hourly.compactMap { HourlyWeatherEntityDB(entity: $0) } ?? []
+
+        let newCity = CityWeatherEntity(
+            cityName: cityName,
+            lat: cords.lat,
+            lon: cords.lon,
+            current: .init(entity: current),
+            weekly: Set(weekly),
+            hourly: Set(hourly)
+        )
+
+        weatherStorageServices.saveCity(city: newCity, completion: { [weak self] result in
+            switch result {
+            case .success():
+                self?.onAddNewCity?()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        })
     }
 
 }

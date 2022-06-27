@@ -39,11 +39,16 @@ extension Date {
         let calendar = Calendar.current
         let daily = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
         let weekday = calendar.component(.weekday, from: self)
+
+        return daily[weekday - 1]
+    }
+
+    var isToday: Bool {
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: self)
         let currentDay = calendar.component(.weekday, from: Date())
 
-        let isToday = weekday == currentDay
-
-        return isToday ? "Сегодня" : daily[weekday - 1]
+        return weekday == currentDay
     }
 
 }

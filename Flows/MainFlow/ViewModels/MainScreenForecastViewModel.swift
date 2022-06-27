@@ -53,7 +53,7 @@ final class MainScreenForecastViewModel: ObservableObject {
 
 private extension MainScreenForecastViewModel {
 
-    func loadArchiveWeather(with selectedCity: CityWeather) {
+    func loadArchiveWeather(with selectedCity: CityEntity) {
         storageService.getCities { [weak self] result in
             switch result {
             case .success(let entities):
@@ -64,7 +64,7 @@ private extension MainScreenForecastViewModel {
         }
     }
 
-    func loadWeather(with selectedCity: CityWeather) {
+    func loadWeather(with selectedCity: CityEntity) {
         weatherService.getWeather(with: selectedCity.cords) { [weak self] result in
             switch result {
             case .success(let request):
@@ -75,7 +75,7 @@ private extension MainScreenForecastViewModel {
         }
     }
 
-    func handleSuccess(with entity: WeatherRequestEntity?, selectedCity: CityWeather) {
+    func handleSuccess(with entity: WeatherRequestEntity?, selectedCity: CityEntity) {
         let adapter = MainScreenForecastModelAdapter(weatherDayEntities: entity?.daily ?? [], cityWeather: selectedCity)
 
         forecastItems = adapter.makeScreenForecastModels().compactMap { model in
@@ -90,12 +90,12 @@ private extension MainScreenForecastViewModel {
         sincLists()
     }
 
-    func handleSuccess(with entities: [CityWeatherEntity]?, selectedCity: CityWeather) {
+    func handleSuccess(with entities: [CityWeatherEntity]?, selectedCity: CityEntity) {
         guard let city = entities?.first(where: { $0.cityName == selectedCity.cityName }) else {
             archiveItems.removeAll()
             return
         }
-        let adapter = MainScreenForecastModelAdapter(weatherStorageEntities: city.weatherArray, cityWeather: selectedCity)
+        let adapter = MainScreenForecastModelAdapter(weatherStorageEntities: city.weatherArray, city: selectedCity)
         let models = adapter.makeScreenForecastModelsByStorage().sorted {
             DateFormat.compareDates($0.date, $1.date, format: .dayLongMonth)
         }

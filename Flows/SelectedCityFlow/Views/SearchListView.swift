@@ -64,7 +64,8 @@ struct SearchListView_Previews: PreviewProvider {
     static var previews: some View {
         SearchListView(
             viewModel: .init(locationService: ServicesAssemblyFactory().locationNetworkService,
-                             weatherService: ServicesAssemblyFactory().weatherNetworkService),
+                             weatherService: ServicesAssemblyFactory().weatherNetworkService,
+                             weatherStorageServices: ServicesAssemblyFactory().weatherStorageService),
             presentingModal: .constant(false)
         )
     }

@@ -6,9 +6,12 @@
 //
 
 import Combine
+import CoreData
 
 protocol WeatherStorageService {
 
+    func getHourlyWeather(completion: @escaping (Result<[HourlyWeatherEntityDB]?, Error>) -> Void)
+    func getWeeklyWeather(completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void)
     func getCities(completion: @escaping (Result<[CityWeatherEntity]?, Error>) -> Void)
     func saveCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void)
     func deleteCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void)
@@ -20,7 +23,8 @@ protocol WeatherStorageService {
 
 final class DataBaseStorage: WeatherStorageService {
 
-    let storageManager = CoreDataRepository<WeeklyWeatherEntityDB>()
+    let weaklyStorageManager = CoreDataRepository<WeeklyWeatherEntityDB>()
+    let hourlyStorageManager = CoreDataRepository<HourlyWeatherEntityDB>()
     let cityStorageManager = CoreDataRepository<CityWeatherEntity>()
 
     private var cancelable: AnyCancellable?
@@ -69,13 +73,25 @@ final class DataBaseStorage: WeatherStorageService {
                 guard let weather = cities?.first(where: { $0.cityName == cityName })?.weatherArray.first(where: { $0.date == date }) else {
                     return
                 }
-                self?.cancelable = self?.storageManager.delete(weather)
+                self?.cancelable = self?.weaklyStorageManager.delete(weather)
                     .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
                     } receiveValue: { completion(.success(())) }
             case .failure(let error):
                 completion(.failure(error))
             }
         }
+    }
+
+    func getHourlyWeather(completion: @escaping (Result<[HourlyWeatherEntityDB]?, Error>) -> Void) {
+        cancelable = hourlyStorageManager.objects()
+            .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
+            } receiveValue: { completion(.success($0)) }
+    }
+
+    func getWeeklyWeather(completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void) {
+        cancelable = weaklyStorageManager.objects()
+            .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
+            } receiveValue: { completion(.success($0)) }
     }
 
 }
@@ -91,7 +107,7 @@ private extension DataBaseStorage {
         }
     }
 
-    func handleCompletion(with result: Subscribers.Completion<Error>, completion: (Result<[CityWeatherEntity]?, Error>) -> Void) {
+    func handleCompletion<T: NSManagedObject>(with result: Subscribers.Completion<Error>, completion: (Result<[T]?, Error>) -> Void) {
         switch result {
         case .finished:
             cancelable?.cancel()

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 final class UserDefaultsService: ObservableObject, Storage {
 
@@ -22,14 +23,9 @@ final class UserDefaultsService: ObservableObject, Storage {
         }
     }
 
-    var selectedCity: CityWeather? {
+    var selectedCity: CityEntity? {
         get { getValue(key: Keys.selectedCity.rawValue) }
         set { setValue(for: newValue, key: Keys.selectedCity.rawValue) }
-    }
-
-    var savedCities: [CityWeather]? {
-        get { getValue(key: Keys.savedCities.rawValue) }
-        set { setValue(for: newValue, key: Keys.savedCities.rawValue) }
     }
 
     // MARK: - Static Properties

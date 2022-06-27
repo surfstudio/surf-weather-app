@@ -118,7 +118,8 @@ struct AddSitiesView_Previews: PreviewProvider {
     static var previews: some View {
         SelectCityView(viewModel: .init(
             weatherService: ServicesAssemblyFactory().weatherNetworkService,
-            locationService: ServicesAssemblyFactory().locationNetworkService), mainHeaderViewModel: .init())
+            locationService: ServicesAssemblyFactory().locationNetworkService,
+            weatherStorageServices: ServicesAssemblyFactory().weatherStorageService), mainHeaderViewModel: .init())
     }
 
 }

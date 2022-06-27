@@ -15,7 +15,7 @@ extension CityWeatherEntity {
         lon: Double,
         current: CurrentWeatherEntityDB?,
         weekly: Set<WeeklyWeatherEntityDB>,
-        hourly: Set<WeeklyWeatherEntityDB>
+        hourly: Set<HourlyWeatherEntityDB>
     ) {
         self.init(context: StorageContextManager.shared.context)
         self.cityName = cityName
@@ -56,6 +56,16 @@ extension WeeklyWeatherEntityDB {
         self.date = date
     }
 
+    convenience init(entity: DailyWeatherEntity) {
+        self.init(context: StorageContextManager.shared.context)
+        let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
+        self.wind = String(entity.wind_speed)
+        self.specification = entity.weather.first?.description
+        self.weatherImage = entity.weather.first?.icon ?? "01d"
+        self.temperature = TemperatureFormatter.format(with: entity.temp.day, unit: .celsius).replacingOccurrences(of: "°C", with: "")
+        self.date = DateFormat.calendarFormatter(format: .dayMonthYear).string(from: date)
+    }
+
 }
 
 extension HourlyWeatherEntityDB {
@@ -73,6 +83,16 @@ extension HourlyWeatherEntityDB {
         self.weatherImage = weatherImage
         self.temperature = temperature
         self.date = date
+    }
+
+    convenience init(entity: HourlyWeatherEntity) {
+        self.init(context: StorageContextManager.shared.context)
+        let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
+        self.wind = String(entity.wind_speed)
+        self.specification = entity.weather.first?.description
+        self.weatherImage = entity.weather.first?.icon ?? "01d"
+        self.temperature = TemperatureFormatter.format(with: entity.temp, unit: .celsius).replacingOccurrences(of: "°C", with: "")
+        self.date = DateFormat.calendarFormatter(format: .dayMonthYear).string(from: date)
     }
 
 }
@@ -94,6 +114,17 @@ extension CurrentWeatherEntityDB {
         self.weatherImage = weatherImage
         self.temperature = temperature
         self.date = date
+    }
+
+    convenience init(entity: CurrentWeatherEntity) {
+        self.init(context: StorageContextManager.shared.context)
+        let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
+        self.weekday = date.weekday
+        self.wind = String(entity.wind_speed)
+        self.specification = entity.weather.first?.description
+        self.weatherImage = entity.weather.first?.icon ?? "01d"
+        self.temperature = TemperatureFormatter.format(with: entity.temp, unit: .celsius).replacingOccurrences(of: "°C", with: "")
+        self.date = DateFormat.calendarFormatter(format: .dayMonthYear).string(from: date)
     }
 
 }

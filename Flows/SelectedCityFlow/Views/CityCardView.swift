@@ -32,7 +32,7 @@ struct CityCardView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             if model.isSelected {
-                Image(isLightMode ? "small_background_light" : "small_background_dark", bundle: nil)
+                Image(isLightMode ? "small_Background_Light" : "small_Background_Dark", bundle: nil)
             }
             VStack(alignment: .leading) {
                 topView
@@ -108,7 +108,7 @@ struct CityCardView_Previews: PreviewProvider {
                          city: "Воронеж",
                          imageName: "sun"),
             isChangeMode: .constant(false),
-            viewModel: .init()
+            viewModel: .init(weatherStorageService: ServicesAssemblyFactory().weatherStorageService)
         )
     }
 }
