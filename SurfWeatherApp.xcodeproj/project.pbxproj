@@ -79,7 +79,6 @@
 			children = (
 				76C6467B27C92AE300D8BBA9 /* Library */,
 				76210BF027C29A7700F858AA /* Services */,
-				76210BED27C2997B00F858AA /* Styles */,
 				769CECF527C27D0E00FFD409 /* Flows */,
 				7606161727AD77F600CC73B5 /* SurfWeatherApp */,
 				7606161627AD77F600CC73B5 /* Products */,
@@ -191,6 +190,7 @@
 		76C6467B27C92AE300D8BBA9 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				76210BED27C2997B00F858AA /* Styles */,
 				769CECFA27C27DC000FFD409 /* Views */,
 				76C6467C27C92B0200D8BBA9 /* Colors.swift */,
 			);
