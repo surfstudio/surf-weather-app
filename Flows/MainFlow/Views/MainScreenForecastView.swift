@@ -26,6 +26,7 @@ struct MainScreenForecastView: View {
                             trailing: 16))
         .frame(maxWidth: .infinity, alignment: .leading)
         .shadow(color: Color(.black.withAlphaComponent(0.08)), radius: 12, x: 0, y: 0)
+        .onAppear { viewModel.loadData() }
     }
 
     var titleView: some View {
@@ -54,6 +55,7 @@ struct MainScreenForecastView: View {
                 MainScreenForecastListItemView(viewModel: viewModel.items[$0])
             }
         }
+        .frame(minHeight: 430)
     }
 
 }
@@ -61,10 +63,10 @@ struct MainScreenForecastView: View {
 struct MainScreenForecastView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            MainScreenForecastView(viewModel: .init())
+            MainScreenForecastView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService))
                 .preferredColorScheme(.light)
                 .previewInterfaceOrientation(.portrait)
-            MainScreenForecastView(viewModel: .init())
+            MainScreenForecastView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService))
                 .preferredColorScheme(.dark)
                 .previewInterfaceOrientation(.portrait)
         }

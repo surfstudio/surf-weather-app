@@ -9,6 +9,10 @@ import SwiftUI
 
 struct MainScreenView: View {
 
+    // MARK: - Properties
+
+    let viewModel: MainScreenViewModel
+
     // MARK: - Private Properties
 
     @State private var carouselMode: CardView.Mode = .long
@@ -20,7 +24,7 @@ struct MainScreenView: View {
         ScrollView {
             LocationHeaderView(viewModel: LocationHeaderViewModel())
             GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 188 : 360)
-            MainScreenForecastView(viewModel: .init())
+            MainScreenForecastView(viewModel: viewModel.forecastViewModel)
             MainScreenForecastJournalView()
         }
         .background(Color.lightBackground | .darkBackground)
@@ -49,6 +53,6 @@ struct MainScreenView: View {
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenView()
+        MainScreenView(viewModel: .init(serviceAssembly: .init()))
     }
 }

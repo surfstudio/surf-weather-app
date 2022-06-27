@@ -9,7 +9,11 @@ import SwiftUI
 
 struct MainScreenForecastJournalView: View {
 
+    // MARK: - States
+
     @State var isHovered = false
+
+    // MARK: - Views
 
     var body: some View {
         Button(action: {}) {
