@@ -56,6 +56,7 @@
 		A4AED4382837E02000FA6C2E /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED4372837E02000FA6C2E /* SearchListView.swift */; };
 		A4AED43A2837EA7D00FA6C2E /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED4392837EA7D00FA6C2E /* LocationListViewModel.swift */; };
 		A4AED43C2837FE7900FA6C2E /* CityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED43B2837FE7900FA6C2E /* CityEntity.swift */; };
+		A4AF1019286B4B8300056A3C /* DataBaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF1018286B4B8300056A3C /* DataBaseStorage.swift */; };
 		A4B6988928495B4E002CA415 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988428495B4E002CA415 /* CardView.swift */; };
 		A4B6988A28495B4E002CA415 /* HourlyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988528495B4E002CA415 /* HourlyCardView.swift */; };
 		A4B6988B28495B4E002CA415 /* ScrollDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988728495B4E002CA415 /* ScrollDelegate.swift */; };
@@ -135,6 +136,7 @@
 		A4AED4372837E02000FA6C2E /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		A4AED4392837EA7D00FA6C2E /* LocationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewModel.swift; sourceTree = "<group>"; };
 		A4AED43B2837FE7900FA6C2E /* CityEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityEntity.swift; sourceTree = "<group>"; };
+		A4AF1018286B4B8300056A3C /* DataBaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStorage.swift; sourceTree = "<group>"; };
 		A4B6988428495B4E002CA415 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		A4B6988528495B4E002CA415 /* HourlyCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardView.swift; sourceTree = "<group>"; };
 		A4B6988728495B4E002CA415 /* ScrollDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDelegate.swift; sourceTree = "<group>"; };
@@ -341,7 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				76210BF027C29A7700F858AA /* UserDefaults */,
-				A41A895A283FC46A003DAFB0 /* WeatherStorageService.swift */,
+				A4AF1017286B4B6900056A3C /* CoreData */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -425,6 +427,15 @@
 				A4AED4352837C7E800FA6C2E /* LocationRequest.swift */,
 			);
 			path = Geocoder;
+			sourceTree = "<group>";
+		};
+		A4AF1017286B4B6900056A3C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A41A895A283FC46A003DAFB0 /* WeatherStorageService.swift */,
+				A4AF1018286B4B8300056A3C /* DataBaseStorage.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		A4B6988328495B4E002CA415 /* CarouselView */ = {
@@ -720,6 +731,7 @@
 				A4AED43A2837EA7D00FA6C2E /* LocationListViewModel.swift in Sources */,
 				7606161927AD77F600CC73B5 /* SurfWeatherAppApp.swift in Sources */,
 				A4D4A00727FD9A48008F5BD4 /* DailyWeatherEntity.swift in Sources */,
+				A4AF1019286B4B8300056A3C /* DataBaseStorage.swift in Sources */,
 				A4442733283B7B250069C3ED /* Encodable+Extension.swift in Sources */,
 				A41A895B283FC46A003DAFB0 /* WeatherStorageService.swift in Sources */,
 				A4442735283B7B460069C3ED /* Decodable+Extension.swift in Sources */,

@@ -2,35 +2,26 @@
 //  DataBaseStorage.swift
 //  SurfWeatherApp
 //
-//  Created by porohov on 26.05.2022.
+//  Created by porohov on 28.06.2022.
 //
 
 import Combine
 import CoreData
 
-protocol WeatherStorageService {
-
-    func getHourlyWeather(completion: @escaping (Result<[HourlyWeatherEntityDB]?, Error>) -> Void)
-    func getWeeklyWeather(completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void)
-    func getCities(completion: @escaping (Result<[CityWeatherEntity]?, Error>) -> Void)
-    func saveCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void)
-    func deleteCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void)
-
-    func getWeathers(with cityName: String, completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void)
-    func deleteWeather(with cityName: String, date: String, completion: @escaping (Result<Void, Error>) -> Void)
-    func saveWeather(by city: CityWeatherEntity, weather: WeeklyWeatherEntityDB, completion: @escaping (Result<Void, Error>) -> Void)
-}
-
 final class DataBaseStorage: WeatherStorageService {
 
-    let weaklyStorageManager = CoreDataRepository<WeeklyWeatherEntityDB>()
-    let hourlyStorageManager = CoreDataRepository<HourlyWeatherEntityDB>()
-    let cityStorageManager = CoreDataRepository<CityWeatherEntity>()
+    // MARK: - Private Properties
+
+    private let weaklyStorageManager = CoreDataRepository<WeeklyWeatherEntityDB>()
+    private let hourlyStorageManager = CoreDataRepository<HourlyWeatherEntityDB>()
+    private let cityStorageManager = CoreDataRepository<CityWeatherEntity>()
 
     private var clearCancelableTimer: Timer?
     private var cancelableSet = Set<AnyCancellable?>() {
         willSet { stopClearCancelableSet(with: newValue) } // Останавливает таймер если добавляются новые объекты
     }
+
+    // MARK: - Methods
 
     func getCities(completion: @escaping (Result<[CityWeatherEntity]?, Error>) -> Void) {
         let cancelable = cityStorageManager.objects().sink(
@@ -113,6 +104,8 @@ final class DataBaseStorage: WeatherStorageService {
     }
 
 }
+
+// MARK: - Private Methods
 
 private extension DataBaseStorage {
 
