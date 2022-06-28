@@ -22,8 +22,14 @@ struct CarouselView: UIViewRepresentable {
 
     @State var page: CGFloat = 0
     @Binding var cardMode: CardView.Mode
-    @Binding var updateIsNeeded: Bool
     @ObservedObject var viewModel: CarouselViewModel
+
+    // MARK: - Methods
+
+    func changePage() {
+        let index = Int(page)
+        viewModel.changePage(with: index)
+    }
 
     // MARK: - UIViewRepresentable
 
@@ -34,7 +40,7 @@ struct CarouselView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIScrollView, context: Context) {
-        guard updateIsNeeded else { return }
+        guard viewModel.updateIsNeeded else { return }
         uiView.subviews.forEach { $0.removeFromSuperview() }
         configureScrollView(context: context, scrollView: uiView)
     }
@@ -42,7 +48,7 @@ struct CarouselView: UIViewRepresentable {
     func makeCoordinator() -> ScrollDelegate {
         return ScrollDelegate(parent: self, itemWidth: Constants.longItemSize.width, itemSpacing: Constants.itemSpacing)
     }
-    
+
 }
 
 // MARK: - Private
@@ -63,6 +69,11 @@ struct CarouselView: UIViewRepresentable {
 
         let subview = makeContentView(with: total)
         scrollView.addSubview(subview)
+
+        viewModel.onChangePage = { page in
+             let width = Constants.longItemSize.width + Constants.itemSpacing
+             scrollView.setContentOffset(CGPoint(x: page * width, y: .zero), animated: true)
+        }
     }
 
      func makeContentView(with contentWidth: CGFloat) -> UIView {
@@ -82,7 +93,8 @@ struct CarouselView: UIViewRepresentable {
                  let model = viewModel.cardViewModels[$0]
                  CardView(viewModel: model, mode: $cardMode, page: $page, cardId: $0, itemSize: itemSize)
              }
-         }.onAppear { updateIsNeeded = false }
+         }
+         .onAppear { viewModel.updateIsNeeded = false }
      }
     
 }

@@ -12,7 +12,8 @@ public enum DateFormat: String {
     case dayMonthYear = "dd.MM.yyyy"
     case dayLongMonthYear = "dd MMMM yyyy"
     case dayLongMonth = "dd MMMM"
-    case time = "h:mm"
+    case time = "HH:mm"
+    case hour = "HH"
 
     public var defaultFormatter: DateFormatter {
         let formatter = DateFormatter()

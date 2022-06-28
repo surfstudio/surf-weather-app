@@ -32,6 +32,14 @@ final class LocationHeaderViewModel: ObservableObject {
 
     @Published var state: State = .content(UserDefaultsService.shared.selectedCity?.cityName ?? "")
 
+    // MARK: - Methods
+
+    func update(with cityName: String) {
+        print(cityName)
+        state = .content(cityName)
+        selectCityViewModel.selectCity(with: cityName, isUpdating: true)
+    }
+
 }
 
 // MARK: - Actions

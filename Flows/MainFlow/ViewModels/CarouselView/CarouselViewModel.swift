@@ -13,73 +13,97 @@ final class CarouselViewModel: ObservableObject {
     @Published var updateIsNeeded = false
     @Published var cardViewModels: [CardViewModel] = []
 
-    private let weatherStorageService: WeatherStorageService
+    var onChangeSelectedCity: Closure<String>?
+    var onChangePage: Closure<CGFloat>?
 
-    init(weatherStorageService: WeatherStorageService) {
+    private let weatherStorageService: WeatherStorageService
+    private let weatherNetworkService: WeatherNetworkService
+
+    private var cities = [CityEntity]()
+
+    init(weatherStorageService: WeatherStorageService, weatherNetworkService: WeatherNetworkService) {
         self.weatherStorageService = weatherStorageService
+        self.weatherNetworkService = weatherNetworkService
         loadData()
     }
 
     func loadData() {
         weatherStorageService.getCities { [weak self] in
             guard case .success(let entities) = $0 else { return }
-            self?.handleSuccess(with: entities ?? [])
+            self?.cardViewModels.removeAll()
+            self?.cities.removeAll()
+            entities?.forEach {
+                guard let cityName = $0.cityName else { return }
+                self?.loadWeather(for: .init(lat: $0.lat, lon: $0.lon), cityName: cityName)
+            }
         }
     }
 
+    func update(with itemCount: Int) {
+        guard itemCount != cardViewModels.count else { return }
+        self.loadData()
+    }
+
     func selectCity(with cityName: String) {
-        let sorted = cardViewModels.sorted(by: { $0.model.city == cityName && $1.model.city != cityName })
-        cardViewModels = sorted
-        updateIsNeeded = true
+        guard let index = cardViewModels.firstIndex(where: { $0.model.city == cityName }) else { return }
+        onChangePage?(CGFloat(index))
+    }
+
+    func changePage(with index: Int) {
+        UserDefaultsService.shared.selectedCity = cities[index]
+        onChangeSelectedCity?(cities[index].cityName)
     }
 
 }
 
 private extension CarouselViewModel {
 
-    func handleSuccess(with entities: [CityWeatherEntity]) {
-        cardViewModels.removeAll()
-        entities.forEach {
-            guard
-                let cityName = $0.cityName,
-                let temp = $0.currentWeather?.temperature,
-                let imageName = $0.currentWeather?.weatherImage,
-                let image = Assets(rawValue: imageName)
-            else { return }
-
-            let cardModel = CardView.Model(city: cityName, temperature: temp, image: image, hourly: getHourly(with: $0))
-            cardViewModels.append(.init(model: cardModel))
+    func loadWeather(for cords: CordsEntity, cityName: String) {
+        weatherNetworkService.getWeather(with: cords) { [weak self] in
+            guard case .success(let request) = $0 else { return }
+            self?.handleSuccess(with: request, cords: cords, cityName: cityName)
         }
+    }
+
+    func handleSuccess(with request: WeatherRequestEntity?, cords: CordsEntity, cityName: String) {
+        guard
+            let request = request,
+            let current = request.current,
+            let imageName = current.weather.first?.icon,
+            let image = Assets(rawValue: imageName)
+        else { return }
+
+        let roundedTemp = String(Int(current.temp))
+        let hourlyModels = getHourly(with: request.hourly, currentDate: current.dt)
+        let vm = CardViewModel(model: .init(city: cityName, temperature: roundedTemp, image: image, hourly: hourlyModels))
+        cardViewModels.append(vm)
+        cities.append(.init(cityName: cityName, area: "", cords: cords))
 
         withAnimation { self.updateIsNeeded = true }
     }
 
-    func getHourly(with entity: CityWeatherEntity) -> [HourlyCardView.Model] {
-        let hourly = entity.hourlyWeather as? Set<HourlyWeatherEntityDB>
-        let models = hourly?.compactMap { hour -> HourlyCardView.Model? in
+    func getHourly(with entities: [HourlyWeatherEntity], currentDate: Int) -> [HourlyCardView.Model] {
+        let models = entities.prefix(12).compactMap { entity -> HourlyCardView.Model? in
             guard
-                hour.city?.cityName == entity.cityName,
-                let time = hour.date,
-                let temp = hour.temperature,
-                let imageName = hour.weatherImage,
+                let imageName = entity.weather.first?.icon,
                 let image = Assets(rawValue: imageName)
             else { return nil }
-            let isSelected = hour.date == entity.currentWeather?.date
+
+            let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
+            let time = DateFormat.calendarFormatter(format: .time).string(from: date)
+
+            let currentDate = Date(timeIntervalSince1970: TimeInterval(currentDate))
+            let currentTime = DateFormat.calendarFormatter(format: .hour).string(from: currentDate)
+
+            let temp = String(Int(entity.temp))
+
+            let comparableTime = DateFormat.calendarFormatter(format: .hour).string(from: date)
+            let isSelected = currentTime == comparableTime
+
             return .init(time: time, temperature: temp, image: image, isSelected: isSelected)
         }
 
-        return models ?? []
+        return models
     }
-}
 
-let hourly: [HourlyCardView.Model] = [
-    .init(time: "12:00", temperature: "20", image: .sun, isSelected: false),
-    .init(time: "13:00", temperature: "25", image: .sunMidle, isSelected: true),
-    .init(time: "14:00", temperature: "14", image: .rain, isSelected: false),
-    .init(time: "15:00", temperature: "8", image: .storm, isSelected: false),
-    .init(time: "16:00", temperature: "15", image: .cloudy, isSelected: false),
-    .init(time: "17:00", temperature: "8", image: .cloudy, isSelected: false),
-    .init(time: "18:00", temperature: "15", image: .sunMidle, isSelected: false),
-    .init(time: "19:00", temperature: "8", image: .sunMidle, isSelected: false),
-    .init(time: "20:00", temperature: "15", image: .sun, isSelected: false)
-]
+}

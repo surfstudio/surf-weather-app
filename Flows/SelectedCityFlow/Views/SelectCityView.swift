@@ -103,7 +103,7 @@ struct SelectCityView: View {
                         .shadow(color: .lightBackground2 | .darkBackground2, radius: 10, x: 0, y: 0)
                         .onTapGesture {
                             guard !isChangeMode else { return }
-                            viewModel.selectCity(with: model)
+                            viewModel.selectCity(with: model.city)
                         }
                     
                 }

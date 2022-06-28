@@ -16,7 +16,7 @@ final class SelectCityViewModel: ObservableObject {
     @Published var showingPopup: Bool = false
     var searchListViewModel: LocationListViewModel
     var cityCardViewModel: CityCardViewModel
-    var onChanged: EmptyClosure?
+    var onChangedItemCount: Closure<Int>?
     var onSelectCity: Closure<String>?
 
     // MARK: - Private Properties
@@ -58,19 +58,20 @@ final class SelectCityViewModel: ObservableObject {
         }
     }
 
-    func selectCity(with model: CityCardView.Model) {
+    func selectCity(with cityName: String, isUpdating: Bool = false) {
         weathers.enumerated().forEach { weathers[$0.offset].isSelected = false }
-        guard let index = weathers.firstIndex(where: { $0.id == model.id }) else {
+        guard let index = weathers.firstIndex(where: { $0.city == cityName }) else {
             return
         }
         weatherStorageServices.getCities { [weak self] in
-            guard case .success(let entities) = $0, let entity = entities?.first(where: { $0.cityName == model.city }) else {
+            guard case .success(let entities) = $0, let entity = entities?.first(where: { $0.cityName == cityName }) else {
                 return
             }
-            UserDefaultsService.shared.selectedCity = .init(cityName: model.city, area: "", cords: .init(lat: entity.lat, lon: entity.lon))
+            UserDefaultsService.shared.selectedCity = .init(cityName: cityName, area: "", cords: .init(lat: entity.lat, lon: entity.lon))
             self?.weathers[index].isSelected = true
             self?.selectCityWithAnimate(by: index)
-            self?.onSelectCity?(model.city)
+
+            if !isUpdating { self?.onSelectCity?(cityName) }
         }
     }
 
@@ -89,8 +90,14 @@ private extension SelectCityViewModel {
             cities.append(city)
         }
 
-        onChanged?()
-        withAnimation { weathers = cities.sorted(by: { $0.isSelected && !$1.isSelected }) }
+        withAnimation {
+            weathers = cities.sorted(by: { $0.isSelected && !$1.isSelected })
+            onChangedItemCount?(weathers.count)
+
+            if weathers.allSatisfy({ $0.isSelected == false }) && weathers.count > .zero {
+                selectCity(with: weathers[0].city, isUpdating: true)
+            }
+        }
     }
 
     func makeCityCardModel(with entity: CurrentWeatherEntityDB, city: String, id: Int) -> CityCardView.Model {

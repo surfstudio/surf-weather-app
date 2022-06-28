@@ -24,10 +24,15 @@ final class MainScreenViewModel: ObservableObject {
                                                          weatherStorageService: serviceAssembly.weatherStorageService)
         self.forecastViewModel = MainScreenForecastViewModel(weatherService: serviceAssembly.weatherNetworkService,
                                                              storageService: serviceAssembly.weatherStorageService)
-        self.carouselViewModel = .init(weatherStorageService: serviceAssembly.weatherStorageService)
+        self.carouselViewModel = .init(weatherStorageService: serviceAssembly.weatherStorageService,
+                                       weatherNetworkService: serviceAssembly.weatherNetworkService)
 
-        locationViewModel.selectCityViewModel.onChanged = { [weak self] in
-            self?.carouselViewModel.loadData()
+        carouselViewModel.onChangeSelectedCity = { [weak self] in
+            self?.forecastViewModel.loadData()
+            self?.locationViewModel.update(with: $0)
+        }
+        locationViewModel.selectCityViewModel.onChangedItemCount = { [weak self] in
+            self?.carouselViewModel.update(with: $0)
         }
         locationViewModel.selectCityViewModel.onSelectCity = { [weak self] cityName in
             self?.carouselViewModel.selectCity(with: cityName)

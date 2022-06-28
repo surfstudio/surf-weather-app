@@ -51,11 +51,7 @@ struct MainScreenView: View {
                 self.viewModel.carouselViewModel.updateIsNeeded = true
             }
         }
-        return CarouselView(
-            cardMode: $carouselMode,
-            updateIsNeeded: $viewModel.carouselViewModel.updateIsNeeded,
-            viewModel: viewModel.carouselViewModel
-        )
+        return CarouselView(cardMode: $carouselMode, viewModel: viewModel.carouselViewModel)
     }
 
 }

@@ -22,6 +22,7 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
 
     private let networkManager: RequestSenderable?
     private var cancelable: AnyCancellable?
+    private var cancelableSet = Set<AnyCancellable?>()
 
     // MARK: - Initialization
 
@@ -35,10 +36,11 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
         guard let urlRequest = RequestFactory.WeatherRequests.loadWeatherDaily(with: cordsEntity).urlRequest else {
             return
         }
-        cancelable = networkManager?.send(request: urlRequest).sink(
+        let cancelable = networkManager?.send(request: urlRequest).sink(
             receiveCompletion: { [weak self] result in self?.handleCompletion(with: result, completion: completion) },
             receiveValue: { completion(.success($0)) }
         )
+        cancelableSet.insert(cancelable)
     }
 
     func getLocation(with cityName: String, completion: @escaping (Result<GeocoderResponseEntry?, Error>) -> Void) {
