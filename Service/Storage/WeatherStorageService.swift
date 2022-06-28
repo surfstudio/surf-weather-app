@@ -27,8 +27,10 @@ final class DataBaseStorage: WeatherStorageService {
     let hourlyStorageManager = CoreDataRepository<HourlyWeatherEntityDB>()
     let cityStorageManager = CoreDataRepository<CityWeatherEntity>()
 
-    private var cancelable: AnyCancellable?
-    private var cancelableSet = Set<AnyCancellable>()
+    private var clearCancelableTimer: Timer?
+    private var cancelableSet = Set<AnyCancellable?>() {
+        willSet { stopClearCancelableSet(with: newValue) } // Останавливает таймер если добавляются новые объекты
+    }
 
     func getCities(completion: @escaping (Result<[CityWeatherEntity]?, Error>) -> Void) {
         let cancelable = cityStorageManager.objects()
@@ -78,9 +80,10 @@ final class DataBaseStorage: WeatherStorageService {
                 guard let weather = cities?.first(where: { $0.cityName == cityName })?.weatherArray.first(where: { $0.date == date }) else {
                     return
                 }
-                self?.cancelable = self?.weaklyStorageManager.delete(weather)
+                let cancelable = self?.weaklyStorageManager.delete(weather)
                     .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
                     } receiveValue: { completion(.success(())) }
+                self?.cancelableSet.insert(cancelable)
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -88,15 +91,17 @@ final class DataBaseStorage: WeatherStorageService {
     }
 
     func getHourlyWeather(completion: @escaping (Result<[HourlyWeatherEntityDB]?, Error>) -> Void) {
-        cancelable = hourlyStorageManager.objects()
+        let cancelable = hourlyStorageManager.objects()
             .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
             } receiveValue: { completion(.success($0)) }
+        cancelableSet.insert(cancelable)
     }
 
     func getWeeklyWeather(completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void) {
-        cancelable = weaklyStorageManager.objects()
+        let cancelable = weaklyStorageManager.objects()
             .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
             } receiveValue: { completion(.success($0)) }
+        cancelableSet.insert(cancelable)
     }
 
 }
@@ -104,28 +109,29 @@ final class DataBaseStorage: WeatherStorageService {
 private extension DataBaseStorage {
 
     func handleCompletion(with result: Subscribers.Completion<Error>, completion: (Result<Void, Error>) -> Void) {
-        switch result {
-        case .finished:
-            cancelable?.cancel()
-            removeCancelable()
-        case .failure(let error):
-            completion(.failure(error))
-        }
+        startClearCanselableSet()
+
+        guard case .failure(let error) = result else { return }
+        completion(.failure(error))
     }
 
     func handleCompletion<T: NSManagedObject>(with result: Subscribers.Completion<Error>, completion: (Result<[T]?, Error>) -> Void) {
-        switch result {
-        case .finished:
-            cancelable?.cancel()
-            removeCancelable()
-        case .failure(let error):
-            completion(.failure(error))
-        }
+        startClearCanselableSet()
+
+        guard case .failure(let error) = result else { return }
+        completion(.failure(error))
     }
 
-    func removeCancelable() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.cancelableSet.removeAll()
+    // MARK: - Clear Requests with timeout 5 second
+
+    func stopClearCancelableSet(with cancelableSet: Set<AnyCancellable?>) {
+        guard cancelableSet.count > self.cancelableSet.count else { return }
+        clearCancelableTimer?.invalidate()
+    }
+
+    func startClearCanselableSet() {
+        clearCancelableTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] timer in
+            self?.cancelableSet.removeAll()
         }
     }
 

@@ -21,7 +21,7 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
     // MARK: - Private Properties
 
     private let networkManager: RequestSenderable?
-    private var cancelable: AnyCancellable?
+    private var clearCancelableTimer: Timer?
     private var cancelableSet = Set<AnyCancellable?>()
 
     // MARK: - Initialization
@@ -40,6 +40,7 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
             receiveCompletion: { [weak self] result in self?.handleCompletion(with: result, completion: completion) },
             receiveValue: { completion(.success($0)) }
         )
+        stopClearCancelableSet()
         cancelableSet.insert(cancelable)
     }
 
@@ -47,10 +48,12 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
         guard let urlRequest = RequestFactory.GeocoderRequest.loadLocation(with: cityName).urlRequest else {
             return
         }
-        cancelable = networkManager?.send(request: urlRequest).sink(
+        let cancelable = networkManager?.send(request: urlRequest).sink(
             receiveCompletion: { [weak self] result in self?.handleCompletionLocation(with: result, completion: completion) },
             receiveValue: { completion(.success($0)) }
         )
+        stopClearCancelableSet()
+        cancelableSet.insert(cancelable)
     }
 
 }
@@ -60,20 +63,28 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
 private extension NetworkService {
 
     func handleCompletion(with result: Subscribers.Completion<Error>, completion: (Result<WeatherRequestEntity?, Error>) -> Void) {
-        switch result {
-        case .finished:
-            cancelable?.cancel()
-        case .failure(let error):
-            completion(.failure(error))
-        }
+        startClearCanselableSet()
+
+        guard case .failure(let error) = result else { return }
+        completion(.failure(error))
     }
 
     func handleCompletionLocation(with result: Subscribers.Completion<Error>, completion: (Result<GeocoderResponseEntry?, Error>) -> Void) {
-        switch result {
-        case .finished:
-            cancelable?.cancel()
-        case .failure(let error):
-            completion(.failure(error))
+        startClearCanselableSet()
+
+        guard case .failure(let error) = result else { return }
+        completion(.failure(error))
+    }
+
+    // MARK: - Clear Requests with timeout 5 second
+
+    func stopClearCancelableSet() {
+        clearCancelableTimer?.invalidate()
+    }
+
+    func startClearCanselableSet() {
+        clearCancelableTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] timer in
+            self?.cancelableSet.removeAll()
         }
     }
 
