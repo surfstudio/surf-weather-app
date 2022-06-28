@@ -23,6 +23,17 @@
 		76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */; };
 		76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467C27C92B0200D8BBA9 /* Colors.swift */; };
 		76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */; };
+		A4AF0FFA2869838F00056A3C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF0FF52869838F00056A3C /* CardView.swift */; };
+		A4AF0FFB2869838F00056A3C /* HourlyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF0FF62869838F00056A3C /* HourlyCardView.swift */; };
+		A4AF0FFC2869838F00056A3C /* ScrollDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF0FF82869838F00056A3C /* ScrollDelegate.swift */; };
+		A4AF0FFD2869838F00056A3C /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF0FF92869838F00056A3C /* CarouselView.swift */; };
+		A4AF1002286983A400056A3C /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF0FFF286983A400056A3C /* CardViewModel.swift */; };
+		A4AF1003286983A400056A3C /* CarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF1000286983A400056A3C /* CarouselViewModel.swift */; };
+		A4AF1004286983A400056A3C /* HourlyCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF1001286983A400056A3C /* HourlyCardViewModel.swift */; };
+		A4AF100D286983CD00056A3C /* CustomScrollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF1008286983CD00056A3C /* CustomScrollCoordinator.swift */; };
+		A4AF100E286983CD00056A3C /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF1009286983CD00056A3C /* CustomScrollView.swift */; };
+		A4AF100F286983CD00056A3C /* ScrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF100B286983CD00056A3C /* ScrollIndicatorView.swift */; };
+		A4AF10112869849700056A3C /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF10102869849700056A3C /* Assets.swift */; };
 		A4D49FDC27FC95FD008F5BD4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D49FD527FC95FD008F5BD4 /* NetworkManager.swift */; };
 		A4D49FDD27FC95FD008F5BD4 /* RequestSenderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D49FD627FC95FD008F5BD4 /* RequestSenderable.swift */; };
 		A4D49FDE27FC95FD008F5BD4 /* WeatherRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D49FD727FC95FD008F5BD4 /* WeatherRequest.swift */; };
@@ -62,6 +73,17 @@
 		76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		76C6467C27C92B0200D8BBA9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListItemView.swift; sourceTree = "<group>"; };
+		A4AF0FF52869838F00056A3C /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A4AF0FF62869838F00056A3C /* HourlyCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardView.swift; sourceTree = "<group>"; };
+		A4AF0FF82869838F00056A3C /* ScrollDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDelegate.swift; sourceTree = "<group>"; };
+		A4AF0FF92869838F00056A3C /* CarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		A4AF0FFF286983A400056A3C /* CardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		A4AF1000286983A400056A3C /* CarouselViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewModel.swift; sourceTree = "<group>"; };
+		A4AF1001286983A400056A3C /* HourlyCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardViewModel.swift; sourceTree = "<group>"; };
+		A4AF1008286983CD00056A3C /* CustomScrollCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollCoordinator.swift; sourceTree = "<group>"; };
+		A4AF1009286983CD00056A3C /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		A4AF100B286983CD00056A3C /* ScrollIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollIndicatorView.swift; sourceTree = "<group>"; };
+		A4AF10102869849700056A3C /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		A4D49FD527FC95FD008F5BD4 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A4D49FD627FC95FD008F5BD4 /* RequestSenderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSenderable.swift; sourceTree = "<group>"; };
 		A4D49FD727FC95FD008F5BD4 /* WeatherRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherRequest.swift; sourceTree = "<group>"; };
@@ -154,6 +176,7 @@
 		769A6F1727D23BEF0007759C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4AF0FF42869838F00056A3C /* CarouselView */,
 				769CECF827C27D2B00FFD409 /* MainScreenView.swift */,
 				76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */,
 				76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */,
@@ -165,6 +188,7 @@
 		769A6F1827D23BF90007759C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				A4AF0FFE286983A400056A3C /* CarouselView */,
 				762BDF00282EB2BA0083A29F /* MainScreenViewModel.swift */,
 				769A6F1B27D2633C0007759C /* MainScreenForecastViewModel.swift */,
 				769A6F1527D23BBA0007759C /* MainScreenForecastListItemViewModel.swift */,
@@ -193,6 +217,10 @@
 		769CECFA27C27DC000FFD409 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A4AF1006286983CD00056A3C /* CustomScrollView */,
+				A4AF100A286983CD00056A3C /* ScrollIndicator */,
+				A4AF1005286983CD00056A3C /* SelectCityHeader */,
+				A4AF100C286983CD00056A3C /* ShimmerView */,
 				76C6467827C90AE900D8BBA9 /* SegmentedPicker */,
 				769CECFD27C27EA700FFD409 /* LocationHeader */,
 			);
@@ -225,6 +253,74 @@
 				769CECFA27C27DC000FFD409 /* Views */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		A4AF0FF42869838F00056A3C /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				A4AF0FF52869838F00056A3C /* CardView.swift */,
+				A4AF0FF62869838F00056A3C /* HourlyCardView.swift */,
+				A4AF0FF72869838F00056A3C /* Support */,
+				A4AF0FF92869838F00056A3C /* CarouselView.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
+		A4AF0FF72869838F00056A3C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A4AF0FF82869838F00056A3C /* ScrollDelegate.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A4AF0FFE286983A400056A3C /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				A4AF0FFF286983A400056A3C /* CardViewModel.swift */,
+				A4AF1000286983A400056A3C /* CarouselViewModel.swift */,
+				A4AF1001286983A400056A3C /* HourlyCardViewModel.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
+		A4AF1005286983CD00056A3C /* SelectCityHeader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SelectCityHeader;
+			sourceTree = "<group>";
+		};
+		A4AF1006286983CD00056A3C /* CustomScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				A4AF1007286983CD00056A3C /* Support */,
+				A4AF1009286983CD00056A3C /* CustomScrollView.swift */,
+			);
+			path = CustomScrollView;
+			sourceTree = "<group>";
+		};
+		A4AF1007286983CD00056A3C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A4AF1008286983CD00056A3C /* CustomScrollCoordinator.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A4AF100A286983CD00056A3C /* ScrollIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				A4AF100B286983CD00056A3C /* ScrollIndicatorView.swift */,
+			);
+			path = ScrollIndicator;
+			sourceTree = "<group>";
+		};
+		A4AF100C286983CD00056A3C /* ShimmerView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ShimmerView;
 			sourceTree = "<group>";
 		};
 		A4D49FCA27FC9338008F5BD4 /* Colors */ = {
@@ -274,6 +370,7 @@
 		A4D49FD227FC93F5008F5BD4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A4AF10102869849700056A3C /* Assets.swift */,
 				7606161C27AD77F700CC73B5 /* Assets.xcassets */,
 				7606161E27AD77F700CC73B5 /* Preview Content */,
 			);
@@ -421,12 +518,16 @@
 				A4D49FE127FC95FD008F5BD4 /* RequestFactory.swift in Sources */,
 				A4D49FF127FCA3C7008F5BD4 /* Aliases.swift in Sources */,
 				769A6F1627D23BBA0007759C /* MainScreenForecastListItemViewModel.swift in Sources */,
+				A4AF1003286983A400056A3C /* CarouselViewModel.swift in Sources */,
 				A4E4E02428240DEF007EF844 /* RequestProvider.swift in Sources */,
+				A4AF100D286983CD00056A3C /* CustomScrollCoordinator.swift in Sources */,
 				762BDF01282EB2BA0083A29F /* MainScreenViewModel.swift in Sources */,
 				A4D49FEE27FC9F90008F5BD4 /* CordsEntity.swift in Sources */,
 				A4D4A00927FD9A6B008F5BD4 /* CurrentWeatherEntity.swift in Sources */,
 				A4D49FDC27FC95FD008F5BD4 /* NetworkManager.swift in Sources */,
+				A4AF0FFB2869838F00056A3C /* HourlyCardView.swift in Sources */,
 				A4D4A00527FD9A33008F5BD4 /* TempEntity.swift in Sources */,
+				A4AF0FFC2869838F00056A3C /* ScrollDelegate.swift in Sources */,
 				76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */,
 				76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */,
 				A4D49FE627FC9630008F5BD4 /* ServiceAssembly.swift in Sources */,
@@ -437,17 +538,24 @@
 				A4D4A00727FD9A48008F5BD4 /* DailyWeatherEntity.swift in Sources */,
 				A4D49FDE27FC95FD008F5BD4 /* WeatherRequest.swift in Sources */,
 				769CECFF27C27EBB00FFD409 /* LocationHeaderViewModel.swift in Sources */,
+				A4AF0FFD2869838F00056A3C /* CarouselView.swift in Sources */,
 				769A6F1E27D275080007759C /* MainScreenForecastJournalView.swift in Sources */,
 				A4D49FF327FCA4CE008F5BD4 /* WeatherEntity.swift in Sources */,
+				A4AF100F286983CD00056A3C /* ScrollIndicatorView.swift in Sources */,
 				A4D4A00127FD6CDF008F5BD4 /* DateFormatter.swift in Sources */,
 				769A6F1C27D2633C0007759C /* MainScreenForecastViewModel.swift in Sources */,
+				A4AF10112869849700056A3C /* Assets.swift in Sources */,
 				769CECFC27C27DE100FFD409 /* LocationHeaderView.swift in Sources */,
+				A4AF1002286983A400056A3C /* CardViewModel.swift in Sources */,
 				A4D4A00027FD6CDF008F5BD4 /* TemperatureFormatter.swift in Sources */,
 				A4D4A00327FD7630008F5BD4 /* MainScreenForecastModelAdapter.swift in Sources */,
+				A4AF100E286983CD00056A3C /* CustomScrollView.swift in Sources */,
 				76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */,
+				A4AF1004286983A400056A3C /* HourlyCardViewModel.swift in Sources */,
 				A4D49FE227FC95FD008F5BD4 /* CoreAssembly.swift in Sources */,
 				769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */,
 				A4D49FFC27FCB49F008F5BD4 /* WeatherRequestEntity.swift in Sources */,
+				A4AF0FFA2869838F00056A3C /* CardView.swift in Sources */,
 				A4D49FE427FC9615008F5BD4 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
