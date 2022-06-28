@@ -67,6 +67,12 @@ struct SelectCityHeaderView: View {
 
 struct SelectCityHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectCityHeaderView(viewModel: SelectCityHeaderViewModel(), mainHeaderViewModel: .init(), isChangeMode: .constant(false))
+        let assembly = ServicesAssemblyFactory()
+        SelectCityHeaderView(
+            viewModel: SelectCityHeaderViewModel(),
+            mainHeaderViewModel: .init(weatherNetworkService: assembly.weatherNetworkService,
+                                       locationNetworkService: assembly.locationNetworkService,
+                                       weatherStorageService: assembly.weatherStorageService),
+            isChangeMode: .constant(false))
     }
 }

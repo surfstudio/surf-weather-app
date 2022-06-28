@@ -17,6 +17,17 @@ final class LocationHeaderViewModel: ObservableObject {
         case content(String)
     }
 
+    let selectCityViewModel: SelectCityViewModel
+
+    init(weatherNetworkService: WeatherNetworkService,
+         locationNetworkService: LocationNetworkService,
+         weatherStorageService: WeatherStorageService) {
+
+        self.selectCityViewModel = .init(weatherService: weatherNetworkService,
+                                         locationService: locationNetworkService,
+                                         weatherStorageServices: weatherStorageService)
+    }
+
     // MARK: - States
 
     @Published var state: State = .content(UserDefaultsService.shared.selectedCity?.cityName ?? "")

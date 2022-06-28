@@ -23,12 +23,7 @@ struct MainScreenView: View {
     var body: some View {
         NavigationView {
             VStack {
-                LocationHeaderView(
-                    viewModel: LocationHeaderViewModel(),
-                    weatherNetworkService: serviceAssembly.weatherNetworkService,
-                    locationNetworkService: serviceAssembly.locationNetworkService,
-                    weatherStorageService: serviceAssembly.weatherStorageService
-                )
+                LocationHeaderView(viewModel: viewModel.locationViewModel)
                 ScrollView {
                     GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 188 : 360)
                     MainScreenForecastView(viewModel: viewModel.forecastViewModel)

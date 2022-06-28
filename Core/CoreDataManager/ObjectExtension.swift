@@ -62,8 +62,10 @@ extension WeeklyWeatherEntityDB {
         self.wind = String(entity.wind_speed)
         self.specification = entity.weather.first?.description
         self.weatherImage = entity.weather.first?.icon ?? "01d"
-        self.temperature = TemperatureFormatter.format(with: entity.temp.day, unit: .celsius).replacingOccurrences(of: "°C", with: "")
         self.date = DateFormat.calendarFormatter(format: .dayMonthYear).string(from: date)
+        self.temperature = TemperatureFormatter.format(with: trunc(entity.temp.day), unit: .celsius)
+            .replacingOccurrences(of: "°C", with: "")
+            .replacingOccurrences(of: " ", with: "")
     }
 
 }
@@ -91,8 +93,10 @@ extension HourlyWeatherEntityDB {
         self.wind = String(entity.wind_speed)
         self.specification = entity.weather.first?.description
         self.weatherImage = entity.weather.first?.icon ?? "01d"
-        self.temperature = TemperatureFormatter.format(with: entity.temp, unit: .celsius).replacingOccurrences(of: "°C", with: "")
-        self.date = DateFormat.calendarFormatter(format: .dayMonthYear).string(from: date)
+        self.date = DateFormat.calendarFormatter(format: .time).string(from: date)
+        self.temperature = TemperatureFormatter.format(with: trunc(entity.temp), unit: .celsius)
+            .replacingOccurrences(of: "°C", with: "")
+            .replacingOccurrences(of: " ", with: "")
     }
 
 }
@@ -123,8 +127,11 @@ extension CurrentWeatherEntityDB {
         self.wind = String(entity.wind_speed)
         self.specification = entity.weather.first?.description
         self.weatherImage = entity.weather.first?.icon ?? "01d"
-        self.temperature = TemperatureFormatter.format(with: entity.temp, unit: .celsius).replacingOccurrences(of: "°C", with: "")
         self.date = DateFormat.calendarFormatter(format: .dayMonthYear).string(from: date)
+        self.temperature = TemperatureFormatter.format(with: trunc(entity.temp), unit: .celsius)
+            .replacingOccurrences(of: "°C", with: "")
+            .replacingOccurrences(of: " ", with: "")
+        
     }
 
 }

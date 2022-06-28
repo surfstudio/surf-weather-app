@@ -16,6 +16,8 @@ final class SelectCityViewModel: ObservableObject {
     @Published var showingPopup: Bool = false
     var searchListViewModel: LocationListViewModel
     var cityCardViewModel: CityCardViewModel
+    var onChanged: EmptyClosure?
+    var onSelectCity: Closure<String>?
 
     // MARK: - Private Properties
 
@@ -68,6 +70,7 @@ final class SelectCityViewModel: ObservableObject {
             UserDefaultsService.shared.selectedCity = .init(cityName: model.city, area: "", cords: .init(lat: entity.lat, lon: entity.lon))
             self?.weathers[index].isSelected = true
             self?.selectCityWithAnimate(by: index)
+            self?.onSelectCity?(model.city)
         }
     }
 
@@ -86,6 +89,7 @@ private extension SelectCityViewModel {
             cities.append(city)
         }
 
+        onChanged?()
         withAnimation { weathers = cities.sorted(by: { $0.isSelected && !$1.isSelected }) }
     }
 

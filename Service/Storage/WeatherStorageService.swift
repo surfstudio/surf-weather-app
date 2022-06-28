@@ -28,23 +28,27 @@ final class DataBaseStorage: WeatherStorageService {
     let cityStorageManager = CoreDataRepository<CityWeatherEntity>()
 
     private var cancelable: AnyCancellable?
+    private var cancelableSet = Set<AnyCancellable>()
 
     func getCities(completion: @escaping (Result<[CityWeatherEntity]?, Error>) -> Void) {
-        cancelable = cityStorageManager.objects()
+        let cancelable = cityStorageManager.objects()
             .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
             } receiveValue: { completion(.success($0)) }
+        cancelableSet.insert(cancelable)
     }
 
     func saveCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void) {
-        cancelable = cityStorageManager.add({ $0 = city })
+        let cancelable = cityStorageManager.add({ $0 = city })
             .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
             } receiveValue: { _ in completion(.success(())) }
+        cancelableSet.insert(cancelable)
     }
 
     func deleteCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void) {
-        cancelable = cityStorageManager.delete(city)
+        let cancelable = cityStorageManager.delete(city)
             .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
             } receiveValue: { completion(.success(())) }
+        cancelableSet.insert(cancelable)
     }
 
     func getWeathers(with cityName: String, completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void) {
@@ -61,9 +65,10 @@ final class DataBaseStorage: WeatherStorageService {
 
     func saveWeather(by city: CityWeatherEntity, weather: WeeklyWeatherEntityDB, completion: @escaping (Result<Void, Error>) -> Void) {
         city.addToWeeklyWeather(weather)
-        cancelable = cityStorageManager.update(city)
+        let cancelable = cityStorageManager.update(city)
             .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
             } receiveValue: { _ in completion(.success(())) }
+        cancelableSet.insert(cancelable)
     }
 
     func deleteWeather(with cityName: String, date: String, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -102,6 +107,7 @@ private extension DataBaseStorage {
         switch result {
         case .finished:
             cancelable?.cancel()
+            removeCancelable()
         case .failure(let error):
             completion(.failure(error))
         }
@@ -111,8 +117,15 @@ private extension DataBaseStorage {
         switch result {
         case .finished:
             cancelable?.cancel()
+            removeCancelable()
         case .failure(let error):
             completion(.failure(error))
+        }
+    }
+
+    func removeCancelable() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.cancelableSet.removeAll()
         }
     }
 

@@ -12,7 +12,7 @@ struct CardView: View {
     // MARK: - Nested
 
     struct Model {
-        let dayly: String
+        let city: String
         var temperature: String
         var image: Assets
         var hourly: [HourlyCardView.Model]
@@ -65,7 +65,7 @@ struct CardView: View {
         VStack(alignment: .leading, spacing: 16.0) {
             HStack {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.model.dayly)
+                    Text(viewModel.model.city)
                         .foregroundColor(.opacityWhite)
                         .font(Font(.init(.system, size: 12)))
                     HStack(alignment: .top, spacing: 8) {
