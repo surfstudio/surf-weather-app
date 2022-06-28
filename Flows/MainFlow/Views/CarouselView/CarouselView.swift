@@ -12,17 +12,24 @@ struct CarouselView: UIViewRepresentable {
 
     // MARK: - Constants
 
-    private enum Constants {
-        static let itemSpacing: CGFloat = 16
-        static let longItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height: 360)
-        static let shortItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height: 188)
-    }
+private enum Constants {
+static let itemSpacing: CGFloat = 16
+static let maxReductionPercent: CGFloat = 0.3 // Максимальный процент уменьшения крайних вьюх где 0.3 - это уменьшить на 30 %
+static let longItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height: 360)
+static let shortItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height: 188)
+}
 
     // MARK: - Properties
 
     @State var page: CGFloat = 0
     @Binding var cardMode: CardView.Mode
     @ObservedObject var viewModel: CarouselViewModel
+
+// MARK: - Private Properties
+
+private var itemSpacingWithScale: CGFloat {
+Constants.itemSpacing - (Constants.longItemSize.width * Constants.maxReductionPercent) / 2
+}
 
     // MARK: - Methods
 
@@ -57,8 +64,8 @@ struct CarouselView: UIViewRepresentable {
 
      func configureScrollView(context: Context, scrollView: UIScrollView) {
         let leftAndRightInsets = UIScreen.main.bounds.width - Constants.longItemSize.width
-        let total = (Constants.longItemSize.width + Constants.itemSpacing) *
-            CGFloat(viewModel.cardViewModels.count) - Constants.itemSpacing + leftAndRightInsets
+        let total = (Constants.longItemSize.width + itemSpacingWithScale) *
+            CGFloat(viewModel.cardViewModels.count) - itemSpacingWithScale + leftAndRightInsets
 
         scrollView.contentSize = CGSize(width: total, height: 1.0)
         scrollView.bounces = true
@@ -87,11 +94,11 @@ struct CarouselView: UIViewRepresentable {
 
      var pagerView: some View {
          let itemSize = cardMode == .short ? Constants.shortItemSize : Constants.longItemSize
-    
-         return HStack(alignment: .center, spacing: Constants.itemSpacing) {
+         return HStack(alignment: .center, spacing: itemSpacingWithScale) {
              ForEach(viewModel.cardViewModels.indices) {
                  let model = viewModel.cardViewModels[$0]
-                 CardView(viewModel: model, mode: $cardMode, page: $page, cardId: $0, itemSize: itemSize)
+                 let percent = Constants.maxReductionPercent
+                 CardView(viewModel: model, mode: $cardMode, page: $page, cardId: $0, itemSize: itemSize, maxReductionPercent: percent)
              }
          }
          .onAppear { viewModel.updateIsNeeded = false }

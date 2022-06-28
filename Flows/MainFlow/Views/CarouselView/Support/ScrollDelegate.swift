@@ -33,9 +33,9 @@ final class ScrollDelegate: NSObject, UIScrollViewDelegate {
         let width = itemWidth + itemSpacing
         let page = scrollView.contentOffset.x / width
 
-        DispatchQueue.main.async {
-            self.parent.page = page
-        }
+DispatchQueue.main.async {
+self.parent.page = page
+}
     }
 
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -51,8 +51,8 @@ final class ScrollDelegate: NSObject, UIScrollViewDelegate {
         }
     }
 
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        parent.changePage()
-    }
+func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+parent.changePage()
+}
 
 }
