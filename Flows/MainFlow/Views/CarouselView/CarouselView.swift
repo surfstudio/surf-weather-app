@@ -12,12 +12,12 @@ struct CarouselView: UIViewRepresentable {
 
     // MARK: - Constants
 
-private enum Constants {
-static let itemSpacing: CGFloat = 16
-static let maxReductionPercent: CGFloat = 0.3 // Максимальный процент уменьшения крайних вьюх где 0.3 - это уменьшить на 30 %
-static let longItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height: 360)
-static let shortItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height: 188)
-}
+    private enum Constants {
+        static let itemSpacing: CGFloat = 16
+        static let maxReductionPercent: CGFloat = 0.3 // Максимальный процент уменьшения крайних вьюх где 0.3 - это уменьшить на 30 %
+        static let longItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height: 360)
+        static let shortItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height: 188)
+    }
 
     // MARK: - Properties
 
@@ -27,9 +27,9 @@ static let shortItemSize = CGSize(width: UIScreen.main.bounds.width - 48, height
 
 // MARK: - Private Properties
 
-private var itemSpacingWithScale: CGFloat {
-Constants.itemSpacing - (Constants.longItemSize.width * Constants.maxReductionPercent) / 2
-}
+    private var itemSpacingWithScale: CGFloat {
+        Constants.itemSpacing - (Constants.longItemSize.width * Constants.maxReductionPercent) / 2
+    }
 
     // MARK: - Methods
 
