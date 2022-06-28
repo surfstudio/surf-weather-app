@@ -33,23 +33,26 @@ final class DataBaseStorage: WeatherStorageService {
     }
 
     func getCities(completion: @escaping (Result<[CityWeatherEntity]?, Error>) -> Void) {
-        let cancelable = cityStorageManager.objects()
-            .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
-            } receiveValue: { completion(.success($0)) }
+        let cancelable = cityStorageManager.objects().sink(
+            receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
+            receiveValue: { completion(.success($0)) }
+        )
         cancelableSet.insert(cancelable)
     }
 
     func saveCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void) {
-        let cancelable = cityStorageManager.add({ $0 = city })
-            .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
-            } receiveValue: { _ in completion(.success(())) }
+        let cancelable = cityStorageManager.add({ $0 = city }).sink(
+            receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
+            receiveValue: { _ in completion(.success(())) }
+        )
         cancelableSet.insert(cancelable)
     }
 
     func deleteCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void) {
-        let cancelable = cityStorageManager.delete(city)
-            .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
-            } receiveValue: { completion(.success(())) }
+        let cancelable = cityStorageManager.delete(city).sink(
+            receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
+            receiveValue: { completion(.success(())) }
+        )
         cancelableSet.insert(cancelable)
     }
 
@@ -67,9 +70,11 @@ final class DataBaseStorage: WeatherStorageService {
 
     func saveWeather(by city: CityWeatherEntity, weather: WeeklyWeatherEntityDB, completion: @escaping (Result<Void, Error>) -> Void) {
         city.addToWeeklyWeather(weather)
-        let cancelable = cityStorageManager.update(city)
-            .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
-            } receiveValue: { _ in completion(.success(())) }
+
+        let cancelable = cityStorageManager.update(city).sink(
+            receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
+            receiveValue: { _ in completion(.success(())) }
+        )
         cancelableSet.insert(cancelable)
     }
 
@@ -80,9 +85,10 @@ final class DataBaseStorage: WeatherStorageService {
                 guard let weather = cities?.first(where: { $0.cityName == cityName })?.weatherArray.first(where: { $0.date == date }) else {
                     return
                 }
-                let cancelable = self?.weaklyStorageManager.delete(weather)
-                    .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
-                    } receiveValue: { completion(.success(())) }
+                let cancelable = self?.weaklyStorageManager.delete(weather).sink(
+                    receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
+                    receiveValue: { completion(.success(())) }
+                )
                 self?.cancelableSet.insert(cancelable)
             case .failure(let error):
                 completion(.failure(error))
@@ -91,16 +97,18 @@ final class DataBaseStorage: WeatherStorageService {
     }
 
     func getHourlyWeather(completion: @escaping (Result<[HourlyWeatherEntityDB]?, Error>) -> Void) {
-        let cancelable = hourlyStorageManager.objects()
-            .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
-            } receiveValue: { completion(.success($0)) }
+        let cancelable = hourlyStorageManager.objects().sink(
+            receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
+            receiveValue: { completion(.success($0)) }
+        )
         cancelableSet.insert(cancelable)
     }
 
     func getWeeklyWeather(completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void) {
-        let cancelable = weaklyStorageManager.objects()
-            .sink { [weak self] in self?.handleCompletion(with: $0, completion: completion)
-            } receiveValue: { completion(.success($0)) }
+        let cancelable = weaklyStorageManager.objects().sink(
+            receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
+            receiveValue: { completion(.success($0)) }
+        )
         cancelableSet.insert(cancelable)
     }
 

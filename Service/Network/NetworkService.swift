@@ -22,7 +22,9 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
 
     private let networkManager: RequestSenderable?
     private var clearCancelableTimer: Timer?
-    private var cancelableSet = Set<AnyCancellable?>()
+    private var cancelableSet = Set<AnyCancellable?>() {
+        willSet { stopClearCancelableSet(with: newValue) } // Останавливает таймер если добавляются новые объекты
+    }
 
     // MARK: - Initialization
 
@@ -40,7 +42,6 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
             receiveCompletion: { [weak self] result in self?.handleCompletion(with: result, completion: completion) },
             receiveValue: { completion(.success($0)) }
         )
-        stopClearCancelableSet()
         cancelableSet.insert(cancelable)
     }
 
@@ -52,7 +53,6 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
             receiveCompletion: { [weak self] result in self?.handleCompletionLocation(with: result, completion: completion) },
             receiveValue: { completion(.success($0)) }
         )
-        stopClearCancelableSet()
         cancelableSet.insert(cancelable)
     }
 
@@ -78,7 +78,8 @@ private extension NetworkService {
 
     // MARK: - Clear Requests with timeout 5 second
 
-    func stopClearCancelableSet() {
+    func stopClearCancelableSet(with cancelableSet: Set<AnyCancellable?>) {
+        guard cancelableSet.count > self.cancelableSet.count else { return }
         clearCancelableTimer?.invalidate()
     }
 
