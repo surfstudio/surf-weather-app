@@ -25,7 +25,7 @@ struct MainScreenView: View {
             VStack {
                 LocationHeaderView(viewModel: viewModel.locationViewModel)
                 ScrollView {
-                    GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 188 : 360)
+                    GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 200 : 380)
                     MainScreenForecastView(viewModel: viewModel.forecastViewModel)
                     MainScreenForecastJournalView()
                 }
@@ -40,7 +40,7 @@ struct MainScreenView: View {
     }
 
     func makeCarousel(with proxy: GeometryProxy) -> some View {
-        let topSpace = 80.0
+        let topSpace = 110.0
         let offset = proxy.frame(in: .global).minY - topSpace
         DispatchQueue.main.async {
             if carouselMode == .long && offset < .zero {
@@ -51,7 +51,10 @@ struct MainScreenView: View {
                 self.viewModel.carouselViewModel.updateIsNeeded = true
             }
         }
-        return CarouselView(cardMode: $carouselMode, viewModel: viewModel.carouselViewModel)
+        return VStack {
+            Spacer()
+            CarouselView(cardMode: $carouselMode, viewModel: viewModel.carouselViewModel)
+        }
     }
 
 }

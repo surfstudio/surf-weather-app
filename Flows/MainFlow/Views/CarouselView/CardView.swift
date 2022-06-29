@@ -127,7 +127,7 @@ private extension CardView {
         let scaleProgress = abs(page - CGFloat(cardId)) * maxReductionPercent
         let scale = maxScale - scaleProgress
 
-        return .init(width: maxScale, height: scale)
+        return .init(width: scale, height: scale)
     }
 
 }

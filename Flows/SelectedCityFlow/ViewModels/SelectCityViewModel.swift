@@ -95,7 +95,7 @@ private extension SelectCityViewModel {
             onChangedItemCount?(weathers.count)
 
             if weathers.allSatisfy({ $0.isSelected == false }) && weathers.count > .zero {
-                selectCity(with: weathers[0].city, isUpdating: true)
+                selectCity(with: weathers[0].city)
             }
         }
     }

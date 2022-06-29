@@ -53,7 +53,7 @@ struct CarouselView: UIViewRepresentable {
     }
 
     func makeCoordinator() -> ScrollDelegate {
-        return ScrollDelegate(parent: self, itemWidth: Constants.longItemSize.width, itemSpacing: Constants.itemSpacing)
+        return ScrollDelegate(parent: self, itemWidth: Constants.longItemSize.width, itemSpacing: itemSpacingWithScale)
     }
 
 }
@@ -78,7 +78,7 @@ struct CarouselView: UIViewRepresentable {
         scrollView.addSubview(subview)
 
         viewModel.onChangePage = { page in
-             let width = Constants.longItemSize.width + Constants.itemSpacing
+             let width = Constants.longItemSize.width + itemSpacingWithScale
              scrollView.setContentOffset(CGPoint(x: page * width, y: .zero), animated: true)
         }
     }
