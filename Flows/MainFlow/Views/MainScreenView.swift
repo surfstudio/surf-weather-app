@@ -49,23 +49,17 @@ struct MainScreenView: View {
             updateIsNeeded: $carouselViewModel.updateIsNeeded,
             viewModel: carouselViewModel
         )
-    }
-
-    func makeRactangle() -> some View {
-
-        let shimmeringConfig = getShimmerConfig(animation: true)
-        return Rectangle()
-            .frame(height: 392, alignment: .top)
-            .foregroundColor(.lightBackground2)
-            .shimmer(isActive: true)
-            .environmentObject(shimmeringConfig)
+            .shimmer(isActive: carouselViewModel.cardViewModels.isEmpty)
+            .environmentObject(getShimmerConfig(animation: true))
     }
 
     func getShimmerConfig(animation: Bool) -> ShimmerConfig {
-        let config = ShimmerConfig(bgColor: Color.clear, fgColor: Color.clear)
+        let bgColor: Color = (.lightBackground2 | .darkBackground2)
+        let config = ShimmerConfig(bgColor: bgColor, fgColor: .clear)
         if animation { config.startAnimation() }
         return config
     }
+
 }
 
 struct MainScreenView_Previews: PreviewProvider {

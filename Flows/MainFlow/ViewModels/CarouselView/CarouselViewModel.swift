@@ -14,16 +14,18 @@ final class CarouselViewModel: ObservableObject {
     @Published var cardViewModels: [CardViewModel] = []
 
     init() {
-        self.cardViewModels = [
-            .init(model: .init(dayly: "Понедельник, 1 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
-            .init(model: .init(dayly: "Вторник, 2 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
-            .init(model: .init(dayly: "Среда, 3 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
-            .init(model: .init(dayly: "Четверг, 4 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
-            .init(model: .init(dayly: "Пятница, 5 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
-            .init(model: .init(dayly: "Суббота, 6 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
-            .init(model: .init(dayly: "Воскресенье, 7 мая", temperature: "25", image: .sunCloudi, hourly: hourly))
-        ]
-        withAnimation { self.updateIsNeeded = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.cardViewModels = [
+                .init(model: .init(dayly: "Понедельник, 1 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+                .init(model: .init(dayly: "Вторник, 2 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+                .init(model: .init(dayly: "Среда, 3 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+                .init(model: .init(dayly: "Четверг, 4 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+                .init(model: .init(dayly: "Пятница, 5 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+                .init(model: .init(dayly: "Суббота, 6 мая", temperature: "25", image: .sunCloudi, hourly: hourly)),
+                .init(model: .init(dayly: "Воскресенье, 7 мая", temperature: "25", image: .sunCloudi, hourly: hourly))
+            ]
+            withAnimation { self.updateIsNeeded = true }
+        }
     }
 
 }
