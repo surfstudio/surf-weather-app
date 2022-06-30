@@ -41,24 +41,31 @@ struct SearchListView: View {
     }
 
     var locationListView: some View {
-        VStack(alignment: .leading, spacing: 36) {
-            ForEach(0..<viewModel.locations.count, id: \.self) { index in
-                Button {
-                    viewModel.addNewCity(with: index)
-                    UIApplication.shared.endEditing()
-                    presentingModal.toggle()
-                } label: {
-                    HStack {
-                        Text(viewModel.locations[index])
-                            .lineLimit(1)
-                            .font(.system(size: 16))
-                            .foregroundColor(.black | .white)
-                        Spacer()
-                    }
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 36) {
+                ForEach(0..<viewModel.locations.count, id: \.self) { index in
+                    makeButton(with: index)
                 }
-            }
-        }.padding(.top, 18.0)
+            }.padding(.top, 18.0)
+        }
     }
+
+    func makeButton(with index: Int) -> some View {
+        Button {
+            viewModel.addNewCity(with: index)
+            UIApplication.shared.endEditing()
+            presentingModal.toggle()
+        } label: {
+            HStack {
+                Text(viewModel.locations[index])
+                    .lineLimit(1)
+                    .font(.system(size: 16))
+                    .foregroundColor(.black | .white)
+                Spacer()
+            }
+        }
+    }
+
 }
 
 struct SearchListView_Previews: PreviewProvider {
