@@ -57,6 +57,15 @@ struct MainScreenView: View {
             Spacer()
             CarouselView(cardMode: $carouselMode, viewModel: viewModel.carouselViewModel)
         }
+        .shimmer(isActive: viewModel.carouselViewModel.cardViewModels.isEmpty)
+        .environmentObject(getShimmerConfig(animation: true))
+    }
+
+    private func getShimmerConfig(animation: Bool) -> ShimmerConfig {
+        let bgColor: Color = (.lightBackground2 | .darkBackground2)
+        let config = ShimmerConfig(bgColor: bgColor, fgColor: .clear)
+        if animation { config.startAnimation() }
+        return config
     }
 
 }
