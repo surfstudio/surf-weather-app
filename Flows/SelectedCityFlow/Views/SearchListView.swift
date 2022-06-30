@@ -20,6 +20,7 @@ struct SearchListView: View {
             Spacer()
         }
         .padding()
+        .background(Color.lightBackground | Color.darkBackground2)
         .onAppear {
             // Без задержки почему то текстовое поле не получает статус первого респондента
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

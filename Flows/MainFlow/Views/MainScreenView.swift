@@ -29,7 +29,9 @@ struct MainScreenView: View {
                     MainScreenForecastView(viewModel: viewModel.forecastViewModel)
                     MainScreenForecastJournalView()
                 }
+                MainScreenPageIndicatorView(viewModel: viewModel.carouselViewModel)
             }
+            .modifier(InterfaceStyleModifier())
             .background(Color.lightBackground | .darkBackground)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
@@ -62,5 +64,14 @@ struct MainScreenView: View {
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenView(viewModel: .init(serviceAssembly: ServicesAssemblyFactory()))
+    }
+}
+
+struct InterfaceStyleModifier: ViewModifier {
+
+    @ObservedObject private var setting = UserDefaultsService.shared
+
+    func body(content: Content) -> some View {
+        content.preferredColorScheme(setting.isLightMode ? .light : .dark)
     }
 }

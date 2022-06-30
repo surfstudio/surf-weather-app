@@ -21,7 +21,7 @@ struct CarouselView: UIViewRepresentable {
 
     // MARK: - Properties
 
-    @State var page: CGFloat = 0
+    @State var page: CGFloat = UserDefaultsService.shared.currentPage ?? .zero
     @Binding var cardMode: CardView.Mode
     @ObservedObject var viewModel: CarouselViewModel
 
@@ -76,11 +76,9 @@ struct CarouselView: UIViewRepresentable {
 
         let subview = makeContentView(with: total)
         scrollView.addSubview(subview)
+        scrollTo(page, for: scrollView)
 
-        viewModel.onChangePage = { page in
-             let width = Constants.longItemSize.width + itemSpacingWithScale
-             scrollView.setContentOffset(CGPoint(x: page * width, y: .zero), animated: true)
-        }
+        viewModel.onChangePage = { scrollTo($0, for: scrollView, animated: true) }
     }
 
      func makeContentView(with contentWidth: CGFloat) -> UIView {
@@ -102,6 +100,11 @@ struct CarouselView: UIViewRepresentable {
              }
          }
          .onAppear { viewModel.updateIsNeeded = false }
+     }
+
+     func scrollTo(_ page: CGFloat, for scrollView: UIScrollView, animated: Bool = false) {
+         let width = Constants.longItemSize.width + itemSpacingWithScale
+         scrollView.setContentOffset(CGPoint(x: page * width, y: .zero), animated: animated)
      }
     
 }

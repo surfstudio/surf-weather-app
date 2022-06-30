@@ -53,6 +53,9 @@ final class ScrollDelegate: NSObject, UIScrollViewDelegate {
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         parent.changePage()
+        let width = itemWidth + itemSpacing
+        let page = scrollView.contentOffset.x / width
+        UserDefaultsService.shared.currentPage = page
     }
 
 }

@@ -18,14 +18,16 @@ final class UserDefaultsService: ObservableObject, Storage {
     // MARK: - Properties
 
     @Published var isLightMode: Bool = false {
-        didSet {
-            UserDefaults.standard.set(isLightMode, forKey: Keys.isLightMode.rawValue)
-        }
+        didSet { setValue(for: isLightMode, key: Keys.isLightMode.rawValue) }
     }
 
-    var selectedCity: CityEntity? {
-        get { getValue(key: Keys.selectedCity.rawValue) }
-        set { setValue(for: newValue, key: Keys.selectedCity.rawValue) }
+    @Published var selectedCity: CityEntity? = UserDefaultsService.getValue(key: Keys.selectedCity.rawValue) {
+        didSet { setValue(for: selectedCity, key: Keys.selectedCity.rawValue) }
+    }
+
+    var currentPage: CGFloat? {
+        get { getValue(key: Keys.currentPage.rawValue) }
+        set { setValue(for: newValue, key: Keys.currentPage.rawValue) }
     }
 
     // MARK: - Static Properties
@@ -37,19 +39,20 @@ final class UserDefaultsService: ObservableObject, Storage {
     private enum Keys: String {
         case isLightMode
         case selectedCity
-        case savedCities
+        case currentPage
     }
 
     // MARK: - Initialization
 
     private init() {
-        setColorMode()
+        setPublished()
     }
 
     // MARK: - Private Methods
 
-    func setColorMode() {
+    func setPublished() {
         isLightMode = getValue(key: Keys.isLightMode.rawValue) ?? (colorScheme == .light)
+        selectedCity = getValue(key: Keys.selectedCity.rawValue)
     }
 
 }
