@@ -38,7 +38,7 @@ struct MainScreenForecastView: View {
     var contentView: some View {
         VStack {
             pickerView
-            listView
+            getListView()
         }
         .padding(EdgeInsets(top: 20, leading: 16, bottom: 28, trailing: 16))
         .background(Color.lightBackground | Color.darkBackground2)
@@ -49,10 +49,13 @@ struct MainScreenForecastView: View {
         SegmentedPickerView(selected: $viewModel.selectedList, elements: ["Архив", "5 дней"])
     }
 
-    var listView: some View {
-        return viewModel.items.isEmpty
-        ? AnyView(shimmeringListView)
-        : AnyView(weatherlistView)
+    @ViewBuilder
+    func getListView() -> some View {
+        if viewModel.items.isEmpty {
+            shimmeringListView
+        } else {
+            weatherlistView
+        }
     }
 
     var weatherlistView: some View {
