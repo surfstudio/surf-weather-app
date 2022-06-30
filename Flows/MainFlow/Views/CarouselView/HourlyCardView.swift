@@ -15,7 +15,7 @@ struct HourlyCardView: View {
     struct Model: Hashable {
         let time: String
         let temperature: String
-        let image: Assets.Weather
+        let image: Assets
         var isSelected: Bool
     }
 

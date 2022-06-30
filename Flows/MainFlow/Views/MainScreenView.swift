@@ -22,14 +22,23 @@ struct MainScreenView: View {
     // MARK: - Views
 
     var body: some View {
-        ScrollView {
-            LocationHeaderView(viewModel: LocationHeaderViewModel())
-            GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 188 : 360)
-            MainScreenForecastView(viewModel: viewModel.forecastViewModel)
-            MainScreenForecastJournalView()
+        NavigationView {
+            VStack {
+                LocationHeaderView(
+                    viewModel: LocationHeaderViewModel(),
+                    weatherNetworkService: serviceAssembly.weatherNetworkService
+                )
+                ScrollView {
+                    GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 188 : 360)
+                    MainScreenForecastView(viewModel: viewModel.forecastViewModel)
+                    MainScreenForecastJournalView()
+                }
+            }
+            .background(Color.lightBackground | .darkBackground)
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .animation(.easeInOut(duration: 0.5), value: carouselMode)
         }
-        .background(Color.lightBackground | .darkBackground)
-        .animation(.easeInOut(duration: 0.5), value: carouselMode)
     }
 
     func makeCarousel(with proxy: GeometryProxy) -> some View {

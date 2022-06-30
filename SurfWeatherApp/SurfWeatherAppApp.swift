@@ -11,6 +11,7 @@ import SwiftUI
 struct SurfWeatherAppApp: App {
 
     @ObservedObject var userSettings = UserDefaultsService.shared
+    let serviceAssembly = ServicesAssemblyFactory()
 
     var body: some Scene {
         WindowGroup {

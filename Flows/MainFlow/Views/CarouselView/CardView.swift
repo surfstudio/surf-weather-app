@@ -14,7 +14,7 @@ struct CardView: View {
     struct Model {
         let dayly: String
         var temperature: String
-        var image: Assets.Weather
+        var image: Assets
         var hourly: [HourlyCardView.Model]
     }
 
