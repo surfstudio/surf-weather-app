@@ -34,6 +34,16 @@
 		A44B6B34282CDBC300542E32 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A44B6B3B282E225400542E32 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A467D0BB282B836B00D92212 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A483B584286DDE7000DE9427 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B57F286DDE7000DE9427 /* CardView.swift */; };
+		A483B585286DDE7000DE9427 /* HourlyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B580286DDE7000DE9427 /* HourlyCardView.swift */; };
+		A483B586286DDE7000DE9427 /* ScrollDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B582286DDE7000DE9427 /* ScrollDelegate.swift */; };
+		A483B587286DDE7000DE9427 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B583286DDE7000DE9427 /* CarouselView.swift */; };
+		A483B58C286DDE7A00DE9427 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B589286DDE7A00DE9427 /* CardViewModel.swift */; };
+		A483B58D286DDE7A00DE9427 /* CarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B58A286DDE7A00DE9427 /* CarouselViewModel.swift */; };
+		A483B58E286DDE7A00DE9427 /* HourlyCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B58B286DDE7A00DE9427 /* HourlyCardViewModel.swift */; };
+		A483B593286DDE8F00DE9427 /* CustomScrollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B591286DDE8F00DE9427 /* CustomScrollCoordinator.swift */; };
+		A483B594286DDE8F00DE9427 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B592286DDE8F00DE9427 /* CustomScrollView.swift */; };
+		A483B597286DDEBD00DE9427 /* ScrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B596286DDEBD00DE9427 /* ScrollIndicatorView.swift */; };
 		A4AED41828377CF500FA6C2E /* MainScreenForecastListShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED41728377CF500FA6C2E /* MainScreenForecastListShimmerView.swift */; };
 		A4AED41A28377D1E00FA6C2E /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED41928377D1E00FA6C2E /* SelectCityView.swift */; };
 		A4AED41C28377D6200FA6C2E /* CityCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED41B28377D6200FA6C2E /* CityCardView.swift */; };
@@ -96,6 +106,16 @@
 		A4442732283B7B250069C3ED /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		A4442734283B7B460069C3ED /* Decodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Extension.swift"; sourceTree = "<group>"; };
 		A4442736283B7B830069C3ED /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		A483B57F286DDE7000DE9427 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A483B580286DDE7000DE9427 /* HourlyCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardView.swift; sourceTree = "<group>"; };
+		A483B582286DDE7000DE9427 /* ScrollDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDelegate.swift; sourceTree = "<group>"; };
+		A483B583286DDE7000DE9427 /* CarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		A483B589286DDE7A00DE9427 /* CardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		A483B58A286DDE7A00DE9427 /* CarouselViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewModel.swift; sourceTree = "<group>"; };
+		A483B58B286DDE7A00DE9427 /* HourlyCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardViewModel.swift; sourceTree = "<group>"; };
+		A483B591286DDE8F00DE9427 /* CustomScrollCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollCoordinator.swift; sourceTree = "<group>"; };
+		A483B592286DDE8F00DE9427 /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		A483B596286DDEBD00DE9427 /* ScrollIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollIndicatorView.swift; sourceTree = "<group>"; };
 		A4AED4152837623000FA6C2E /* MainScreenForecastListShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListShimmerView.swift; sourceTree = "<group>"; };
 		A4AED41728377CF500FA6C2E /* MainScreenForecastListShimmerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListShimmerView.swift; sourceTree = "<group>"; };
 		A4AED41928377D1E00FA6C2E /* SelectCityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
@@ -208,6 +228,7 @@
 		769A6F1727D23BEF0007759C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A483B57E286DDE7000DE9427 /* CarouselView */,
 				769CECF827C27D2B00FFD409 /* MainScreenView.swift */,
 				76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */,
 				A4AED41728377CF500FA6C2E /* MainScreenForecastListShimmerView.swift */,
@@ -221,6 +242,7 @@
 		769A6F1827D23BF90007759C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				A483B588286DDE7A00DE9427 /* CarouselView */,
 				762BDF00282EB2BA0083A29F /* MainScreenViewModel.swift */,
 				769A6F1B27D2633C0007759C /* MainScreenForecastViewModel.swift */,
 				769A6F1527D23BBA0007759C /* MainScreenForecastListItemViewModel.swift */,
@@ -250,6 +272,8 @@
 		769CECFA27C27DC000FFD409 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A483B595286DDEBD00DE9427 /* ScrollIndicator */,
+				A483B58F286DDE8F00DE9427 /* CustomScrollView */,
 				A4CAC29A283D276800793EF8 /* Popup */,
 				A44B6B35282CDD7B00542E32 /* SearchBar */,
 				A467D0BC282BDC7600D92212 /* SelectCityHeader */,
@@ -322,6 +346,60 @@
 				A4AED42028377DC800FA6C2E /* SelectCityHeaderViewModel.swift */,
 			);
 			path = SelectCityHeader;
+			sourceTree = "<group>";
+		};
+		A483B57E286DDE7000DE9427 /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				A483B57F286DDE7000DE9427 /* CardView.swift */,
+				A483B580286DDE7000DE9427 /* HourlyCardView.swift */,
+				A483B581286DDE7000DE9427 /* Support */,
+				A483B583286DDE7000DE9427 /* CarouselView.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
+		A483B581286DDE7000DE9427 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A483B582286DDE7000DE9427 /* ScrollDelegate.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A483B588286DDE7A00DE9427 /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				A483B589286DDE7A00DE9427 /* CardViewModel.swift */,
+				A483B58A286DDE7A00DE9427 /* CarouselViewModel.swift */,
+				A483B58B286DDE7A00DE9427 /* HourlyCardViewModel.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
+		A483B58F286DDE8F00DE9427 /* CustomScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				A483B590286DDE8F00DE9427 /* Support */,
+				A483B592286DDE8F00DE9427 /* CustomScrollView.swift */,
+			);
+			path = CustomScrollView;
+			sourceTree = "<group>";
+		};
+		A483B590286DDE8F00DE9427 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A483B591286DDE8F00DE9427 /* CustomScrollCoordinator.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A483B595286DDEBD00DE9427 /* ScrollIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				A483B596286DDEBD00DE9427 /* ScrollIndicatorView.swift */,
+			);
+			path = ScrollIndicator;
 			sourceTree = "<group>";
 		};
 		A4AED42A2837AA6D00FA6C2E /* SelectedCityFlow */ = {
@@ -598,6 +676,7 @@
 				A4D49FDD27FC95FD008F5BD4 /* RequestSenderable.swift in Sources */,
 				76210BEF27C299A100F858AA /* ColorModeToggleStyle.swift in Sources */,
 				76ADAFC427C8F01000F85FA7 /* MainScreenForecastView.swift in Sources */,
+				A483B585286DDE7000DE9427 /* HourlyCardView.swift in Sources */,
 				A4AED42228377DC800FA6C2E /* SelectCityHeaderViewModel.swift in Sources */,
 				A4AED43A2837EA7D00FA6C2E /* LocationListViewModel.swift in Sources */,
 				7606161927AD77F600CC73B5 /* SurfWeatherAppApp.swift in Sources */,
@@ -614,9 +693,15 @@
 				769A6F1E27D275080007759C /* MainScreenForecastJournalView.swift in Sources */,
 				A4AED42628377DF600FA6C2E /* UIApplication+Extension.swift in Sources */,
 				A4AED42128377DC800FA6C2E /* SelectCityHeaderView.swift in Sources */,
+				A483B584286DDE7000DE9427 /* CardView.swift in Sources */,
 				A44B6B3B282E225400542E32 /* (null) in Sources */,
 				A444272F283B57FF0069C3ED /* CityWeather.swift in Sources */,
+				A483B594286DDE8F00DE9427 /* CustomScrollView.swift in Sources */,
+				A483B58C286DDE7A00DE9427 /* CardViewModel.swift in Sources */,
+				A483B58E286DDE7A00DE9427 /* HourlyCardViewModel.swift in Sources */,
 				A4AED4362837C7E800FA6C2E /* LocationRequest.swift in Sources */,
+				A483B58D286DDE7A00DE9427 /* CarouselViewModel.swift in Sources */,
+				A483B587286DDE7000DE9427 /* CarouselView.swift in Sources */,
 				A44B6B15282BE29600542E32 /* (null) in Sources */,
 				A4D49FF327FCA4CE008F5BD4 /* WeatherEntity.swift in Sources */,
 				A4AED41828377CF500FA6C2E /* MainScreenForecastListShimmerView.swift in Sources */,
@@ -626,9 +711,12 @@
 				A4D4A00027FD6CDF008F5BD4 /* TemperatureFormatter.swift in Sources */,
 				A44B6B34282CDBC300542E32 /* (null) in Sources */,
 				A4AED4332837C4F100FA6C2E /* FullAddressEntity.swift in Sources */,
+				A483B593286DDE8F00DE9427 /* CustomScrollCoordinator.swift in Sources */,
 				A44B6B17282BE6B800542E32 /* (null) in Sources */,
 				A4D4A00327FD7630008F5BD4 /* MainScreenForecastModelAdapter.swift in Sources */,
+				A483B597286DDEBD00DE9427 /* ScrollIndicatorView.swift in Sources */,
 				A4442731283B6C6F0069C3ED /* CityCardViewModel.swift in Sources */,
+				A483B586286DDE7000DE9427 /* ScrollDelegate.swift in Sources */,
 				76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */,
 				A4D49FE227FC95FD008F5BD4 /* CoreAssembly.swift in Sources */,
 				A4E4E02A2824F8EF007EF844 /* ShimmerView.swift in Sources */,
