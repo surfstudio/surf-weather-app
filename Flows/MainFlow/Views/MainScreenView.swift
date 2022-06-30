@@ -14,6 +14,11 @@ struct MainScreenView: View {
     let viewModel: MainScreenViewModel
     let serviceAssembly = ServicesAssemblyFactory()
 
+    // MARK: - Private Properties
+
+    @State private var carouselMode: CardView.Mode = .long
+    @ObservedObject var carouselViewModel = CarouselViewModel()
+
     // MARK: - Views
 
     var body: some View {
@@ -24,7 +29,7 @@ struct MainScreenView: View {
                     weatherNetworkService: serviceAssembly.weatherNetworkService
                 )
                 ScrollView {
-                    makeRactangle()
+                    GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 188 : 360)
                     MainScreenForecastView(viewModel: viewModel.forecastViewModel)
                     MainScreenForecastJournalView()
                 }
@@ -32,26 +37,34 @@ struct MainScreenView: View {
             .background(Color.lightBackground | .darkBackground)
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
+            .animation(.easeInOut(duration: 0.5), value: carouselMode)
         }
     }
 
-}
-
-// MARK: - Private Methods
-
-private extension MainScreenView {
-
-    func makeRactangle() -> some View {
-        let shimmeringConfig = getShimmerConfig(animation: true)
-        return Rectangle()
-            .frame(height: 392, alignment: .top)
-            .foregroundColor(.lightBackground2)
-            .shimmer(isActive: true)
-            .environmentObject(shimmeringConfig)
+    func makeCarousel(with proxy: GeometryProxy) -> some View {
+        let topSpace = 80.0
+        let offset = proxy.frame(in: .global).minY - topSpace
+        DispatchQueue.main.async {
+            if carouselMode == .long && offset < .zero {
+                self.carouselMode = .short
+                self.carouselViewModel.updateIsNeeded = true
+            } else if carouselMode == .short && offset > .zero {
+                self.carouselMode = .long
+                self.carouselViewModel.updateIsNeeded = true
+            }
+        }
+        return CarouselView(
+            cardMode: $carouselMode,
+            updateIsNeeded: $carouselViewModel.updateIsNeeded,
+            viewModel: carouselViewModel
+        )
+            .shimmer(isActive: carouselViewModel.cardViewModels.isEmpty)
+            .environmentObject(getShimmerConfig(animation: true))
     }
 
     func getShimmerConfig(animation: Bool) -> ShimmerConfig {
-        let config = ShimmerConfig(bgColor: Color.clear, fgColor: Color.clear)
+        let bgColor: Color = (.lightBackground2 | .darkBackground2)
+        let config = ShimmerConfig(bgColor: bgColor, fgColor: .clear)
         if animation { config.startAnimation() }
         return config
     }
