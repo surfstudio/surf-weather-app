@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-final class UserDefaultsService: ObservableObject {
+final class UserDefaultsService: ObservableObject, Storage {
 
     // MARK: - Environments
 
@@ -22,13 +22,14 @@ final class UserDefaultsService: ObservableObject {
         }
     }
 
-    var selectedCity: String {
-        get {
-            UserDefaults.standard.string(forKey: Keys.selectedCity.rawValue) ?? ""
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Keys.selectedCity.rawValue)
-        }
+    var selectedCity: CityWeather? {
+        get { getValue(key: Keys.selectedCity.rawValue) }
+        set { setValue(for: newValue, key: Keys.selectedCity.rawValue) }
+    }
+
+    var savedCities: [CityWeather]? {
+        get { getValue(key: Keys.savedCities.rawValue) }
+        set { setValue(for: newValue, key: Keys.savedCities.rawValue) }
     }
 
     // MARK: - Static Properties
@@ -40,6 +41,7 @@ final class UserDefaultsService: ObservableObject {
     private enum Keys: String {
         case isLightMode
         case selectedCity
+        case savedCities
     }
 
     // MARK: - Initialization
@@ -51,11 +53,7 @@ final class UserDefaultsService: ObservableObject {
     // MARK: - Private Methods
 
     func setColorMode() {
-        if let isLightMode = UserDefaults.standard.object(forKey: Keys.isLightMode.rawValue) as? Bool {
-            self.isLightMode = isLightMode
-        } else {
-            self.isLightMode = colorScheme == .light
-        }
+        isLightMode = getValue(key: Keys.isLightMode.rawValue) ?? (colorScheme == .light)
     }
 
 }

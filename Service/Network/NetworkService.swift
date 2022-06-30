@@ -12,7 +12,11 @@ protocol WeatherNetworkService {
     func getWeather(with cordsEntity: CordsEntity, completion: @escaping (Result<WeatherRequestEntity?, Error>) -> Void)
 }
 
-final class NetworkService: WeatherNetworkService {
+protocol LocationNetworkService {
+    func getLocation(with cityName: String, completion: @escaping (Result<GeocoderResponseEntry?, Error>) -> Void)
+}
+
+final class NetworkService: WeatherNetworkService, LocationNetworkService {
 
     // MARK: - Private Properties
 
@@ -37,6 +41,16 @@ final class NetworkService: WeatherNetworkService {
         )
     }
 
+    func getLocation(with cityName: String, completion: @escaping (Result<GeocoderResponseEntry?, Error>) -> Void) {
+        guard let urlRequest = RequestFactory.GeocoderRequest.loadLocation(with: cityName).urlRequest else {
+            return
+        }
+        cancelable = networkManager?.send(request: urlRequest).sink(
+            receiveCompletion: { [weak self] result in self?.handleCompletionLocation(with: result, completion: completion) },
+            receiveValue: { completion(.success($0)) }
+        )
+    }
+
 }
 
 // MARK: - Private Methods
@@ -44,6 +58,15 @@ final class NetworkService: WeatherNetworkService {
 private extension NetworkService {
 
     func handleCompletion(with result: Subscribers.Completion<Error>, completion: (Result<WeatherRequestEntity?, Error>) -> Void) {
+        switch result {
+        case .finished:
+            cancelable?.cancel()
+        case .failure(let error):
+            completion(.failure(error))
+        }
+    }
+
+    func handleCompletionLocation(with result: Subscribers.Completion<Error>, completion: (Result<GeocoderResponseEntry?, Error>) -> Void) {
         switch result {
         case .finished:
             cancelable?.cancel()

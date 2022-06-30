@@ -14,6 +14,9 @@ struct SelectCityView: View {
     @ObservedObject var viewModel: SelectCityViewModel
     @ObservedObject var mainHeaderViewModel: LocationHeaderViewModel
 
+    @State var presentingModal = false
+    @State var isChangeMode = false
+
     // MARK: - Initialization
 
     init(viewModel: SelectCityViewModel, mainHeaderViewModel: LocationHeaderViewModel) {
@@ -27,7 +30,8 @@ struct SelectCityView: View {
         VStack(alignment: .leading, spacing: 22.0) {
             SelectCityHeaderView(
                 viewModel: .init(),
-                mainHeaderViewModel: mainHeaderViewModel
+                mainHeaderViewModel: mainHeaderViewModel,
+                isChangeMode: $isChangeMode
             )
             Text("Выберете место")
                 .font(.system(size: 24, weight: .heavy))
@@ -35,7 +39,7 @@ struct SelectCityView: View {
                 .foregroundColor(.lightText | .white)
             Text("Отслеживайте погоду в родном городе и, отправляясь в путешевствие")
                 .foregroundColor(.lightText | .darkWhite)
-            SearchBarView(searchText: $viewModel.searchText)
+            searchButton
             citiesListView
         }
         .padding()
@@ -44,6 +48,39 @@ struct SelectCityView: View {
         .onTapGesture { UIApplication.shared.endEditing() }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .popup(isPresented: $viewModel.showingPopup, autohideIn: 2) {
+            ZStack(alignment: .center) {
+                Color.lightBackground | Color.darkBackground
+                Text("Добавлен новый город \nВыберете его, чтобы сделать главным.")
+                    .foregroundColor(.black | .white)
+                    .font(.system(size: 12))
+                    .multilineTextAlignment(.center)
+            }.frame(height: 112)
+        }
+    }
+
+    var searchButton: some View {
+        Button(action: {
+            self.presentingModal.toggle()
+        }) {
+            searchView
+        }.sheet(isPresented: $presentingModal) {
+            SearchListView(viewModel: viewModel.searchListViewModel, presentingModal: $presentingModal)
+        }
+    }
+
+    var searchView: some View {
+        HStack {
+            Image("search", bundle: nil)
+            Text("Поиск").foregroundColor(.lightText2).font(.headline)
+            Spacer()
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 24)
+                .fill(Color.lightBackground2 | Color.darkBackground)
+                .frame(height: 40)
+        )
     }
 
     private var columns: [GridItem] = [
@@ -58,34 +95,19 @@ struct SelectCityView: View {
                       spacing: 16.0,
                       pinnedViews: .sectionHeaders) {
                 ForEach(viewModel.weathers, id: \.self) { model in
-                    CityCardView(model: model)
+                    CityCardView(
+                        model: model,
+                        isChangeMode: $isChangeMode,
+                        viewModel: viewModel.cityCardViewModel
+                    )
                         .shadow(color: .lightBackground2 | .darkBackground2, radius: 10, x: 0, y: 0)
                         .onTapGesture {
-                            selectCity(with: model)
-                            UIApplication.shared.endEditing()
+                            guard !isChangeMode else { return }
+                            viewModel.selectCity(with: model)
                         }
                     
                 }
             }.padding(.top, 18.0)
-        }
-    }
-
-    // MARK: - Methods
-
-    func selectCity(with model: CityCardView.Model) {
-        for (index, _) in viewModel.weathers.enumerated() {
-            viewModel.weathers[index].isSelected = false
-        }
-        guard let index = viewModel.weathers.firstIndex(where: { $0.id == model.id }) else {
-            return
-        }
-        UserDefaultsService.shared.selectedCity = viewModel.weathers[index].city
-        viewModel.weathers[index].isSelected = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            withAnimation(.easeInOut(duration: 0.5)) {
-                let selectedModel = viewModel.weathers.remove(at: index)
-                viewModel.weathers.insert(selectedModel, at: 0)
-            }
         }
     }
 
@@ -94,7 +116,9 @@ struct SelectCityView: View {
 struct AddSitiesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        SelectCityView(viewModel: .init(weatherService: ServicesAssemblyFactory().weatherNetworkService), mainHeaderViewModel: .init())
+        SelectCityView(viewModel: .init(
+            weatherService: ServicesAssemblyFactory().weatherNetworkService,
+            locationService: ServicesAssemblyFactory().locationNetworkService), mainHeaderViewModel: .init())
     }
 
 }

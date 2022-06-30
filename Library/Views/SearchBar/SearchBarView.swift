@@ -12,6 +12,7 @@ struct SearchBarView: View {
     // MARK: - Properties
 
     @Binding var searchText: String
+    var focusedField: FocusState<Bool>.Binding
 
     // MARK: - Views
 
@@ -20,6 +21,8 @@ struct SearchBarView: View {
             Image("search", bundle: nil)
             TextField("Поиск", text: $searchText)
                 .foregroundColor(Color.black | Color.white)
+                .focused(focusedField)
+            deleteView
         }
         .font(.headline)
         .padding()
@@ -30,10 +33,13 @@ struct SearchBarView: View {
         )
     }
 
-}
+    var deleteView: some View {
+        Button {
+            searchText.removeAll()
+        } label: {
+            Image("clearButton", bundle: nil)
+        }
 
-struct SearchBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchBarView(searchText: .constant(""))
     }
+
 }

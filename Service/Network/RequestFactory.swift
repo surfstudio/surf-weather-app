@@ -15,4 +15,10 @@ struct RequestFactory {
         }
     }
 
+    struct GeocoderRequest {
+        static func loadLocation(with cityName: String) -> LocationRequest {
+            return LocationRequest(cityName: cityName)
+        }
+    }
+
 }

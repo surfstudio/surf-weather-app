@@ -14,6 +14,7 @@ struct SelectCityHeaderView: View {
     var viewModel: SelectCityHeaderViewModel
     @ObservedObject var mainHeaderViewModel: LocationHeaderViewModel
     @Environment(\.presentationMode) var presentationMode
+    @Binding var isChangeMode: Bool
 
     let selectedCity = UserDefaultsService.shared.selectedCity
 
@@ -30,7 +31,7 @@ struct SelectCityHeaderView: View {
     var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
-            mainHeaderViewModel.state = .content(selectedCity)
+            mainHeaderViewModel.state = .content(selectedCity?.cityName ?? "Воронеж")
         }, label: {
             makeButtonView(with: Image("left-arrow", bundle: nil))
         })
@@ -39,6 +40,7 @@ struct SelectCityHeaderView: View {
     var editButton: some View {
         Button(action: {
             viewModel.editButtonAction()
+            isChangeMode.toggle()
         }, label: {
             makeButtonView(with: Image("edit", bundle: nil))
         })
@@ -65,6 +67,6 @@ struct SelectCityHeaderView: View {
 
 struct SelectCityHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectCityHeaderView(viewModel: SelectCityHeaderViewModel(), mainHeaderViewModel: .init())
+        SelectCityHeaderView(viewModel: SelectCityHeaderViewModel(), mainHeaderViewModel: .init(), isChangeMode: .constant(false))
     }
 }

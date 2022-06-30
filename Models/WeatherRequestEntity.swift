@@ -8,6 +8,6 @@
 import Foundation
 
 struct WeatherRequestEntity: Codable {
-    let current: CurrentWeatherEntity
+    let current: CurrentWeatherEntity?
     let daily: [DailyWeatherEntity]
 }

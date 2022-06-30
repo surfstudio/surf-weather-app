@@ -26,7 +26,8 @@ struct MainScreenView: View {
             VStack {
                 LocationHeaderView(
                     viewModel: LocationHeaderViewModel(),
-                    weatherNetworkService: serviceAssembly.weatherNetworkService
+                    weatherNetworkService: serviceAssembly.weatherNetworkService,
+                    locationNetworkService: serviceAssembly.locationNetworkService
                 )
                 ScrollView {
                     GeometryReader { makeCarousel(with: $0) }.frame(height: carouselMode == .short ? 188 : 360)

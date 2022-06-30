@@ -13,29 +13,62 @@ final class SelectCityViewModel: ObservableObject {
     // MARK: - Properties
 
     @Published var weathers: [CityCardView.Model] = [ ]
-    var searchText: String = "" { willSet { searchCity(with: newValue) } }
+    @Published var showingPopup: Bool = false
+    var searchListViewModel: LocationListViewModel
+    var cityCardViewModel: CityCardViewModel
 
     // MARK: - Private Properties
 
     private var weatherService: WeatherNetworkService
-    private var loadedWeathers: [CityCardView.Model] = [ ]
-    private var searchWeathers: [CityCardView.Model] = [ ]
-    private var selectedCity = UserDefaultsService.shared.selectedCity
+    private var locationService: LocationNetworkService
+    private var savedCities = UserDefaultsService.shared.savedCities
 
     // MARK: - Initialization
 
-    init(weatherService: WeatherNetworkService) {
+    init(weatherService: WeatherNetworkService, locationService: LocationNetworkService) {
         self.weatherService = weatherService
+        self.locationService = locationService
+        self.searchListViewModel = .init(locationService: locationService, weatherService: weatherService)
+        self.cityCardViewModel = .init()
+
+        searchListViewModel.onAddNewCity = { [weak self] in
+            self?.loadData()
+            self?.showingPopup.toggle()
+        }
+        cityCardViewModel.onDeleteCity = { [weak self] in
+            self?.loadData()
+        }
     }
 
     // MARK: - Methods
 
     func loadData() {
-        loadWeather(with: .init(lat: 51, lon: 39), city: "Воронеж", id: 1) { [weak self] in
-            self?.loadWeather(with: .init(lat: 62, lon: 54), city: "Москва", id: 2) { [weak self] in
-                self?.loadWeather(with: .init(lat: 34, lon: 48), city: "Ижевск", id: 3) { [weak self] in
-                    self?.loadWeather(with: .init(lat: 25, lon: 25), city: "Самара", id: 4) { }
-                }
+        guard let entities = UserDefaultsService.shared.savedCities else { return }
+        var cities: [CityCardView.Model] = []
+
+        for (index, entity) in entities.enumerated() {
+            guard let currentWeather = entity.cityWeather.current else { return }
+            let city = makeCityCardModel(with: currentWeather, city: entity.cityName, id: index)
+            cities.append(city)
+        }
+
+        withAnimation { weathers = cities.sorted(by: { $0.isSelected && !$1.isSelected }) }
+    }
+
+    func selectCity(with model: CityCardView.Model) {
+        for (index, _) in weathers.enumerated() {
+            weathers[index].isSelected = false
+        }
+        guard let index = weathers.firstIndex(where: { $0.id == model.id }) else {
+            return
+        }
+        let city = savedCities?.first(where: { $0.cityName == model.city })
+        UserDefaultsService.shared.selectedCity = city
+        weathers[index].isSelected = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            withAnimation(.easeInOut(duration: 0.5)) {
+                let selectedModel = self.weathers.remove(at: index)
+                self.weathers.insert(selectedModel, at: 0)
             }
         }
     }
@@ -46,40 +79,6 @@ final class SelectCityViewModel: ObservableObject {
 
 private extension SelectCityViewModel {
 
-    func searchCity(with text: String) {
-        loadedWeathers.forEach {
-            if $0.city.contains(text) && !searchWeathers.contains($0) {
-                searchWeathers.append($0)
-            }
-        }
-        if text.isEmpty { searchWeathers.removeAll() }
-        withAnimation { weathers = text.isEmpty ? loadedWeathers : searchWeathers }
-    }
-
-    func loadWeather(with cord: CordsEntity, city: String, id: Int, completion: @escaping () -> Void) {
-        weatherService.getWeather(with: cord) { [weak self] result in
-            switch result {
-            case .success(let request):
-                self?.handleSuccess(with: request, city: city, id: id)
-                completion()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-
-    func handleSuccess(with entity: WeatherRequestEntity?, city: String, id: Int) {
-        guard let entity = entity?.current else {
-            return
-        }
-        let city = makeCityCardModel(with: entity, city: city, id: id)
-        loadedWeathers.append(city)
-        let sorted = loadedWeathers.sorted(by: { $0.isSelected && !$1.isSelected })
-
-        loadedWeathers = sorted
-        withAnimation { weathers = sorted }
-    }
-
     func makeCityCardModel(with entity: CurrentWeatherEntity, city: String, id: Int) -> CityCardView.Model {
         let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
 
@@ -87,7 +86,7 @@ private extension SelectCityViewModel {
         let temp = TemperatureFormatter.format(with: entity.temp, unit: .celsius).replacingOccurrences(of: "°C", with: "")
         let imageName = Assets(rawValue: entity.weather.first?.icon ?? "01d")?.medium ?? "sun"
 
-        let isSelected = selectedCity == city
+        let isSelected = UserDefaultsService.shared.selectedCity?.cityName == city
         return CityCardView.Model(id: id, isSelected: isSelected, temperature: temp, time: dateFormatted, city: city, imageName: imageName)
     }
 
