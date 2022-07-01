@@ -10,5 +10,8 @@ import Foundation
 final class WeatherDiaryTitleViewModel: ObservableObject {
 
     @Published var selectedYear = "2022"
-    @Published var showingDatePicker = false
+
+    func applyYear(_ year: String) {
+        selectedYear = year
+    }
 }

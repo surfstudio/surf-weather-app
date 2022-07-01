@@ -10,9 +10,10 @@ import Foundation
 final class DatePickerViewModel: ObservableObject {
 
     @Published var currentYear = 2022
+    var onChangeYear: Closure<String>?
 
     func applyDate() {
-        print(currentYear)
+        onChangeYear?(String(currentYear))
     }
 
 }

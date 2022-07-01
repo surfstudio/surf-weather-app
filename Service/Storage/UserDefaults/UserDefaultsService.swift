@@ -25,6 +25,16 @@ final class UserDefaultsService: ObservableObject, Storage {
         didSet { setValue(for: selectedCity, key: Keys.selectedCity.rawValue) }
     }
 
+    var dyaryMonth: String? {
+        get { getValue(key: Keys.dyaryMonth.rawValue) }
+        set { setValue(for: newValue, key: Keys.dyaryMonth.rawValue) }
+    }
+
+    var dyaryYear: String? {
+        get { getValue(key: Keys.dyaryYear.rawValue) }
+        set { setValue(for: newValue, key: Keys.dyaryYear.rawValue) }
+    }
+
     var currentPage: CGFloat? {
         get { getValue(key: Keys.currentPage.rawValue) }
         set { setValue(for: newValue, key: Keys.currentPage.rawValue) }
@@ -40,6 +50,8 @@ final class UserDefaultsService: ObservableObject, Storage {
         case isLightMode
         case selectedCity
         case currentPage
+        case dyaryMonth
+        case dyaryYear
     }
 
     // MARK: - Initialization
