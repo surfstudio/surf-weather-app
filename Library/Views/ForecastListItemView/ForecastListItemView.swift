@@ -1,5 +1,5 @@
 //
-//  MainScreenForecastListItemView.swift
+//  ForecastListItemView.swift
 //  SurfWeatherApp
 //
 //  Created by Владислав Климов on 25.02.2022.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct MainScreenForecastListItemView: View {
+struct ForecastListItemView: View {
 
     // MARK: - Properties
 
-    @ObservedObject var viewModel: MainScreenForecastListItemViewModel
+    @ObservedObject var viewModel: ForecastListItemViewModel
 
     // MARK: - Private Properties
 
@@ -69,6 +69,7 @@ struct MainScreenForecastListItemView: View {
                 .frame(width: 20)
             Image(viewModel.model.weatherImage, bundle: nil)
                 .renderingMode(.template)
+                .frame(width: 16, height: 16)
                 .tint(.lightText | .darkWhite)
             Spacer()
                 .frame(width: 8)
@@ -104,7 +105,7 @@ struct MainScreenForecastListItemView: View {
 
 // MARK: - Model
 
-extension MainScreenForecastListItemView {
+extension ForecastListItemView {
 
     struct Model {
         let cityName: String
@@ -122,9 +123,9 @@ extension MainScreenForecastListItemView {
 
 // MARK: - Preview
 
-struct MainScreenForecastListView_Previews: PreviewProvider {
+struct ForecastListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenForecastListItemView(
+        ForecastListItemView(
             viewModel: .init(isSelected: false,
                              model: .init(cityName: "Воронеж",
                                           lat: 25,

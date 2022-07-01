@@ -32,9 +32,9 @@ class MainScreenForecastModelAdapter {
 
     // MARK: - Methods
 
-    func makeScreenForecastModels() -> [MainScreenForecastListItemView.Model] {
+    func makeScreenForecastModels() -> [ForecastListItemView.Model] {
 
-        weatherDayEntities.prefix(5).compactMap { entity -> MainScreenForecastListItemView.Model in
+        weatherDayEntities.prefix(5).compactMap { entity -> ForecastListItemView.Model in
             let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
 
             let dateFormatted = DateFormat.calendarFormatter(format: .dayLongMonth).string(from: date)
@@ -55,12 +55,12 @@ class MainScreenForecastModelAdapter {
         }
     }
 
-    func makeScreenForecastModelsByStorage() -> [MainScreenForecastListItemView.Model] {
-        var models: [MainScreenForecastListItemView.Model] = []
+    func makeScreenForecastModelsByStorage() -> [ForecastListItemView.Model] {
+        var models: [ForecastListItemView.Model] = []
 
         for entity in weatherStorageEntities {
 
-            let model = MainScreenForecastListItemView.Model(
+            let model = ForecastListItemView.Model(
                 cityName: cityName,
                 lat: cord.lat,
                 lon: cord.lon,
@@ -76,7 +76,7 @@ class MainScreenForecastModelAdapter {
         return models
     }
 
-    static func makeStorageWeatherEntity(with model: MainScreenForecastListItemView.Model) -> WeeklyWeatherEntityDB {
+    static func makeStorageWeatherEntity(with model: ForecastListItemView.Model) -> WeeklyWeatherEntityDB {
         return WeeklyWeatherEntityDB(
             weekday: model.weekday,
             wind: model.wind,
@@ -87,7 +87,7 @@ class MainScreenForecastModelAdapter {
         )
     }
 
-    static func makeCityWeatherEntity(with model: MainScreenForecastListItemView.Model) -> CityWeatherEntity {
+    static func makeCityWeatherEntity(with model: ForecastListItemView.Model) -> CityWeatherEntity {
         return CityWeatherEntity(
             cityName: model.cityName,
             lat: model.lat,

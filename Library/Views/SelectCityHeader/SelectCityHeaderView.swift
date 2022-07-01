@@ -33,7 +33,7 @@ struct SelectCityHeaderView: View {
             presentationMode.wrappedValue.dismiss()
             mainHeaderViewModel.state = .content(selectedCity?.cityName ?? "Воронеж")
         }, label: {
-            makeButtonView(with: Image("left-arrow", bundle: nil))
+            RoundButtonView(image: Image("left-arrow", bundle: nil))
         })
     }
 
@@ -42,25 +42,8 @@ struct SelectCityHeaderView: View {
             viewModel.editButtonAction()
             isChangeMode.toggle()
         }, label: {
-            makeButtonView(with: Image("edit", bundle: nil))
+            RoundButtonView(image: Image("edit", bundle: nil))
         })
-    }
-
-    func makeButtonView(with image: Image) -> some View {
-        ZStack {
-
-            Circle()
-                .frame(width: 40, height: 40, alignment: .center)
-                .foregroundColor(.lightBackground | .darkBackground)
-                .overlay(
-                    Circle()
-                        .stroke(.lightBackground2 | .darkBackground2, lineWidth: 1)
-                )
-
-            image
-            .frame(width: 14, height: 14, alignment: .center)
-        }
-        .frame(width: 40, height: 40, alignment: .center)
     }
 
 }

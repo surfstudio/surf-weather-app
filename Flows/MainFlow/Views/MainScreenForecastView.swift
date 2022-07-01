@@ -61,7 +61,7 @@ struct MainScreenForecastView: View {
     var weatherlistView: some View {
         VStack(alignment: .leading, spacing: .zero) {
             ForEach(viewModel.items.indices, id: \.self) {
-                MainScreenForecastListItemView(viewModel: viewModel.items[$0])
+                ForecastListItemView(viewModel: viewModel.items[$0])
             }
             Spacer()
         }

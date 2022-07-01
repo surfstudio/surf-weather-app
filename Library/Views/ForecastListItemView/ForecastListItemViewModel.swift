@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class MainScreenForecastListItemViewModel: ObservableObject {
+final class ForecastListItemViewModel: ObservableObject {
 
     // MARK: - Properties
 
     @Published var isSelected: Bool
-    @Published var model: MainScreenForecastListItemView.Model
+    @Published var model: ForecastListItemView.Model
     let isNeedSeparator: Bool
     let isNeedDayAllocate: Bool
     let storageService: WeatherStorageService
@@ -23,7 +23,7 @@ final class MainScreenForecastListItemViewModel: ObservableObject {
 
     init(
         isSelected: Bool,
-        model: MainScreenForecastListItemView.Model,
+        model: ForecastListItemView.Model,
         isNeedSeparator: Bool = true,
         isNeedDayAllocate: Bool = false,
         storageService: WeatherStorageService

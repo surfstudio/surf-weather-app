@@ -6,6 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
+
+extension String {
+
+    static func | (_ light: String, _ dark: String) -> String {
+        return UserDefaultsService.shared.isLightMode ? light : dark
+    }
+}
 
 enum Assets: String {
 
