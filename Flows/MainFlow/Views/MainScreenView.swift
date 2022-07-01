@@ -12,6 +12,7 @@ struct MainScreenView: View {
     // MARK: - Properties
 
     let viewModel: MainScreenViewModel
+    let serviceAssembly = ServicesAssemblyFactory()
 
     // MARK: - Private Properties
 
@@ -48,7 +49,17 @@ struct MainScreenView: View {
             updateIsNeeded: $carouselViewModel.updateIsNeeded,
             viewModel: carouselViewModel
         )
+            .shimmer(isActive: carouselViewModel.cardViewModels.isEmpty)
+            .environmentObject(getShimmerConfig(animation: true))
     }
+
+    func getShimmerConfig(animation: Bool) -> ShimmerConfig {
+        let bgColor: Color = (.lightBackground2 | .darkBackground2)
+        let config = ShimmerConfig(bgColor: bgColor, fgColor: .clear)
+        if animation { config.startAnimation() }
+        return config
+    }
+
 }
 
 struct MainScreenView_Previews: PreviewProvider {
