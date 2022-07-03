@@ -97,7 +97,7 @@ private extension MainScreenForecastViewModel {
         }
         let adapter = MainScreenForecastModelAdapter(weatherStorageEntities: city.weatherArray, city: selectedCity)
         let models = adapter.makeScreenForecastModelsByStorage().sorted {
-            DateFormat.compareDates($0.date, $1.date, format: .dayLongMonth)
+            DateFormat.compareDates($0.date, $1.date)
         }
         archiveItems = models.compactMap { .init(isSelected: true, model: $0, storageService: storageService) }
 

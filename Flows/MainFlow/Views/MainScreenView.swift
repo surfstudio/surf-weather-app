@@ -57,7 +57,7 @@ struct MainScreenView: View {
             Spacer()
             CarouselView(cardMode: $carouselMode, viewModel: viewModel.carouselViewModel)
         }
-        .shimmer(isActive: viewModel.carouselViewModel.cardViewModels.isEmpty)
+        .shimmer(isActive: viewModel.isLoading)
         .environmentObject(getShimmerConfig(animation: true))
     }
 

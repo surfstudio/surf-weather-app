@@ -85,16 +85,11 @@ private extension LocationListViewModel {
             return
         }
 
-        let weekly = entity?.daily.compactMap { WeeklyWeatherEntityDB(entity: $0) } ?? []
-        let hourly = entity?.hourly.compactMap { HourlyWeatherEntityDB(entity: $0) } ?? []
-
         let newCity = CityWeatherEntity(
             cityName: cityName,
             lat: cords.lat,
             lon: cords.lon,
-            current: .init(entity: current),
-            weekly: Set(weekly),
-            hourly: Set(hourly)
+            current: .init(entity: current)
         )
 
         weatherStorageServices.saveCity(city: newCity, completion: { [weak self] result in

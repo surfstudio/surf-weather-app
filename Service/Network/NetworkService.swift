@@ -22,8 +22,8 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
 
     private let networkManager: RequestSenderable?
     private var clearCancelableTimer: Timer?
-    private var cancelableSet = Set<AnyCancellable?>() {
-        willSet { stopClearCancelableSet(with: newValue) } // Останавливает таймер если добавляются новые объекты
+    private var cancelables = [AnyCancellable]() {
+        willSet { stopClearCancelables() } // Останавливает таймер если добавляются новые объекты
     }
 
     // MARK: - Initialization
@@ -38,22 +38,20 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
         guard let urlRequest = RequestFactory.WeatherRequests.loadWeatherDaily(with: cordsEntity).urlRequest else {
             return
         }
-        let cancelable = networkManager?.send(request: urlRequest).sink(
+        networkManager?.send(request: urlRequest).sink(
             receiveCompletion: { [weak self] result in self?.handleCompletion(with: result, completion: completion) },
             receiveValue: { completion(.success($0)) }
-        )
-        cancelableSet.insert(cancelable)
+        ).store(in: &self.cancelables)
     }
 
     func getLocation(with cityName: String, completion: @escaping (Result<GeocoderResponseEntry?, Error>) -> Void) {
         guard let urlRequest = RequestFactory.GeocoderRequest.loadLocation(with: cityName).urlRequest else {
             return
         }
-        let cancelable = networkManager?.send(request: urlRequest).sink(
+        networkManager?.send(request: urlRequest).sink(
             receiveCompletion: { [weak self] result in self?.handleCompletionLocation(with: result, completion: completion) },
             receiveValue: { completion(.success($0)) }
-        )
-        cancelableSet.insert(cancelable)
+        ).store(in: &self.cancelables)
     }
 
 }
@@ -63,14 +61,14 @@ final class NetworkService: WeatherNetworkService, LocationNetworkService {
 private extension NetworkService {
 
     func handleCompletion(with result: Subscribers.Completion<Error>, completion: (Result<WeatherRequestEntity?, Error>) -> Void) {
-        startClearCanselableSet()
+        startClearCanselables()
 
         guard case .failure(let error) = result else { return }
         completion(.failure(error))
     }
 
     func handleCompletionLocation(with result: Subscribers.Completion<Error>, completion: (Result<GeocoderResponseEntry?, Error>) -> Void) {
-        startClearCanselableSet()
+        startClearCanselables()
 
         guard case .failure(let error) = result else { return }
         completion(.failure(error))
@@ -78,14 +76,14 @@ private extension NetworkService {
 
     // MARK: - Clear Requests with timeout 5 second
 
-    func stopClearCancelableSet(with cancelableSet: Set<AnyCancellable?>) {
-        guard cancelableSet.count > self.cancelableSet.count else { return }
+    func stopClearCancelables() {
         clearCancelableTimer?.invalidate()
     }
 
-    func startClearCanselableSet() {
-        clearCancelableTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] timer in
-            self?.cancelableSet.removeAll()
+    func startClearCanselables() {
+        clearCancelableTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { [weak self] _ in
+            guard self?.clearCancelableTimer?.isValid == true else { return }
+            self?.cancelables.removeAll()
         }
     }
 

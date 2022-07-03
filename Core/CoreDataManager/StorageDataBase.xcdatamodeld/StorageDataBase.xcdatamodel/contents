@@ -14,7 +14,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="CurrentWeatherEntityDB" representedClassName="CurrentWeatherEntityDB" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="specification" optional="YES" attributeType="String"/>
         <attribute name="temperature" optional="YES" attributeType="String"/>
         <attribute name="weatherImage" optional="YES" attributeType="String"/>
@@ -28,7 +28,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="HourlyWeatherEntityDB" representedClassName="HourlyWeatherEntityDB" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="specification" optional="YES" attributeType="String"/>
         <attribute name="temperature" optional="YES" attributeType="String"/>
         <attribute name="weatherImage" optional="YES" attributeType="String"/>
@@ -41,7 +41,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="WeeklyWeatherEntityDB" representedClassName="WeeklyWeatherEntityDB" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="specification" optional="YES" attributeType="String"/>
         <attribute name="temperature" optional="YES" attributeType="String"/>
         <attribute name="weatherImage" optional="YES" attributeType="String"/>
