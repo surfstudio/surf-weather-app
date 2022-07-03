@@ -38,8 +38,8 @@ final class WeatherDiaryForecastListViewModel: ObservableObject {
         let models = entities.compactMap { entity -> ForecastListItemViewModel? in
             guard
                 entity.city?.cityName == UserDefaultsService.shared.selectedCity?.cityName,
-                let date = DateFormat.calendarFormatter(format: .dayLongMonth).date(from: entity.date ?? ""),
-//                DateFormat.calendarFormatter(format: .year).string(from: date) == UserDefaultsService.shared.dyaryYear,
+                let date = entity.date,
+                DateFormat.calendarFormatter(format: .year).string(from: date) == UserDefaultsService.shared.dyaryYear,
                 DateFormat.calendarFormatter(format: .month).string(from: date) == UserDefaultsService.shared.dyaryMonth
             else { return nil }
             guard
@@ -68,12 +68,9 @@ final class WeatherDiaryForecastListViewModel: ObservableObject {
                   storageService: ServicesAssemblyFactory().weatherStorageService
             )
         }
+        models.last?.isNeedSeparator = false
 
         withAnimation { items = models }
-    }
-
-    func sortItems() {
-        
     }
 
 }

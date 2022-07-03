@@ -34,7 +34,7 @@ struct MainScreenPageIndicatorView: View {
                 let isSelected = storage.selectedCity?.cityName == model.city
                 makeCirkle(with: model, isSelected: isSelected, index: index)
             }
-        }
+        }.padding()
     }
 
     func makeCirkle(with model: CardView.Model, isSelected: Bool, index: Int) -> some View {

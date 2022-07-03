@@ -14,7 +14,7 @@ struct WeatherDiaryForecastListView: View {
     var body: some View {
         weatherlistView
             .padding(EdgeInsets(top: 20, leading: 16, bottom: 28, trailing: 16))
-            .background(Color.lightBackground | Color.darkBackground2)
+            .background(viewModel.items.isEmpty ? .clear : Color.lightBackground | Color.darkBackground2)
             .cornerRadius(16)
             .frame(maxWidth: .infinity, alignment: .leading)
             .shadow(color: Color(.black.withAlphaComponent(0.08)), radius: 12, x: 0, y: 0)
