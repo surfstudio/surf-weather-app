@@ -13,21 +13,13 @@ extension CityWeatherEntity {
         cityName: String,
         lat: Double,
         lon: Double,
-        current: CurrentWeatherEntityDB?,
-        weekly: Set<WeeklyWeatherEntityDB>,
-        hourly: Set<HourlyWeatherEntityDB>
+        current: CurrentWeatherEntityDB?
     ) {
         self.init(context: StorageContextManager.shared.context)
         self.cityName = cityName
         self.lat = lat
         self.lon = lon
         self.currentWeather = current
-        self.weeklyWeather = []
-        self.hourlyWeather = []
-        StorageContextManager.shared.context.perform {
-            self.addToWeeklyWeather(weekly as NSSet)
-            self.addToHourlyWeather(hourly as NSSet)
-        }
     }
 
     var weatherArray: [WeeklyWeatherEntityDB] {
@@ -45,7 +37,7 @@ extension WeeklyWeatherEntityDB {
         specification: String,
         weatherImage: String,
         temperature: String,
-        date: String
+        date: Date?
     ) {
         self.init(context: StorageContextManager.shared.context)
         self.weekday = weekday
@@ -62,7 +54,7 @@ extension WeeklyWeatherEntityDB {
         self.wind = String(entity.wind_speed)
         self.specification = entity.weather.first?.description
         self.weatherImage = entity.weather.first?.icon ?? "01d"
-        self.date = DateFormat.calendarFormatter(format: .dayMonthYear).string(from: date)
+        self.date = date
         self.temperature = TemperatureFormatter.format(with: trunc(entity.temp.day), unit: .celsius)
             .replacingOccurrences(of: "°C", with: "")
             .replacingOccurrences(of: " ", with: "")
@@ -77,7 +69,7 @@ extension HourlyWeatherEntityDB {
         specification: String,
         weatherImage: String,
         temperature: String,
-        date: String
+        date: Date?
     ) {
         self.init(context: StorageContextManager.shared.context)
         self.wind = wind
@@ -93,7 +85,7 @@ extension HourlyWeatherEntityDB {
         self.wind = String(entity.wind_speed)
         self.specification = entity.weather.first?.description
         self.weatherImage = entity.weather.first?.icon ?? "01d"
-        self.date = DateFormat.calendarFormatter(format: .time).string(from: date)
+        self.date = date
         self.temperature = TemperatureFormatter.format(with: trunc(entity.temp), unit: .celsius)
             .replacingOccurrences(of: "°C", with: "")
             .replacingOccurrences(of: " ", with: "")
@@ -109,7 +101,7 @@ extension CurrentWeatherEntityDB {
         specification: String,
         weatherImage: String,
         temperature: String,
-        date: String
+        date: Date?
     ) {
         self.init(context: StorageContextManager.shared.context)
         self.weekday = weekday
@@ -127,7 +119,7 @@ extension CurrentWeatherEntityDB {
         self.wind = String(entity.wind_speed)
         self.specification = entity.weather.first?.description
         self.weatherImage = entity.weather.first?.icon ?? "01d"
-        self.date = DateFormat.calendarFormatter(format: .dayMonthYear).string(from: date)
+        self.date = date
         self.temperature = TemperatureFormatter.format(with: trunc(entity.temp), unit: .celsius)
             .replacingOccurrences(of: "°C", with: "")
             .replacingOccurrences(of: " ", with: "")

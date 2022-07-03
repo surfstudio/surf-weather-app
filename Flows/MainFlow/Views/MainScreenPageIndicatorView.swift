@@ -29,7 +29,7 @@ struct MainScreenPageIndicatorView: View {
 
     var body: some View {
         HStack {
-            ForEach(viewModel.cardViewModels.indices) { index in
+            ForEach(viewModel.cardViewModels.indices, id: \.self) { index in
                 let model = viewModel.cardViewModels[index].model
                 let isSelected = storage.selectedCity?.cityName == model.city
                 makeCirkle(with: model, isSelected: isSelected, index: index)

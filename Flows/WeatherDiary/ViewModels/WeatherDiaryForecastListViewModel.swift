@@ -21,7 +21,7 @@ final class WeatherDiaryForecastListViewModel: ObservableObject {
                            lat: 25,
                            lon: 25,
                            weekday: "Сегодня",
-                           date: "11 апреля",
+                           date: Date(),
                            temperature: "5℃",
                            weatherImage: "01d",
                            description: "Сильный ветер",
