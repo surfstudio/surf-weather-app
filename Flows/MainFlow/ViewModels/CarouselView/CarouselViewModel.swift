@@ -13,7 +13,7 @@ final class CarouselViewModel: ObservableObject {
     @Published var updateIsNeeded = false
     @Published var cardViewModels: [CardViewModel] = []
 
-    var onChangeSelectedCity: Closure<CityEntity>?
+    var onChangeSelectedCity: Closure<String>?
     var onChangePage: Closure<CGFloat>?
     var onStartLoading: EmptyClosure?
     var onStopLoading: EmptyClosure?
@@ -54,7 +54,7 @@ final class CarouselViewModel: ObservableObject {
 
     func changePage(with index: Int) {
         UserDefaultsService.shared.selectedCity = cities[index]
-        onChangeSelectedCity?(cities[index])
+        onChangeSelectedCity?(cities[index].cityName)
     }
 
 }

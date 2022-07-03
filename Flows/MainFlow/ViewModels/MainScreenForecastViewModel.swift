@@ -47,12 +47,6 @@ final class MainScreenForecastViewModel: ObservableObject {
         loadArchiveWeather(with: selectedCity)
     }
 
-    func update(with city: CityEntity) {
-        print(city)
-        loadWeather(with: city)
-        loadArchiveWeather(with: city)
-    }
-
 }
 
 // MARK: - Private Methods

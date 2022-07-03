@@ -30,8 +30,8 @@ final class MainScreenViewModel: ObservableObject {
                                        weatherNetworkService: serviceAssembly.weatherNetworkService)
 
         carouselViewModel.onChangeSelectedCity = { [weak self] in
-            self?.forecastViewModel.update(with: $0)
-            self?.locationViewModel.update(with: $0.cityName)
+            self?.forecastViewModel.loadData()
+            self?.locationViewModel.update(with: $0)
         }
 
         carouselViewModel.onStartLoading = { [weak self] in self?.isLoading = true }
