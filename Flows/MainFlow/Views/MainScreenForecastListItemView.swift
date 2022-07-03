@@ -41,7 +41,7 @@ struct MainScreenForecastListItemView: View {
             Text(viewModel.model.weekday)
                 .font(.system(size: 16))
                 .foregroundColor(dayColor) +
-            Text(", \(viewModel.model.date)")
+            Text(", \(date)")
                 .font(.system(size: 16))
                 .foregroundColor(.lightText2 | .darkText)
 
@@ -100,6 +100,10 @@ struct MainScreenForecastListItemView: View {
             )
     }
 
+    var date: String {
+        DateFormat.calendarFormatter(format: .dayLongMonth).string(from: viewModel.model.date)
+    }
+
 }
 
 // MARK: - Model
@@ -111,7 +115,7 @@ extension MainScreenForecastListItemView {
         let lat: Double
         let lon: Double
         let weekday: String
-        let date: String
+        let date: Date
         let temperature: String
         let weatherImage: String
         let description: String
@@ -130,7 +134,7 @@ struct MainScreenForecastListView_Previews: PreviewProvider {
                                           lat: 25,
                                           lon: 25,
                                           weekday: "Сегодня",
-                                          date: "11 апреля",
+                                          date: Date(),
                                           temperature: "5℃",
                                           weatherImage: "01d",
                                           description: "Сильный ветер",

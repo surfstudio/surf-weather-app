@@ -5,6 +5,8 @@
 //  Created by porohov on 26.05.2022.
 //
 
+import Foundation
+
 protocol WeatherStorageService {
 
     func getHourlyWeather(completion: @escaping (Result<[HourlyWeatherEntityDB]?, Error>) -> Void)
@@ -14,6 +16,6 @@ protocol WeatherStorageService {
     func deleteCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void)
 
     func getWeathers(with cityName: String, completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void)
-    func deleteWeather(with cityName: String, date: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func deleteWeather(with cityName: String, date: Date?, completion: @escaping (Result<Void, Error>) -> Void)
     func saveWeather(by city: CityWeatherEntity, weather: WeeklyWeatherEntityDB, completion: @escaping (Result<Void, Error>) -> Void)
 }

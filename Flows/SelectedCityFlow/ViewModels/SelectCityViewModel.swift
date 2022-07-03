@@ -101,7 +101,7 @@ private extension SelectCityViewModel {
     }
 
     func makeCityCardModel(with entity: CurrentWeatherEntityDB, city: String, id: Int) -> CityCardView.Model {
-        let date = entity.date ?? ""
+        let date = entity.date ?? Date()
         let temp = entity.temperature ?? ""
         let imageName = Assets(rawValue: entity.weatherImage ?? "01d")?.imageName ?? "sun"
 

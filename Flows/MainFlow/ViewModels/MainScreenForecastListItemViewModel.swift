@@ -98,9 +98,7 @@ final class MainScreenForecastListItemViewModel: ObservableObject {
                 cityName: model.cityName,
                 lat: model.lat,
                 lon: model.lon,
-                current: nil,
-                weekly: [savedWeather],
-                hourly: []
+                current: nil
             )
             saveCity(with: newCity)
         }

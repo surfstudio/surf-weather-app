@@ -17,34 +17,31 @@ final class DataBaseStorage: WeatherStorageService {
     private let cityStorageManager = CoreDataRepository<CityWeatherEntity>()
 
     private var clearCancelableTimer: Timer?
-    private var cancelableSet = Set<AnyCancellable?>() {
-        willSet { stopClearCancelableSet(with: newValue) } // Останавливает таймер если добавляются новые объекты
+    private var cancelables = [AnyCancellable]() {
+        willSet { stopClearCancelables() } // Останавливает таймер если добавляются новые объекты
     }
 
     // MARK: - Methods
 
     func getCities(completion: @escaping (Result<[CityWeatherEntity]?, Error>) -> Void) {
-        let cancelable = cityStorageManager.objects().sink(
+        cityStorageManager.objects().sink(
             receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
             receiveValue: { completion(.success($0)) }
-        )
-        cancelableSet.insert(cancelable)
+        ).store(in: &cancelables)
     }
 
     func saveCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void) {
-        let cancelable = cityStorageManager.add({ $0 = city }).sink(
+        cityStorageManager.add({ $0 = city }).sink(
             receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
             receiveValue: { _ in completion(.success(())) }
-        )
-        cancelableSet.insert(cancelable)
+        ).store(in: &cancelables)
     }
 
     func deleteCity(city: CityWeatherEntity, completion: @escaping (Result<Void, Error>) -> Void) {
-        let cancelable = cityStorageManager.delete(city).sink(
+        cityStorageManager.delete(city).sink(
             receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
             receiveValue: { completion(.success(())) }
-        )
-        cancelableSet.insert(cancelable)
+        ).store(in: &cancelables)
     }
 
     func getWeathers(with cityName: String, completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void) {
@@ -62,25 +59,24 @@ final class DataBaseStorage: WeatherStorageService {
     func saveWeather(by city: CityWeatherEntity, weather: WeeklyWeatherEntityDB, completion: @escaping (Result<Void, Error>) -> Void) {
         city.addToWeeklyWeather(weather)
 
-        let cancelable = cityStorageManager.update(city).sink(
+        cityStorageManager.update(city).sink(
             receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
             receiveValue: { _ in completion(.success(())) }
-        )
-        cancelableSet.insert(cancelable)
+        ).store(in: &cancelables)
     }
 
-    func deleteWeather(with cityName: String, date: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func deleteWeather(with cityName: String, date: Date?, completion: @escaping (Result<Void, Error>) -> Void) {
         getCities { [weak self] result in
             switch result {
             case .success(let cities):
-                guard let weather = cities?.first(where: { $0.cityName == cityName })?.weatherArray.first(where: { $0.date == date }) else {
+                guard let weather = cities?.first(where: { $0.cityName == cityName })?.weatherArray.first(where: { $0.date == date }),
+                      let self = self else {
                     return
                 }
-                let cancelable = self?.weaklyStorageManager.delete(weather).sink(
-                    receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
+                self.weaklyStorageManager.delete(weather).sink(
+                    receiveCompletion: { self.handleCompletion(with: $0, completion: completion) },
                     receiveValue: { completion(.success(())) }
-                )
-                self?.cancelableSet.insert(cancelable)
+                ).store(in: &self.cancelables)
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -88,19 +84,17 @@ final class DataBaseStorage: WeatherStorageService {
     }
 
     func getHourlyWeather(completion: @escaping (Result<[HourlyWeatherEntityDB]?, Error>) -> Void) {
-        let cancelable = hourlyStorageManager.objects().sink(
+        hourlyStorageManager.objects().sink(
             receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
             receiveValue: { completion(.success($0)) }
-        )
-        cancelableSet.insert(cancelable)
+        ).store(in: &cancelables)
     }
 
     func getWeeklyWeather(completion: @escaping (Result<[WeeklyWeatherEntityDB]?, Error>) -> Void) {
-        let cancelable = weaklyStorageManager.objects().sink(
+        weaklyStorageManager.objects().sink(
             receiveCompletion: { [weak self] in self?.handleCompletion(with: $0, completion: completion) },
             receiveValue: { completion(.success($0)) }
-        )
-        cancelableSet.insert(cancelable)
+        ).store(in: &cancelables)
     }
 
 }
@@ -110,14 +104,14 @@ final class DataBaseStorage: WeatherStorageService {
 private extension DataBaseStorage {
 
     func handleCompletion(with result: Subscribers.Completion<Error>, completion: (Result<Void, Error>) -> Void) {
-        startClearCanselableSet()
+        startClearCanselables()
 
         guard case .failure(let error) = result else { return }
         completion(.failure(error))
     }
 
     func handleCompletion<T: NSManagedObject>(with result: Subscribers.Completion<Error>, completion: (Result<[T]?, Error>) -> Void) {
-        startClearCanselableSet()
+        startClearCanselables()
 
         guard case .failure(let error) = result else { return }
         completion(.failure(error))
@@ -125,14 +119,14 @@ private extension DataBaseStorage {
 
     // MARK: - Clear Requests with timeout 5 second
 
-    func stopClearCancelableSet(with cancelableSet: Set<AnyCancellable?>) {
-        guard cancelableSet.count > self.cancelableSet.count else { return }
+    func stopClearCancelables() {
         clearCancelableTimer?.invalidate()
     }
 
-    func startClearCanselableSet() {
-        clearCancelableTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] timer in
-            self?.cancelableSet.removeAll()
+    func startClearCanselables() {
+        clearCancelableTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak self] _ in
+            guard self?.clearCancelableTimer?.isValid == true else { return }
+            self?.cancelables.removeAll()
         }
     }
 

@@ -28,9 +28,8 @@ public enum DateFormat: String {
         return dateFormatter
     }
 
-    public static func compareDates(_ first: String, _ second: String, format: DateFormat) -> Bool {
-        let formatterDate = calendarFormatter(format: format)
-        return formatterDate.date(from: first) ?? Date() < formatterDate.date(from: second) ?? Date()
+    public static func compareDates(_ first: Date, _ second: Date) -> Bool {
+        return first < second
     }
 
 }

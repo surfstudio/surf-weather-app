@@ -16,6 +16,8 @@ final class MainScreenViewModel: ObservableObject {
     let forecastViewModel: MainScreenForecastViewModel
     @ObservedObject var carouselViewModel: CarouselViewModel
 
+    @Published var isLoading = true
+
     // MARK: - Initialization
 
     init(serviceAssembly:  ServicesAssembly) {
@@ -28,12 +30,17 @@ final class MainScreenViewModel: ObservableObject {
                                        weatherNetworkService: serviceAssembly.weatherNetworkService)
 
         carouselViewModel.onChangeSelectedCity = { [weak self] in
-            self?.forecastViewModel.loadData()
-            self?.locationViewModel.update(with: $0)
+            self?.forecastViewModel.update(with: $0)
+            self?.locationViewModel.update(with: $0.cityName)
         }
+
+        carouselViewModel.onStartLoading = { [weak self] in self?.isLoading = true }
+        carouselViewModel.onStopLoading = { [weak self] in self?.isLoading = false }
+
         locationViewModel.selectCityViewModel.onChangedItemCount = { [weak self] in
             self?.carouselViewModel.update(with: $0)
         }
+
         locationViewModel.selectCityViewModel.onSelectCity = { [weak self] cityName in
             self?.carouselViewModel.selectCity(with: cityName)
         }

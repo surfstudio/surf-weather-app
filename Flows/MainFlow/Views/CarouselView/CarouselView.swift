@@ -93,7 +93,7 @@ struct CarouselView: UIViewRepresentable {
      var pagerView: some View {
          let itemSize = cardMode == .short ? Constants.shortItemSize : Constants.longItemSize
          return HStack(alignment: .center, spacing: itemSpacingWithScale) {
-             ForEach(viewModel.cardViewModels.indices) {
+             ForEach(viewModel.cardViewModels.indices, id: \.self) {
                  let model = viewModel.cardViewModels[$0]
                  let percent = Constants.maxReductionPercent
                  CardView(viewModel: model, mode: $cardMode, page: $page, cardId: $0, itemSize: itemSize, maxReductionPercent: percent)

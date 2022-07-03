@@ -37,7 +37,6 @@ class MainScreenForecastModelAdapter {
         weatherDayEntities.prefix(5).compactMap { entity -> MainScreenForecastListItemView.Model in
             let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
 
-            let dateFormatted = DateFormat.calendarFormatter(format: .dayLongMonth).string(from: date)
             let temp = TemperatureFormatter.format(with: entity.temp.day, unit: .celsius)
             let imageName = entity.weather.first?.icon ?? "01d"
             let description = entity.weather.first?.description ?? ""
@@ -47,7 +46,7 @@ class MainScreenForecastModelAdapter {
                          lat: cord.lat,
                          lon: cord.lon,
                          weekday: date.weekday,
-                         date: dateFormatted,
+                         date: date,
                          temperature: temp,
                          weatherImage: imageName,
                          description: description,
@@ -57,21 +56,21 @@ class MainScreenForecastModelAdapter {
 
     func makeScreenForecastModelsByStorage() -> [MainScreenForecastListItemView.Model] {
         var models: [MainScreenForecastListItemView.Model] = []
+        
+        models = weatherStorageEntities.compactMap { entity -> MainScreenForecastListItemView.Model? in
+            guard let date = entity.date else { return nil }
 
-        for entity in weatherStorageEntities {
-
-            let model = MainScreenForecastListItemView.Model(
+            return MainScreenForecastListItemView.Model(
                 cityName: cityName,
                 lat: cord.lat,
                 lon: cord.lon,
                 weekday: entity.weekday ?? "",
-                date: entity.date ?? "",
+                date: date,
                 temperature: entity.temperature ?? "",
                 weatherImage: entity.weatherImage ?? "",
                 description: entity.specification ?? "",
                 wind: entity.wind ?? ""
             )
-            models.append(model)
         }
         return models
     }
@@ -92,9 +91,7 @@ class MainScreenForecastModelAdapter {
             cityName: model.cityName,
             lat: model.lat,
             lon: model.lon,
-            current: nil,
-            weekly: [],
-            hourly: []
+            current: nil
         )
     }
 

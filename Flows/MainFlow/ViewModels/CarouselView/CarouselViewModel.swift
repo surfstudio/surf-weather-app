@@ -13,8 +13,10 @@ final class CarouselViewModel: ObservableObject {
     @Published var updateIsNeeded = false
     @Published var cardViewModels: [CardViewModel] = []
 
-    var onChangeSelectedCity: Closure<String>?
+    var onChangeSelectedCity: Closure<CityEntity>?
     var onChangePage: Closure<CGFloat>?
+    var onStartLoading: EmptyClosure?
+    var onStopLoading: EmptyClosure?
 
     private let weatherStorageService: WeatherStorageService
     private let weatherNetworkService: WeatherNetworkService
@@ -28,6 +30,7 @@ final class CarouselViewModel: ObservableObject {
     }
 
     func loadData() {
+        onStartLoading?()
         weatherStorageService.getCities { [weak self] in
             guard case .success(let entities) = $0 else { return }
             self?.cardViewModels.removeAll()
@@ -51,7 +54,7 @@ final class CarouselViewModel: ObservableObject {
 
     func changePage(with index: Int) {
         UserDefaultsService.shared.selectedCity = cities[index]
-        onChangeSelectedCity?(cities[index].cityName)
+        onChangeSelectedCity?(cities[index])
     }
 
 }
@@ -80,6 +83,7 @@ private extension CarouselViewModel {
         cities.append(.init(cityName: cityName, area: "", cords: cords))
 
         withAnimation { self.updateIsNeeded = true }
+        onStopLoading?()
     }
 
     func getHourly(with entities: [HourlyWeatherEntity], currentDate: Int) -> [HourlyCardView.Model] {
