@@ -81,8 +81,10 @@ private extension MainScreenForecastViewModel {
         forecastItems = adapter.makeScreenForecastModels().compactMap { model in
                 .init(isSelected: archiveItems.contains(where: { $0.model.date == model.date }),
                       model: model,
+                      isNeedDayAllocate: model.date.isToday,
                       storageService: storageService)
         }
+        forecastItems.last?.isNeedSeparator = false
 
         // Работа чекбокса
         forecastItems.forEach { handleSelectItems(for: $0) }
@@ -99,7 +101,10 @@ private extension MainScreenForecastViewModel {
         let models = adapter.makeScreenForecastModelsByStorage().sorted {
             DateFormat.compareDates($0.date, $1.date)
         }
-        archiveItems = models.compactMap { .init(isSelected: true, model: $0, storageService: storageService) }
+        archiveItems = models.compactMap {
+            .init(isSelected: true, model: $0, isNeedDayAllocate: $0.date.isToday, storageService: storageService)
+        }
+        archiveItems.last?.isNeedSeparator = false
 
         // Работа чекбокса
         archiveItems.forEach { handleSelectItems(for: $0) }
