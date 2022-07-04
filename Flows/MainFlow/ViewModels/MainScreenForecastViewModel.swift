@@ -21,12 +21,12 @@ final class MainScreenForecastViewModel: ObservableObject {
     // MARK: - Properties
 
     @Published var selectedList: Int = SelectedList.forecast.rawValue
-    @Published var items: [MainScreenForecastListItemViewModel] = []
+    @Published var items: [ForecastListItemViewModel] = []
 
     // MARK: - Private Properties
 
-    private var forecastItems: [MainScreenForecastListItemViewModel] = []
-    private var archiveItems: [MainScreenForecastListItemViewModel] = []
+    private var forecastItems: [ForecastListItemViewModel] = []
+    private var archiveItems: [ForecastListItemViewModel] = []
 
     private var cancellables: [AnyCancellable] = []
     private let weatherService: WeatherNetworkService
@@ -118,7 +118,7 @@ private extension MainScreenForecastViewModel {
         }.store(in: &self.cancellables)
     }
 
-    func handleSelectItems(for item: MainScreenForecastListItemViewModel) {
+    func handleSelectItems(for item: ForecastListItemViewModel) {
         item.onSelect = { [weak self] isSelected in
             if isSelected {
                 self?.archiveItems.append(item)

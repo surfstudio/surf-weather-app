@@ -32,9 +32,9 @@ class MainScreenForecastModelAdapter {
 
     // MARK: - Methods
 
-    func makeScreenForecastModels() -> [MainScreenForecastListItemView.Model] {
+    func makeScreenForecastModels() -> [ForecastListItemView.Model] {
 
-        weatherDayEntities.prefix(5).compactMap { entity -> MainScreenForecastListItemView.Model in
+        weatherDayEntities.prefix(5).compactMap { entity -> ForecastListItemView.Model in
             let date = Date(timeIntervalSince1970: TimeInterval(entity.dt))
 
             let temp = TemperatureFormatter.format(with: entity.temp.day, unit: .celsius)
@@ -54,13 +54,13 @@ class MainScreenForecastModelAdapter {
         }
     }
 
-    func makeScreenForecastModelsByStorage() -> [MainScreenForecastListItemView.Model] {
-        var models: [MainScreenForecastListItemView.Model] = []
+    func makeScreenForecastModelsByStorage() -> [ForecastListItemView.Model] {
+        var models: [ForecastListItemView.Model] = []
         
-        models = weatherStorageEntities.compactMap { entity -> MainScreenForecastListItemView.Model? in
+        models = weatherStorageEntities.compactMap { entity -> ForecastListItemView.Model? in
             guard let date = entity.date else { return nil }
 
-            return MainScreenForecastListItemView.Model(
+            return ForecastListItemView.Model(
                 cityName: cityName,
                 lat: cord.lat,
                 lon: cord.lon,
@@ -75,7 +75,7 @@ class MainScreenForecastModelAdapter {
         return models
     }
 
-    static func makeStorageWeatherEntity(with model: MainScreenForecastListItemView.Model) -> WeeklyWeatherEntityDB {
+    static func makeStorageWeatherEntity(with model: ForecastListItemView.Model) -> WeeklyWeatherEntityDB {
         return WeeklyWeatherEntityDB(
             weekday: model.weekday,
             wind: model.wind,
@@ -86,7 +86,7 @@ class MainScreenForecastModelAdapter {
         )
     }
 
-    static func makeCityWeatherEntity(with model: MainScreenForecastListItemView.Model) -> CityWeatherEntity {
+    static func makeCityWeatherEntity(with model: ForecastListItemView.Model) -> CityWeatherEntity {
         return CityWeatherEntity(
             cityName: model.cityName,
             lat: model.lat,
