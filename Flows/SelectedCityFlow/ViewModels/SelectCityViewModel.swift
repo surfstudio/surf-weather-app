@@ -16,7 +16,7 @@ final class SelectCityViewModel: ObservableObject {
     @Published var showingPopup: Bool = false
     var searchListViewModel: LocationListViewModel
     var cityCardViewModel: CityCardViewModel
-    var onChangedItemCount: Closure<Int>?
+    var onChangedCitiesCount: EmptyClosure?
     var onSelectCity: Closure<String>?
 
     // MARK: - Private Properties
@@ -91,9 +91,12 @@ private extension SelectCityViewModel {
         }
 
         withAnimation {
+            let isChangeCount = weathers.count != cities.count
             weathers = cities.sorted(by: { $0.isSelected && !$1.isSelected })
-            onChangedItemCount?(weathers.count)
 
+            if isChangeCount {
+                onChangedCitiesCount?()
+            }
             if weathers.allSatisfy({ $0.isSelected == false }) && weathers.count > .zero {
                 selectCity(with: weathers[0].city)
             }

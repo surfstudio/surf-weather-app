@@ -13,7 +13,7 @@ final class ForecastListItemViewModel: ObservableObject {
 
     @Published var isSelected: Bool
     @Published var model: ForecastListItemView.Model
-    let isNeedSeparator: Bool
+    var isNeedSeparator: Bool
     let isNeedDayAllocate: Bool
     let storageService: WeatherStorageService
 

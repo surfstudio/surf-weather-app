@@ -13,6 +13,7 @@ struct CardView: View {
 
     struct Model {
         let city: String
+        let date: String
         var temperature: String
         var image: Assets
         var hourly: [HourlyCardView.Model]
@@ -66,7 +67,7 @@ struct CardView: View {
         VStack(alignment: .leading, spacing: 16.0) {
             HStack {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.model.city)
+                    Text(viewModel.model.date)
                         .foregroundColor(.opacityWhite)
                         .font(Font(.init(.system, size: 12)))
                     HStack(alignment: .top, spacing: 8) {

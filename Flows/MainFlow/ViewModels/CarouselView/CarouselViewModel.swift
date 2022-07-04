@@ -29,7 +29,7 @@ final class CarouselViewModel: ObservableObject {
         loadData()
     }
 
-    func loadData() {
+    func loadData(completion: EmptyClosure? = nil) {
         onStartLoading?()
         weatherStorageService.getCities { [weak self] in
             guard case .success(let entities) = $0 else { return }
@@ -37,14 +37,18 @@ final class CarouselViewModel: ObservableObject {
             self?.cities.removeAll()
             entities?.forEach {
                 guard let cityName = $0.cityName else { return }
-                self?.loadWeather(for: .init(lat: $0.lat, lon: $0.lon), cityName: cityName)
+                let isLast = $0 === entities?.last(where: { $0.cityName != nil })
+                self?.loadWeather(for: .init(lat: $0.lat, lon: $0.lon), cityName: cityName, completion: isLast ? completion : nil)
             }
         }
     }
 
-    func update(with itemCount: Int) {
-        guard itemCount != cardViewModels.count else { return }
-        self.loadData()
+    func update() {
+        self.loadData() { [weak self] in
+            DispatchQueue.main.async {
+                self?.selectCity(with: UserDefaultsService.shared.selectedCity?.cityName ?? "")
+            }
+        }
     }
 
     func selectCity(with cityName: String) {
@@ -61,14 +65,14 @@ final class CarouselViewModel: ObservableObject {
 
 private extension CarouselViewModel {
 
-    func loadWeather(for cords: CordsEntity, cityName: String) {
+    func loadWeather(for cords: CordsEntity, cityName: String, completion: EmptyClosure?) {
         weatherNetworkService.getWeather(with: cords) { [weak self] in
             guard case .success(let request) = $0 else { return }
-            self?.handleSuccess(with: request, cords: cords, cityName: cityName)
+            self?.handleSuccess(with: request, cords: cords, cityName: cityName, completion: completion)
         }
     }
 
-    func handleSuccess(with request: WeatherRequestEntity?, cords: CordsEntity, cityName: String) {
+    func handleSuccess(with request: WeatherRequestEntity?, cords: CordsEntity, cityName: String, completion: EmptyClosure?) {
         guard
             let request = request,
             let current = request.current,
@@ -78,12 +82,15 @@ private extension CarouselViewModel {
 
         let roundedTemp = String(Int(current.temp))
         let hourlyModels = getHourly(with: request.hourly, currentDate: current.dt)
-        let vm = CardViewModel(model: .init(city: cityName, temperature: roundedTemp, image: image, hourly: hourlyModels))
+        let date = Date(timeIntervalSince1970: TimeInterval(current.dt))
+        let currentDate = [date.weekday, DateFormat.calendarFormatter(format: .dayLongMonth).string(from: date)].joined(separator: ", ")
+        let vm = CardViewModel(model: .init(city: cityName, date: currentDate, temperature: roundedTemp, image: image, hourly: hourlyModels))
         cardViewModels.append(vm)
         cities.append(.init(cityName: cityName, area: "", cords: cords))
 
         withAnimation { self.updateIsNeeded = true }
         onStopLoading?()
+        completion?()
     }
 
     func getHourly(with entities: [HourlyWeatherEntity], currentDate: Int) -> [HourlyCardView.Model] {

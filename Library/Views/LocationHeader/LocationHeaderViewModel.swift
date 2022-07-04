@@ -17,6 +17,13 @@ final class LocationHeaderViewModel: ObservableObject {
         case content(String)
     }
 
+    // MARK: - Properties
+
+    var onSelectCity: Closure<String>?
+    var onChangedCitiesCount: EmptyClosure?
+
+    // MARK: - Private Properties
+
     let selectCityViewModel: SelectCityViewModel
 
     init(weatherNetworkService: WeatherNetworkService,
@@ -26,6 +33,13 @@ final class LocationHeaderViewModel: ObservableObject {
         self.selectCityViewModel = .init(weatherService: weatherNetworkService,
                                          locationService: locationNetworkService,
                                          weatherStorageServices: weatherStorageService)
+
+        selectCityViewModel.onSelectCity = { [weak self] city in
+            self?.onSelectCity?(city)
+        }
+        selectCityViewModel.onChangedCitiesCount = { [weak self] in
+            self?.onChangedCitiesCount?()
+        }
     }
 
     // MARK: - States
@@ -35,8 +49,7 @@ final class LocationHeaderViewModel: ObservableObject {
     // MARK: - Methods
 
     func update(with cityName: String) {
-        print(cityName)
-        state = .content(cityName)
+        state = .loading
         selectCityViewModel.selectCity(with: cityName, isUpdating: true)
     }
 
