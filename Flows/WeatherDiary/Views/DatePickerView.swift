@@ -21,8 +21,8 @@ struct DatePickerView: View {
 
     var pickerView: some View {
         Picker("", selection: $viewModel.currentYear) {
-            ForEach(2000...2022, id: \.self) {
-                Text(String($0))
+            ForEach(viewModel.years, id: \.self) {
+                Text($0)
             }
         }
         .pickerStyle(InlinePickerStyle())

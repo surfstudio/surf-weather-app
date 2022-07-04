@@ -34,12 +34,12 @@ struct WeatherDiaryMonthListView: View {
     func makeMonthView(with index: Int) -> some View {
         let selectedColor = Color.lightBlue | Color.darkPurple
         let deselectColor = Color.lightBackground2 | Color.darkBackground2
-        let isSelected = viewModel.month[index].1
+        let isSelected = viewModel.month[index].isSelected
 
         return Button {
             viewModel.selectMonth(with: index)
         } label: {
-            Text(viewModel.month[index].0)
+            Text(viewModel.month[index].name)
                 .foregroundColor(.black | .white)
                 .padding()
                 .frame(height: Constant.monthItemHeight - Constant.borderWidth)
