@@ -32,16 +32,17 @@ final class MainScreenViewModel: ObservableObject {
         carouselViewModel.onChangeSelectedCity = { [weak self] in
             self?.forecastViewModel.loadData()
             self?.locationViewModel.update(with: $0)
+            self?.locationViewModel.state = .content($0)
         }
 
         carouselViewModel.onStartLoading = { [weak self] in self?.isLoading = true }
         carouselViewModel.onStopLoading = { [weak self] in self?.isLoading = false }
 
-        locationViewModel.selectCityViewModel.onChangedItemCount = { [weak self] in
-            self?.carouselViewModel.update(with: $0)
+        locationViewModel.onChangedCitiesCount = { [weak self] in
+            self?.carouselViewModel.update()
         }
 
-        locationViewModel.selectCityViewModel.onSelectCity = { [weak self] cityName in
+        locationViewModel.onSelectCity = { [weak self] cityName in
             self?.carouselViewModel.selectCity(with: cityName)
         }
     }

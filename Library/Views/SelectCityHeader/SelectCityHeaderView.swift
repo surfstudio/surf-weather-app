@@ -22,7 +22,9 @@ struct SelectCityHeaderView: View {
 
     var body: some View {
         HStack {
-            backButton
+            if !isChangeMode {
+                backButton
+            }
             Spacer()
             editButton
         }
@@ -42,7 +44,11 @@ struct SelectCityHeaderView: View {
             viewModel.editButtonAction()
             isChangeMode.toggle()
         }, label: {
-            RoundButtonView(image: Image("edit", bundle: nil))
+            if isChangeMode {
+                Text("Готово").frame(height: 40).foregroundColor(.lightBlue | .violetTextColor)
+            } else {
+                RoundButtonView(image: Image("edit", bundle: nil))
+            }
         })
     }
 
