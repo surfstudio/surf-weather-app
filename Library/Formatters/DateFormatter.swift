@@ -12,6 +12,8 @@ public enum DateFormat: String {
     case dayMonthYear = "dd.MM.yyyy"
     case dayLongMonthYear = "dd MMMM yyyy"
     case dayLongMonth = "dd MMMM"
+    case time = "HH:mm"
+    case hour = "HH"
 
     public var defaultFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -26,6 +28,10 @@ public enum DateFormat: String {
         return dateFormatter
     }
 
+    public static func compareDates(_ first: Date, _ second: Date) -> Bool {
+        return first < second
+    }
+
 }
 
 extension Date {
@@ -34,11 +40,16 @@ extension Date {
         let calendar = Calendar.current
         let daily = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
         let weekday = calendar.component(.weekday, from: self)
+
+        return daily[weekday - 1]
+    }
+
+    var isToday: Bool {
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: self)
         let currentDay = calendar.component(.weekday, from: Date())
 
-        let isToday = weekday == currentDay
-
-        return isToday ? "Сегодня" : daily[weekday - 1]
+        return weekday == currentDay
     }
 
 }

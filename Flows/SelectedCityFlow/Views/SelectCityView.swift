@@ -107,7 +107,7 @@ struct SelectCityView: View {
                         .shadow(color: .lightBackground2 | .darkBackground2, radius: 10, x: 0, y: 0)
                         .onTapGesture {
                             guard !isChangeMode else { return }
-                            viewModel.selectCity(with: model)
+                            viewModel.selectCity(with: model.city)
                         }
                     
                 }
@@ -120,9 +120,16 @@ struct SelectCityView: View {
 struct AddSitiesView_Previews: PreviewProvider {
 
     static var previews: some View {
-        SelectCityView(viewModel: .init(
-            weatherService: ServicesAssemblyFactory().weatherNetworkService,
-            locationService: ServicesAssemblyFactory().locationNetworkService), mainHeaderViewModel: .init())
+        let assembly = ServicesAssemblyFactory()
+        SelectCityView(
+            viewModel: .init(
+                weatherService: assembly.weatherNetworkService,
+                locationService: assembly.locationNetworkService,
+                weatherStorageServices: assembly.weatherStorageService),
+            mainHeaderViewModel: .init(
+                weatherNetworkService: assembly.weatherNetworkService,
+                locationNetworkService: assembly.locationNetworkService,
+                weatherStorageService: assembly.weatherStorageService))
     }
 
 }

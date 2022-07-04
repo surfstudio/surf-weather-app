@@ -12,7 +12,8 @@ struct CardView: View {
     // MARK: - Nested
 
     struct Model {
-        let dayly: String
+        let city: String
+        let date: String
         var temperature: String
         var image: Assets
         var hourly: [HourlyCardView.Model]
@@ -41,7 +42,7 @@ struct CardView: View {
 
     var body: some View {
         ZStack {
-            Image(storage.isLightMode ? "card_background_light" : "card_background_dark", bundle: nil)
+            Image(storage.isLightMode ? "big_background_light" : "big_background_dark", bundle: nil)
                 .resizable(capInsets: .init(top: 20, leading: 0, bottom: 20, trailing: 0), resizingMode: .stretch)
             VStack {
                 topView
@@ -66,7 +67,7 @@ struct CardView: View {
         VStack(alignment: .leading, spacing: 16.0) {
             HStack {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.model.dayly)
+                    Text(viewModel.model.date)
                         .foregroundColor(.opacityWhite)
                         .font(Font(.init(.system, size: 12)))
                     HStack(alignment: .top, spacing: 8) {
@@ -80,9 +81,9 @@ struct CardView: View {
                     }
                 }
                 Spacer()
-                Image(viewModel.model.image.medium, bundle: nil).padding(.top, -70).padding(.trailing, -50)
+                Image(viewModel.model.image.imageName, bundle: nil).padding(.top, -70).padding(.trailing, -50)
             }
-            Text(viewModel.model.image.name)
+            Text(viewModel.model.image.description)
                 .foregroundColor(.white)
                 .font(Font(.init(.system, size: 24)))
         }

@@ -23,6 +23,12 @@
 		76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */; };
 		76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6467C27C92B0200D8BBA9 /* Colors.swift */; };
 		76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */; };
+		A41A8950283FBD08003DAFB0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A894F283FBD08003DAFB0 /* CoreDataStack.swift */; };
+		A41A8955283FBF7B003DAFB0 /* StorageDataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A41A8953283FBF7B003DAFB0 /* StorageDataBase.xcdatamodeld */; };
+		A41A8957283FC219003DAFB0 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A8956283FC219003DAFB0 /* CoreDataRepository.swift */; };
+		A41A895B283FC46A003DAFB0 /* WeatherStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A895A283FC46A003DAFB0 /* WeatherStorageService.swift */; };
+		A41A895D283FE513003DAFB0 /* StorageContextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A895C283FE513003DAFB0 /* StorageContextManager.swift */; };
+		A41A895F283FE6E8003DAFB0 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A895E283FE6E8003DAFB0 /* ObjectExtension.swift */; };
 		A444272F283B57FF0069C3ED /* CityWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = A444272E283B57FF0069C3ED /* CityWeather.swift */; };
 		A4442731283B6C6F0069C3ED /* CityCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4442730283B6C6F0069C3ED /* CityCardViewModel.swift */; };
 		A4442733283B7B250069C3ED /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4442732283B7B250069C3ED /* Encodable+Extension.swift */; };
@@ -34,16 +40,7 @@
 		A44B6B34282CDBC300542E32 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A44B6B3B282E225400542E32 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A467D0BB282B836B00D92212 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		A483B584286DDE7000DE9427 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B57F286DDE7000DE9427 /* CardView.swift */; };
-		A483B585286DDE7000DE9427 /* HourlyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B580286DDE7000DE9427 /* HourlyCardView.swift */; };
-		A483B586286DDE7000DE9427 /* ScrollDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B582286DDE7000DE9427 /* ScrollDelegate.swift */; };
-		A483B587286DDE7000DE9427 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B583286DDE7000DE9427 /* CarouselView.swift */; };
-		A483B58C286DDE7A00DE9427 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B589286DDE7A00DE9427 /* CardViewModel.swift */; };
-		A483B58D286DDE7A00DE9427 /* CarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B58A286DDE7A00DE9427 /* CarouselViewModel.swift */; };
-		A483B58E286DDE7A00DE9427 /* HourlyCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B58B286DDE7A00DE9427 /* HourlyCardViewModel.swift */; };
-		A483B593286DDE8F00DE9427 /* CustomScrollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B591286DDE8F00DE9427 /* CustomScrollCoordinator.swift */; };
-		A483B594286DDE8F00DE9427 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B592286DDE8F00DE9427 /* CustomScrollView.swift */; };
-		A483B597286DDEBD00DE9427 /* ScrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B596286DDEBD00DE9427 /* ScrollIndicatorView.swift */; };
+		A483B546286DB09500DE9427 /* MainScreenPageIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A483B545286DB09500DE9427 /* MainScreenPageIndicatorView.swift */; };
 		A4AED41828377CF500FA6C2E /* MainScreenForecastListShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED41728377CF500FA6C2E /* MainScreenForecastListShimmerView.swift */; };
 		A4AED41A28377D1E00FA6C2E /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED41928377D1E00FA6C2E /* SelectCityView.swift */; };
 		A4AED41C28377D6200FA6C2E /* CityCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED41B28377D6200FA6C2E /* CityCardView.swift */; };
@@ -60,6 +57,17 @@
 		A4AED4382837E02000FA6C2E /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED4372837E02000FA6C2E /* SearchListView.swift */; };
 		A4AED43A2837EA7D00FA6C2E /* LocationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED4392837EA7D00FA6C2E /* LocationListViewModel.swift */; };
 		A4AED43C2837FE7900FA6C2E /* CityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AED43B2837FE7900FA6C2E /* CityEntity.swift */; };
+		A4AF1019286B4B8300056A3C /* DataBaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AF1018286B4B8300056A3C /* DataBaseStorage.swift */; };
+		A4B6988928495B4E002CA415 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988428495B4E002CA415 /* CardView.swift */; };
+		A4B6988A28495B4E002CA415 /* HourlyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988528495B4E002CA415 /* HourlyCardView.swift */; };
+		A4B6988B28495B4E002CA415 /* ScrollDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988728495B4E002CA415 /* ScrollDelegate.swift */; };
+		A4B6988C28495B4E002CA415 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988828495B4E002CA415 /* CarouselView.swift */; };
+		A4B6989128495B7E002CA415 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988E28495B7E002CA415 /* CardViewModel.swift */; };
+		A4B6989228495B7E002CA415 /* CarouselViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6988F28495B7E002CA415 /* CarouselViewModel.swift */; };
+		A4B6989328495B7E002CA415 /* HourlyCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6989028495B7E002CA415 /* HourlyCardViewModel.swift */; };
+		A4B6989828495BD7002CA415 /* CustomScrollCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6989628495BD7002CA415 /* CustomScrollCoordinator.swift */; };
+		A4B6989928495BD7002CA415 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6989728495BD7002CA415 /* CustomScrollView.swift */; };
+		A4B6989C28495BE6002CA415 /* ScrollIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B6989B28495BE6002CA415 /* ScrollIndicatorView.swift */; };
 		A4CAC29C283D278C00793EF8 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CAC29B283D278C00793EF8 /* PopupView.swift */; };
 		A4D49FDC27FC95FD008F5BD4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D49FD527FC95FD008F5BD4 /* NetworkManager.swift */; };
 		A4D49FDD27FC95FD008F5BD4 /* RequestSenderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D49FD627FC95FD008F5BD4 /* RequestSenderable.swift */; };
@@ -101,21 +109,18 @@
 		76C6467927C90D1D00D8BBA9 /* SegmentedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPickerView.swift; sourceTree = "<group>"; };
 		76C6467C27C92B0200D8BBA9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListItemView.swift; sourceTree = "<group>"; };
+		A41A894F283FBD08003DAFB0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		A41A8954283FBF7B003DAFB0 /* StorageDataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StorageDataBase.xcdatamodel; sourceTree = "<group>"; };
+		A41A8956283FC219003DAFB0 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
+		A41A895A283FC46A003DAFB0 /* WeatherStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStorageService.swift; sourceTree = "<group>"; };
+		A41A895C283FE513003DAFB0 /* StorageContextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageContextManager.swift; sourceTree = "<group>"; };
+		A41A895E283FE6E8003DAFB0 /* ObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectExtension.swift; sourceTree = "<group>"; };
 		A444272E283B57FF0069C3ED /* CityWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeather.swift; sourceTree = "<group>"; };
 		A4442730283B6C6F0069C3ED /* CityCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCardViewModel.swift; sourceTree = "<group>"; };
 		A4442732283B7B250069C3ED /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
 		A4442734283B7B460069C3ED /* Decodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Extension.swift"; sourceTree = "<group>"; };
 		A4442736283B7B830069C3ED /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		A483B57F286DDE7000DE9427 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		A483B580286DDE7000DE9427 /* HourlyCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardView.swift; sourceTree = "<group>"; };
-		A483B582286DDE7000DE9427 /* ScrollDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDelegate.swift; sourceTree = "<group>"; };
-		A483B583286DDE7000DE9427 /* CarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
-		A483B589286DDE7A00DE9427 /* CardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
-		A483B58A286DDE7A00DE9427 /* CarouselViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewModel.swift; sourceTree = "<group>"; };
-		A483B58B286DDE7A00DE9427 /* HourlyCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardViewModel.swift; sourceTree = "<group>"; };
-		A483B591286DDE8F00DE9427 /* CustomScrollCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollCoordinator.swift; sourceTree = "<group>"; };
-		A483B592286DDE8F00DE9427 /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
-		A483B596286DDEBD00DE9427 /* ScrollIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollIndicatorView.swift; sourceTree = "<group>"; };
+		A483B545286DB09500DE9427 /* MainScreenPageIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPageIndicatorView.swift; sourceTree = "<group>"; };
 		A4AED4152837623000FA6C2E /* MainScreenForecastListShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListShimmerView.swift; sourceTree = "<group>"; };
 		A4AED41728377CF500FA6C2E /* MainScreenForecastListShimmerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenForecastListShimmerView.swift; sourceTree = "<group>"; };
 		A4AED41928377D1E00FA6C2E /* SelectCityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
@@ -133,6 +138,17 @@
 		A4AED4372837E02000FA6C2E /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		A4AED4392837EA7D00FA6C2E /* LocationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListViewModel.swift; sourceTree = "<group>"; };
 		A4AED43B2837FE7900FA6C2E /* CityEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityEntity.swift; sourceTree = "<group>"; };
+		A4AF1018286B4B8300056A3C /* DataBaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStorage.swift; sourceTree = "<group>"; };
+		A4B6988428495B4E002CA415 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		A4B6988528495B4E002CA415 /* HourlyCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardView.swift; sourceTree = "<group>"; };
+		A4B6988728495B4E002CA415 /* ScrollDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDelegate.swift; sourceTree = "<group>"; };
+		A4B6988828495B4E002CA415 /* CarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		A4B6988E28495B7E002CA415 /* CardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		A4B6988F28495B7E002CA415 /* CarouselViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewModel.swift; sourceTree = "<group>"; };
+		A4B6989028495B7E002CA415 /* HourlyCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyCardViewModel.swift; sourceTree = "<group>"; };
+		A4B6989628495BD7002CA415 /* CustomScrollCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollCoordinator.swift; sourceTree = "<group>"; };
+		A4B6989728495BD7002CA415 /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		A4B6989B28495BE6002CA415 /* ScrollIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollIndicatorView.swift; sourceTree = "<group>"; };
 		A4CAC29B283D278C00793EF8 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		A4D49FD527FC95FD008F5BD4 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A4D49FD627FC95FD008F5BD4 /* RequestSenderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSenderable.swift; sourceTree = "<group>"; };
@@ -216,25 +232,26 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
-		76210BF027C29A7700F858AA /* Storage */ = {
+		76210BF027C29A7700F858AA /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
 				76210BF127C29AAD00F858AA /* UserDefaultsService.swift */,
 				A4442736283B7B830069C3ED /* Storage.swift */,
 			);
-			path = Storage;
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		769A6F1727D23BEF0007759C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A483B57E286DDE7000DE9427 /* CarouselView */,
+				A4B6988328495B4E002CA415 /* CarouselView */,
 				769CECF827C27D2B00FFD409 /* MainScreenView.swift */,
 				76ADAFC327C8F01000F85FA7 /* MainScreenForecastView.swift */,
 				A4AED41728377CF500FA6C2E /* MainScreenForecastListShimmerView.swift */,
 				76C6468027C9648000D8BBA9 /* MainScreenForecastListItemView.swift */,
 				A4AED4152837623000FA6C2E /* MainScreenForecastListShimmerView.swift */,
 				769A6F1D27D275080007759C /* MainScreenForecastJournalView.swift */,
+				A483B545286DB09500DE9427 /* MainScreenPageIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,7 +259,7 @@
 		769A6F1827D23BF90007759C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				A483B588286DDE7A00DE9427 /* CarouselView */,
+				A4B6988D28495B7E002CA415 /* CarouselView */,
 				762BDF00282EB2BA0083A29F /* MainScreenViewModel.swift */,
 				769A6F1B27D2633C0007759C /* MainScreenForecastViewModel.swift */,
 				769A6F1527D23BBA0007759C /* MainScreenForecastListItemViewModel.swift */,
@@ -272,8 +289,8 @@
 		769CECFA27C27DC000FFD409 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A483B595286DDEBD00DE9427 /* ScrollIndicator */,
-				A483B58F286DDE8F00DE9427 /* CustomScrollView */,
+				A4B6989A28495BE6002CA415 /* ScrollIndicator */,
+				A4B6989428495BD7002CA415 /* CustomScrollView */,
 				A4CAC29A283D276800793EF8 /* Popup */,
 				A44B6B35282CDD7B00542E32 /* SearchBar */,
 				A467D0BC282BDC7600D92212 /* SelectCityHeader */,
@@ -313,6 +330,27 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		A41A8947283FB668003DAFB0 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				A41A894F283FBD08003DAFB0 /* CoreDataStack.swift */,
+				A41A8956283FC219003DAFB0 /* CoreDataRepository.swift */,
+				A41A8953283FBF7B003DAFB0 /* StorageDataBase.xcdatamodeld */,
+				A41A895C283FE513003DAFB0 /* StorageContextManager.swift */,
+				A41A895E283FE6E8003DAFB0 /* ObjectExtension.swift */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
+		A41A8958283FC440003DAFB0 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				76210BF027C29A7700F858AA /* UserDefaults */,
+				A4AF1017286B4B6900056A3C /* CoreData */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		A43447A528055268009B93A8 /* ShimmerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,60 +384,6 @@
 				A4AED42028377DC800FA6C2E /* SelectCityHeaderViewModel.swift */,
 			);
 			path = SelectCityHeader;
-			sourceTree = "<group>";
-		};
-		A483B57E286DDE7000DE9427 /* CarouselView */ = {
-			isa = PBXGroup;
-			children = (
-				A483B57F286DDE7000DE9427 /* CardView.swift */,
-				A483B580286DDE7000DE9427 /* HourlyCardView.swift */,
-				A483B581286DDE7000DE9427 /* Support */,
-				A483B583286DDE7000DE9427 /* CarouselView.swift */,
-			);
-			path = CarouselView;
-			sourceTree = "<group>";
-		};
-		A483B581286DDE7000DE9427 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				A483B582286DDE7000DE9427 /* ScrollDelegate.swift */,
-			);
-			path = Support;
-			sourceTree = "<group>";
-		};
-		A483B588286DDE7A00DE9427 /* CarouselView */ = {
-			isa = PBXGroup;
-			children = (
-				A483B589286DDE7A00DE9427 /* CardViewModel.swift */,
-				A483B58A286DDE7A00DE9427 /* CarouselViewModel.swift */,
-				A483B58B286DDE7A00DE9427 /* HourlyCardViewModel.swift */,
-			);
-			path = CarouselView;
-			sourceTree = "<group>";
-		};
-		A483B58F286DDE8F00DE9427 /* CustomScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				A483B590286DDE8F00DE9427 /* Support */,
-				A483B592286DDE8F00DE9427 /* CustomScrollView.swift */,
-			);
-			path = CustomScrollView;
-			sourceTree = "<group>";
-		};
-		A483B590286DDE8F00DE9427 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				A483B591286DDE8F00DE9427 /* CustomScrollCoordinator.swift */,
-			);
-			path = Support;
-			sourceTree = "<group>";
-		};
-		A483B595286DDEBD00DE9427 /* ScrollIndicator */ = {
-			isa = PBXGroup;
-			children = (
-				A483B596286DDEBD00DE9427 /* ScrollIndicatorView.swift */,
-			);
-			path = ScrollIndicator;
 			sourceTree = "<group>";
 		};
 		A4AED42A2837AA6D00FA6C2E /* SelectedCityFlow */ = {
@@ -448,6 +432,69 @@
 			path = Geocoder;
 			sourceTree = "<group>";
 		};
+		A4AF1017286B4B6900056A3C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A41A895A283FC46A003DAFB0 /* WeatherStorageService.swift */,
+				A4AF1018286B4B8300056A3C /* DataBaseStorage.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		A4B6988328495B4E002CA415 /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				A4B6988428495B4E002CA415 /* CardView.swift */,
+				A4B6988528495B4E002CA415 /* HourlyCardView.swift */,
+				A4B6988628495B4E002CA415 /* Support */,
+				A4B6988828495B4E002CA415 /* CarouselView.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
+		A4B6988628495B4E002CA415 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A4B6988728495B4E002CA415 /* ScrollDelegate.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A4B6988D28495B7E002CA415 /* CarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				A4B6988E28495B7E002CA415 /* CardViewModel.swift */,
+				A4B6988F28495B7E002CA415 /* CarouselViewModel.swift */,
+				A4B6989028495B7E002CA415 /* HourlyCardViewModel.swift */,
+			);
+			path = CarouselView;
+			sourceTree = "<group>";
+		};
+		A4B6989428495BD7002CA415 /* CustomScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				A4B6989528495BD7002CA415 /* Support */,
+				A4B6989728495BD7002CA415 /* CustomScrollView.swift */,
+			);
+			path = CustomScrollView;
+			sourceTree = "<group>";
+		};
+		A4B6989528495BD7002CA415 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A4B6989628495BD7002CA415 /* CustomScrollCoordinator.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		A4B6989A28495BE6002CA415 /* ScrollIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				A4B6989B28495BE6002CA415 /* ScrollIndicatorView.swift */,
+			);
+			path = ScrollIndicator;
+			sourceTree = "<group>";
+		};
 		A4CAC29A283D276800793EF8 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,7 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				A4D49FE527FC9630008F5BD4 /* ServiceAssembly.swift */,
-				76210BF027C29A7700F858AA /* Storage */,
+				A41A8958283FC440003DAFB0 /* Storage */,
 				A4D49FCE27FC937D008F5BD4 /* Network */,
 			);
 			path = Service;
@@ -489,6 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				A4D49FDB27FC95FD008F5BD4 /* CoreAssembly.swift */,
+				A41A8947283FB668003DAFB0 /* CoreDataManager */,
 				A4D49FD427FC95FD008F5BD4 /* NetworkManager */,
 			);
 			path = Core;
@@ -652,8 +700,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4B6989128495B7E002CA415 /* CardViewModel.swift in Sources */,
 				A4CAC29C283D278C00793EF8 /* PopupView.swift in Sources */,
 				76210BF227C29AAD00F858AA /* UserDefaultsService.swift in Sources */,
+				A483B546286DB09500DE9427 /* MainScreenPageIndicatorView.swift in Sources */,
+				A4B6989C28495BE6002CA415 /* ScrollIndicatorView.swift in Sources */,
 				A4D49FE127FC95FD008F5BD4 /* RequestFactory.swift in Sources */,
 				A4D49FF127FCA3C7008F5BD4 /* Aliases.swift in Sources */,
 				769A6F1627D23BBA0007759C /* MainScreenForecastListItemViewModel.swift in Sources */,
@@ -663,10 +714,13 @@
 				A4AED4382837E02000FA6C2E /* SearchListView.swift in Sources */,
 				A4AED42428377DE300FA6C2E /* SearchBarView.swift in Sources */,
 				A4D49FEE27FC9F90008F5BD4 /* CordsEntity.swift in Sources */,
+				A4B6989228495B7E002CA415 /* CarouselViewModel.swift in Sources */,
 				A4D4A00927FD9A6B008F5BD4 /* CurrentWeatherEntity.swift in Sources */,
 				A4D49FDC27FC95FD008F5BD4 /* NetworkManager.swift in Sources */,
+				A4B6988B28495B4E002CA415 /* ScrollDelegate.swift in Sources */,
 				A4D4A00527FD9A33008F5BD4 /* TempEntity.swift in Sources */,
 				76C6467A27C90D1D00D8BBA9 /* SegmentedPickerView.swift in Sources */,
+				A4B6988A28495B4E002CA415 /* HourlyCardView.swift in Sources */,
 				A44B6B19282BF03F00542E32 /* (null) in Sources */,
 				A467D0BB282B836B00D92212 /* (null) in Sources */,
 				76C6468127C9648000D8BBA9 /* MainScreenForecastListItemView.swift in Sources */,
@@ -674,17 +728,20 @@
 				A4AED42E2837C14800FA6C2E /* GeocoderEntry.swift in Sources */,
 				A4D49FE627FC9630008F5BD4 /* ServiceAssembly.swift in Sources */,
 				A4D49FDD27FC95FD008F5BD4 /* RequestSenderable.swift in Sources */,
+				A41A8957283FC219003DAFB0 /* CoreDataRepository.swift in Sources */,
 				76210BEF27C299A100F858AA /* ColorModeToggleStyle.swift in Sources */,
 				76ADAFC427C8F01000F85FA7 /* MainScreenForecastView.swift in Sources */,
-				A483B585286DDE7000DE9427 /* HourlyCardView.swift in Sources */,
 				A4AED42228377DC800FA6C2E /* SelectCityHeaderViewModel.swift in Sources */,
 				A4AED43A2837EA7D00FA6C2E /* LocationListViewModel.swift in Sources */,
 				7606161927AD77F600CC73B5 /* SurfWeatherAppApp.swift in Sources */,
 				A4D4A00727FD9A48008F5BD4 /* DailyWeatherEntity.swift in Sources */,
+				A4AF1019286B4B8300056A3C /* DataBaseStorage.swift in Sources */,
 				A4442733283B7B250069C3ED /* Encodable+Extension.swift in Sources */,
+				A41A895B283FC46A003DAFB0 /* WeatherStorageService.swift in Sources */,
 				A4442735283B7B460069C3ED /* Decodable+Extension.swift in Sources */,
 				A4442737283B7B830069C3ED /* Storage.swift in Sources */,
 				A4D49FDE27FC95FD008F5BD4 /* WeatherRequest.swift in Sources */,
+				A41A8955283FBF7B003DAFB0 /* StorageDataBase.xcdatamodeld in Sources */,
 				A4AED41E28377D9B00FA6C2E /* SelectCityViewModel.swift in Sources */,
 				769CECFF27C27EBB00FFD409 /* LocationHeaderViewModel.swift in Sources */,
 				A4AED42828377E4B00FA6C2E /* Assets.swift in Sources */,
@@ -693,34 +750,33 @@
 				769A6F1E27D275080007759C /* MainScreenForecastJournalView.swift in Sources */,
 				A4AED42628377DF600FA6C2E /* UIApplication+Extension.swift in Sources */,
 				A4AED42128377DC800FA6C2E /* SelectCityHeaderView.swift in Sources */,
-				A483B584286DDE7000DE9427 /* CardView.swift in Sources */,
 				A44B6B3B282E225400542E32 /* (null) in Sources */,
+				A4B6988928495B4E002CA415 /* CardView.swift in Sources */,
+				A4B6989828495BD7002CA415 /* CustomScrollCoordinator.swift in Sources */,
 				A444272F283B57FF0069C3ED /* CityWeather.swift in Sources */,
-				A483B594286DDE8F00DE9427 /* CustomScrollView.swift in Sources */,
-				A483B58C286DDE7A00DE9427 /* CardViewModel.swift in Sources */,
-				A483B58E286DDE7A00DE9427 /* HourlyCardViewModel.swift in Sources */,
 				A4AED4362837C7E800FA6C2E /* LocationRequest.swift in Sources */,
-				A483B58D286DDE7A00DE9427 /* CarouselViewModel.swift in Sources */,
-				A483B587286DDE7000DE9427 /* CarouselView.swift in Sources */,
 				A44B6B15282BE29600542E32 /* (null) in Sources */,
 				A4D49FF327FCA4CE008F5BD4 /* WeatherEntity.swift in Sources */,
+				A41A895D283FE513003DAFB0 /* StorageContextManager.swift in Sources */,
+				A41A8950283FBD08003DAFB0 /* CoreDataStack.swift in Sources */,
 				A4AED41828377CF500FA6C2E /* MainScreenForecastListShimmerView.swift in Sources */,
 				A4D4A00127FD6CDF008F5BD4 /* DateFormatter.swift in Sources */,
 				769A6F1C27D2633C0007759C /* MainScreenForecastViewModel.swift in Sources */,
 				769CECFC27C27DE100FFD409 /* LocationHeaderView.swift in Sources */,
 				A4D4A00027FD6CDF008F5BD4 /* TemperatureFormatter.swift in Sources */,
 				A44B6B34282CDBC300542E32 /* (null) in Sources */,
+				A4B6988C28495B4E002CA415 /* CarouselView.swift in Sources */,
+				A4B6989328495B7E002CA415 /* HourlyCardViewModel.swift in Sources */,
+				A4B6989928495BD7002CA415 /* CustomScrollView.swift in Sources */,
 				A4AED4332837C4F100FA6C2E /* FullAddressEntity.swift in Sources */,
-				A483B593286DDE8F00DE9427 /* CustomScrollCoordinator.swift in Sources */,
 				A44B6B17282BE6B800542E32 /* (null) in Sources */,
 				A4D4A00327FD7630008F5BD4 /* MainScreenForecastModelAdapter.swift in Sources */,
-				A483B597286DDEBD00DE9427 /* ScrollIndicatorView.swift in Sources */,
 				A4442731283B6C6F0069C3ED /* CityCardViewModel.swift in Sources */,
-				A483B586286DDE7000DE9427 /* ScrollDelegate.swift in Sources */,
 				76C6467D27C92B0200D8BBA9 /* Colors.swift in Sources */,
 				A4D49FE227FC95FD008F5BD4 /* CoreAssembly.swift in Sources */,
 				A4E4E02A2824F8EF007EF844 /* ShimmerView.swift in Sources */,
 				769CECF927C27D2B00FFD409 /* MainScreenView.swift in Sources */,
+				A41A895F283FE6E8003DAFB0 /* ObjectExtension.swift in Sources */,
 				A4D49FFC27FCB49F008F5BD4 /* WeatherRequestEntity.swift in Sources */,
 				A4D49FE427FC9615008F5BD4 /* NetworkService.swift in Sources */,
 			);
@@ -854,7 +910,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Resources/Assets/Preview Content\"";
-				DEVELOPMENT_TEAM = U6V2AU849T;
+				DEVELOPMENT_TEAM = PVVSWG9FDA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SurfWeatherApp/Info.plist;
@@ -885,7 +941,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Resources/Assets/Preview Content\"";
-				DEVELOPMENT_TEAM = U6V2AU849T;
+				DEVELOPMENT_TEAM = PVVSWG9FDA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SurfWeatherApp/Info.plist;
@@ -929,6 +985,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A41A8953283FBF7B003DAFB0 /* StorageDataBase.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A41A8954283FBF7B003DAFB0 /* StorageDataBase.xcdatamodel */,
+			);
+			currentVersion = A41A8954283FBF7B003DAFB0 /* StorageDataBase.xcdatamodel */;
+			path = StorageDataBase.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7606160D27AD77F600CC73B5 /* Project object */;
 }

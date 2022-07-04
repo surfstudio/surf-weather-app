@@ -31,7 +31,7 @@ struct HourlyCardView: View {
             Text(model.time)
                 .font(Font(.init(.system, size: 14)))
                 .foregroundColor(model.isSelected ? .violetTextColor : .white.opacity(0.64))
-            Image(model.image.medium, bundle: nil).resizable()
+            Image(model.image.imageName, bundle: nil).resizable()
                 .frame(width: 32, height: 32)
             Text("\(model.temperature)&deg;")
                 .font(Font(.init(.system, size: 20)))

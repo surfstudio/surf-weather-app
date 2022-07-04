@@ -15,3 +15,10 @@ struct DailyWeatherEntity: Codable {
     let wind_speed: Double
     let weather: [WeatherEntity]
 }
+
+struct HourlyWeatherEntity: Codable {
+    let dt: Int
+    let temp: Double
+    let wind_speed: Double
+    let weather: [WeatherEntity]
+}

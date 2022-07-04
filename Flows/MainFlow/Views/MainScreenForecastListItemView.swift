@@ -41,7 +41,7 @@ struct MainScreenForecastListItemView: View {
             Text(viewModel.model.weekday)
                 .font(.system(size: 16))
                 .foregroundColor(dayColor) +
-            Text(", \(viewModel.model.date)")
+            Text(", \(date)")
                 .font(.system(size: 16))
                 .foregroundColor(.lightText2 | .darkText)
 
@@ -100,6 +100,10 @@ struct MainScreenForecastListItemView: View {
             )
     }
 
+    var date: String {
+        DateFormat.calendarFormatter(format: .dayLongMonth).string(from: viewModel.model.date)
+    }
+
 }
 
 // MARK: - Model
@@ -107,8 +111,11 @@ struct MainScreenForecastListItemView: View {
 extension MainScreenForecastListItemView {
 
     struct Model {
+        let cityName: String
+        let lat: Double
+        let lon: Double
         let weekday: String
-        let date: String
+        let date: Date
         let temperature: String
         let weatherImage: String
         let description: String
@@ -123,14 +130,18 @@ struct MainScreenForecastListView_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenForecastListItemView(
             viewModel: .init(isSelected: false,
-                             model: .init(weekday: "Сегодня",
-                                          date: "11 апреля",
+                             model: .init(cityName: "Воронеж",
+                                          lat: 25,
+                                          lon: 25,
+                                          weekday: "Сегодня",
+                                          date: Date(),
                                           temperature: "5℃",
                                           weatherImage: "01d",
                                           description: "Сильный ветер",
                                           wind: "7 м/с"),
                              isNeedSeparator: true,
-                             isNeedDayAllocate: false
+                             isNeedDayAllocate: false,
+                             storageService: ServicesAssemblyFactory().weatherStorageService
                             )
         )
     }

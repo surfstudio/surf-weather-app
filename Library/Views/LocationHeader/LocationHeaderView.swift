@@ -13,8 +13,6 @@ struct LocationHeaderView: View {
 
     @StateObject var viewModel: LocationHeaderViewModel
     @State var isLightMode = UserDefaultsService.shared.isLightMode
-    let weatherNetworkService: WeatherNetworkService
-    let locationNetworkService: LocationNetworkService
 
     // MARK: - Views
 
@@ -44,8 +42,7 @@ struct LocationHeaderView: View {
     var button: some View {
         NavigationLink(
             destination: SelectCityView(
-                viewModel: .init(weatherService: weatherNetworkService,
-                                 locationService: locationNetworkService),
+                viewModel: viewModel.selectCityViewModel,
                 mainHeaderViewModel: viewModel
                 )
         ) {
@@ -102,8 +99,9 @@ struct LocationHeaderView: View {
 
 struct LocationHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationHeaderView(viewModel: LocationHeaderViewModel(),
+        LocationHeaderView(viewModel: LocationHeaderViewModel(
                            weatherNetworkService: ServicesAssemblyFactory().weatherNetworkService,
-                           locationNetworkService: ServicesAssemblyFactory().locationNetworkService)
+                           locationNetworkService: ServicesAssemblyFactory().locationNetworkService,
+                           weatherStorageService: ServicesAssemblyFactory().weatherStorageService))
     }
 }

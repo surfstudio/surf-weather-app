@@ -61,7 +61,9 @@ struct SegmentedPickerView: View {
                 }
             }
             .onAppear {
-                position = calculatePosition(for: proxy.size.width)
+                DispatchQueue.main.async {
+                    self.position = calculatePosition(for: proxy.size.width)
+                }
             }
         }
         .frame(height: Constants.height)

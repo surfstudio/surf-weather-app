@@ -15,7 +15,7 @@ struct CityCardView: View {
         var id: Int
         var isSelected: Bool
         let temperature: String
-        let time: String
+        let time: Date
         let city: String
         let imageName: String
     }
@@ -32,7 +32,7 @@ struct CityCardView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             if model.isSelected {
-                Image(isLightMode ? "cardBackgroundLight" : "cardBackgroundDark", bundle: nil)
+                Image(isLightMode ? "small_Background_Light" : "small_Background_Dark", bundle: nil)
             }
             VStack(alignment: .leading) {
                 topView
@@ -58,7 +58,7 @@ struct CityCardView: View {
                 .font(.system(size: 12, weight: .medium))
                 .foregroundColor(model.isSelected || !isLightMode ? .white : .black)
         } else {
-            return Text(model.time)
+            return Text(DateFormat.calendarFormatter(format: .time).string(from: model.time))
                 .font(.system(size: 12, weight: .medium))
                 .foregroundColor(.blue)
         }
@@ -104,11 +104,11 @@ struct CityCardView_Previews: PreviewProvider {
             model: .init(id: 1,
                          isSelected: false,
                          temperature: "20",
-                         time: "10:00",
+                         time: Date(),
                          city: "Воронеж",
                          imageName: "sun"),
             isChangeMode: .constant(false),
-            viewModel: .init()
+            viewModel: .init(weatherStorageService: ServicesAssemblyFactory().weatherStorageService)
         )
     }
 }

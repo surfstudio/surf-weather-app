@@ -21,15 +21,21 @@ struct CarouselView: UIViewRepresentable {
 
     // MARK: - Properties
 
-    @State var page: CGFloat = 0
+    @State var page: CGFloat = UserDefaultsService.shared.currentPage ?? .zero
     @Binding var cardMode: CardView.Mode
-    @Binding var updateIsNeeded: Bool
     @ObservedObject var viewModel: CarouselViewModel
 
-    // MARK: - Private Properties
+// MARK: - Private Properties
 
     private var itemSpacingWithScale: CGFloat {
         Constants.itemSpacing - (Constants.longItemSize.width * Constants.maxReductionPercent) / 2
+    }
+
+    // MARK: - Methods
+
+    func changePage() {
+        let index = Int(page)
+        viewModel.changePage(with: index)
     }
 
     // MARK: - UIViewRepresentable
@@ -41,7 +47,7 @@ struct CarouselView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIScrollView, context: Context) {
-        guard updateIsNeeded else { return }
+        guard viewModel.updateIsNeeded else { return }
         uiView.subviews.forEach { $0.removeFromSuperview() }
         configureScrollView(context: context, scrollView: uiView)
     }
@@ -49,7 +55,7 @@ struct CarouselView: UIViewRepresentable {
     func makeCoordinator() -> ScrollDelegate {
         return ScrollDelegate(parent: self, itemWidth: Constants.longItemSize.width, itemSpacing: itemSpacingWithScale)
     }
-    
+
 }
 
 // MARK: - Private
@@ -70,6 +76,9 @@ struct CarouselView: UIViewRepresentable {
 
         let subview = makeContentView(with: total)
         scrollView.addSubview(subview)
+        scrollTo(page, for: scrollView)
+
+        viewModel.onChangePage = { scrollTo($0, for: scrollView, animated: true) }
     }
 
      func makeContentView(with contentWidth: CGFloat) -> UIView {
@@ -83,14 +92,19 @@ struct CarouselView: UIViewRepresentable {
 
      var pagerView: some View {
          let itemSize = cardMode == .short ? Constants.shortItemSize : Constants.longItemSize
-    
          return HStack(alignment: .center, spacing: itemSpacingWithScale) {
-             ForEach(viewModel.cardViewModels.indices) {
+             ForEach(viewModel.cardViewModels.indices, id: \.self) {
                  let model = viewModel.cardViewModels[$0]
                  let percent = Constants.maxReductionPercent
                  CardView(viewModel: model, mode: $cardMode, page: $page, cardId: $0, itemSize: itemSize, maxReductionPercent: percent)
              }
-         }.onAppear { updateIsNeeded = false }
+         }
+         .onAppear { viewModel.updateIsNeeded = false }
+     }
+
+     func scrollTo(_ page: CGFloat, for scrollView: UIScrollView, animated: Bool = false) {
+         let width = Constants.longItemSize.width + itemSpacingWithScale
+         scrollView.setContentOffset(CGPoint(x: page * width, y: .zero), animated: animated)
      }
     
 }
