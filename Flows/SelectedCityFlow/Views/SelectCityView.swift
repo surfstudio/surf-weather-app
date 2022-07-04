@@ -66,13 +66,17 @@ struct SelectCityView: View {
             searchView
         }.sheet(isPresented: $presentingModal) {
             SearchListView(viewModel: viewModel.searchListViewModel, presentingModal: $presentingModal)
-        }
+        }.allowsHitTesting(!isChangeMode)
     }
 
     var searchView: some View {
         HStack {
             Image("search", bundle: nil)
-            Text("Поиск").foregroundColor(.lightText2).font(.headline)
+                .opacity(isChangeMode ? 0.5 : 1)
+            Text("Поиск")
+                .foregroundColor(.lightText2)
+                .font(.headline)
+                .opacity(isChangeMode ? 0.5 : 1)
             Spacer()
         }
         .padding()
